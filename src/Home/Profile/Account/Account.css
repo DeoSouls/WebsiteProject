@@ -1,0 +1,115 @@
+
+.account-header {
+    margin-left: 45px;
+    margin-top: 60px;
+
+    width: 900px;
+    height: max-content;
+
+}
+
+.account-avatar {
+    font-size: 19px;
+    font-family: nav_font2;
+
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.account-main-img {
+    display: flex;
+    width: 800px;
+    margin-top: 40px;
+    margin-left: 45px;
+}
+
+.account-icon {
+    width: 130px;
+    height: 130px;
+
+    border-radius: 50%;
+
+    background-color: rgb(112, 214, 112);
+}
+
+.icon-upload {
+    padding-left: 45px;
+    padding-top: 34px;
+}
+
+.custom-file-input {
+    width: 0.1px;
+	height: 0.1px;
+	/* opacity: 0; */
+	overflow: hidden;
+	position: absolute;
+	/* z-index: -1; */
+}
+
+.label-upload-btn {
+    color: black;
+
+    font-family: nav_font2;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.undercheck-upload {
+    padding-top: 6px;
+    font-size: 14px;
+    font-family: simple;
+}
+
+.account-img {
+    width: 148px;
+    height: 114px;
+    border: none;
+    outline: none;
+    position: absolute;
+    display: none;
+}
+
+.profile-inputs {
+    display: flex;
+    width: 1000px;
+}
+
+.inputs-left {
+    width: 460px;
+    height: 480px;
+    margin-left: 45px;
+}
+
+.inputs-right {
+    width: 440px;
+    height: 480px;
+}
+
+.label-userdata {
+    padding-top: 23px;
+    padding-bottom: 5px;
+    font-family: nav_font2;
+    font-size: 13px;
+}
+
+
+.update-btn {
+    margin-top: 110px;
+    width: 110px;
+    height: 50px;
+
+    color: white;
+    font-size: 15px;
+    font-family: try_cloth;
+
+    background-color: black;
+    transition: all 0.2s;
+
+    border: none;
+    border-radius: 7px;
+}
+
+.update-btn:hover {
+    background-color: rgb(104, 104, 104);
+}
+

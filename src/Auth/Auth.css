@@ -1,0 +1,91 @@
+/*Стили заголовка*/
+.header_sign {
+    margin-left: 170px;
+    font-size: 19px;
+    font-weight: 500;
+
+    font-family: 'REX';
+}
+
+.header_border {
+    margin-top: 25px;
+    margin-left: 10px;
+
+    width: 380px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+/*Чекбокс*/
+.check_device {
+    margin-top: 20px;
+    margin-left: 100px;
+    width: 17px;
+}
+
+.label_check_device {
+    margin-left: 10px;
+
+    font-size: 16px;
+    font-family: 'REX';
+}
+
+
+/*Кнопка отправки запроса на авторизацию*/
+.btn_signin {
+    width: 400px;
+    height: 50px;
+
+    margin-top: 15px;
+
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    color: white;
+
+    font-size: 16px;
+    font-family: 'header_edit';
+}
+
+.btn_signin:hover {
+    background-color: rgb(187, 187, 187);
+}
+
+/*Переход на страницу регистрации*/
+.navigate_registre {
+    margin-top: 30px;
+    margin-left: 110px;
+    margin-bottom: 100px;
+
+    font-family: 'REX';
+    font-size: 17px;
+}
+
+.navigate {
+    font-family: 'REX';
+    font-size: 17px;
+
+    color: black;
+}
+
+/*Анимации ReactCSSTransitionGroup*/
+.item-appear {
+    background-color: rgb(228, 228, 228);
+    color: rgb(236, 236, 236);
+}
+
+
+.item-appear-active {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    transition: all 0.5s ease-in-out;
+}
+
+/* .item-exit {
+    opacity: 1;
+}
+
+
+.item-exit-active {
+    opacity: 0.01;
+    transition: opacity 0.5s ease-in;
+} */

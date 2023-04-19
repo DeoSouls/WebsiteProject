@@ -1,0 +1,235 @@
+.reg {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    min-width: 1350px;
+    height: 1000px;
+}
+
+/*Стили обложки*/
+.reg-cover {
+    min-width: 880px;
+    height: 100%;
+
+    display: flex;
+    justify-content: end;
+
+    border-right: 1px solid rgb(233, 233, 233);
+
+    background-color: white;
+}
+
+/*Стиль шапки обложки*/
+.reg-style-cover {
+    min-width: 700px;
+    height: 400px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.style-cover-right1 {
+    width:468px;
+    height: 230px;
+    filter: blur(50px);
+    position: absolute;
+
+    border-bottom-left-radius: 90%;
+
+    background: rgb(88, 126, 253);
+}
+
+.style-cover-right2 {
+    width:468px;
+    height: 230px;
+    filter: blur(50px);
+    position: absolute;
+
+    border-bottom-left-radius: 90%;
+
+    background: rgb(255, 75, 31);
+}
+
+
+.style-cover-left1 {
+    width:400px;
+    height: 230px;
+    margin-left: 500px;
+    filter: blur(50px);
+
+    border-bottom-right-radius: 90%;
+
+    background: linear-gradient(-276deg, rgb(131, 157, 243),40%, rgb(89, 230, 136));
+}
+
+.style-cover-left2 {
+    width:400px;
+    height: 230px;
+    margin-left: 500px;
+    filter: blur(50px);
+
+    border-bottom-right-radius: 90%;
+
+    background: linear-gradient(-276deg, rgb(253, 90, 41),40%, rgb(255, 36, 219));
+}
+
+/*Стили заголовка страницы*/
+.reg-header {
+    height: 100%;
+    padding-top: 48%;
+    padding-right: 18%;
+}
+
+.header-data {
+    font-family: 'REX';
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.header-main {
+    width: 300px;
+    font-family: 'header_edit';
+    font-size: 55px;
+    font-weight: 100;
+}
+
+.header-under {
+    padding-top: 270px;
+    padding-left: 30px;
+    width: 300px;
+    font-family: 'header';
+    font-size: 40px;
+    font-weight: 100;
+}
+
+
+/*Стили формы анкеты учетной записи*/
+.reg-main {
+    min-width: 1150px;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+}
+
+.reg-form {
+    padding-top: 200px;
+    width: 650px;
+}
+
+.reg-username {
+    display: flex;
+}
+
+.reg-required {
+    font-family: "REX";
+    font-size: 18px;
+}
+
+.btn-continue {
+    width: 425px;
+    height: 50px;
+    margin-top: 25px;
+
+    background-color: black;
+    color: white;
+
+    font-size: 17px;
+    font-family: 'header_edit';
+    font-weight: 100;
+
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.btn-continue:hover {
+    background-color: rgb(148, 148, 148);
+    border-color: rgb(148, 148, 148);
+}
+
+
+/*Кнопка возвращения на предыдущую страницу*/
+.btn-back {
+    background: none;
+    border: none;
+    position: absolute;
+
+    font-size: 25px;
+    font-family: 'header';
+    font-weight: 900;
+    opacity: 0.7;
+    
+    top: 30px;
+    left: 240px;
+}
+
+.btn-back:hover {
+    color: rgb(126, 126, 126);
+}
+
+.other {
+    width: 425px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.other-variant {
+    padding-top: 28px;
+
+    font-family: 'REX';
+    font-size: 19px;
+}
+
+.other-switch {
+    padding-top: 3px;
+    margin-bottom: 40px;
+
+    color: black;
+    font-family: 'REX';
+    font-size: 16px;
+}
+
+@font-face {
+    font-family: "REX";
+    src: url('../../fonts/rex.far.ttf');
+}
+
+@font-face {
+    font-family: "self_edit";
+    src: url('../../fonts/rex.self.ttf');
+}
+
+@font-face {
+    font-family: "header_edit";
+    src: url('../../fonts/53e59-muller-extrabold-demo.ttf');
+}
+
+@font-face {
+    font-family: "header";
+    src: url('../../fonts/sfns-display-bold.ttf');
+}
+
+@font-face {
+    font-family: "simple";
+    src: url('../../fonts/overpass-light1.ttf');
+}
+
+@font-face {
+    font-family: "nav_font";
+    src: url('../../fonts/sfns-display-thin.ttf');
+}
+
+@font-face {
+    font-family: "nav_font2";
+    src: url('../../fonts/overpass-reg1.ttf');
+}
+
+@font-face {
+    font-family: "try_cloth";
+    src: url('../../fonts/try-clother-light.ttf');
+}

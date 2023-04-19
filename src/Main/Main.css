@@ -1,0 +1,49 @@
+.video-main {
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.video-header {
+    width: auto;
+    height: 500px;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.header {
+    position: absolute;
+    
+    width: 100%;
+    min-width: 900px;
+    height: 500px;
+    margin-top: 180px;
+    
+    color: white;
+    text-align: center;
+    font-family: header;
+    font-weight: 900;
+    font-size: 55px;
+}
+
+.header2 {
+    position: absolute;
+    
+    width: 100%;
+    min-width: 900px;
+    height: 500px;
+    margin-top: 280px;
+    
+    color: white;
+    text-align: center;
+    font-family: nav_font2;
+    font-weight: 100;
+    font-size: 26px;
+}
+
+.header-part-cursive {
+    font-style: italic;
+    font-weight: 100;
+    font-family: nav_font;
+}

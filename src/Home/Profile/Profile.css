@@ -1,0 +1,176 @@
+
+/*Шапка профиля*/
+.profile-name {
+    padding-top: 100px;
+    border-bottom: 1px solid rgb(236, 236, 236);
+
+    width: auto;
+}
+
+.header-profile {
+    font-size: 50px;
+    font-family: nav_font;
+
+    padding-bottom: 6px;
+}
+
+.profile-indent {
+    min-width: 400px;
+    margin: 0 230px;
+}
+
+.profile-nav {
+    width: auto;
+    height: 55px;
+    border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.profile-nav-btn {
+    width: 70px;
+    height: 55px;
+
+    margin: 0 230px;
+
+    font-family: REX;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+
+    padding-left: 18px;
+
+    border: none;
+    background: white;
+    border-bottom: 1px solid black;
+}
+
+.profile-nav-img {
+    width: 15px;
+    height: 15px;
+    margin-top: 3px;
+    margin-left: -16px;
+
+    position: absolute;
+
+    background: url('../../5.png') no-repeat;
+}
+
+
+/*Часть контента аккаунта*/
+.nav-account {
+    display: flex;
+    width: auto;
+    height: max-content;
+
+    width: 500px;
+    height: 929px;
+
+    border-right: 1px solid rgb(236, 236, 236);
+    background-color: rgb(250, 250, 250);
+}
+
+.navigate-profile {
+    display: grid;
+    grid-template-rows: max-content;
+    padding-left: 249px;
+} 
+
+.profile-content {
+    width: 100%;
+    height: 800px;
+}
+
+/*Навигация по второстепенным опциям*/
+.secondary-options {
+    width: 250px;
+    height: 313px;
+
+    margin-top: 55px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    background-color: rgb(250, 250, 250);
+}
+
+.option-account {
+    width: 230px;
+    height: 40px;
+
+    padding-top: 6px;
+    padding-left: 8px;
+    margin-top: -11px;
+    
+    font-family: simple;
+    font-size: 15px;
+    
+    color: Black;
+    background-color: rgb(250, 250, 250);
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.option-account:hover {
+    background-color: rgb(233, 233, 233);
+}
+
+.account-options {
+    width: 250px;
+    height: 270px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid rgb(228, 228, 228);
+    background-color: rgb(250, 250, 250);
+}
+
+.option-main {
+    width: 230px;
+    height: 40px;
+
+    padding-top: 6px;
+    padding-left: 8px;
+    margin-top: -11px;
+    
+    font-family: simple;
+    font-size: 15px;
+    
+    color: Black;
+    background-color: rgb(250, 250, 250);
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.option-main:hover {
+    background-color: rgb(233, 233, 233);
+}
+
+.contact-options {
+    width: 250px;
+    height: 20px;
+    margin-bottom: 210px;
+
+    background-color: rgb(250, 250, 250);
+}
+
+.option-contact {
+    width: 230px;
+    height: 40px;
+
+    padding-top: 6px;
+    padding-left: 8px;
+    margin-top: -11px;
+    
+    font-family: simple;
+    font-size: 15px;
+    
+    color: Black;
+    background-color: rgb(250, 250, 250);
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.option-contact:hover {
+    background-color: rgb(233, 233, 233);
+}
+
+
+
+
+

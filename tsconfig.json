@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "plugins": [
+        {
+          "name": "typescript-plugin-css-modules",
+          "options": {
+            "classnameTransform": "dashes",
+            "customMatcher": "\\.m\\.css$",
+          }
+        }
+      ]
+    }
+  }
