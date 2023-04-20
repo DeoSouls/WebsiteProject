@@ -12,7 +12,7 @@ class MailService {
             secure: false,
             auth: {
                 user: 'vladimirdrozdov83935@gmail.com',
-                pass: 'ubyyyqjzmzzoczmf'
+                pass: '*'
             }
         })
     }

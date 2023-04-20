@@ -98,7 +98,7 @@
     padding-top: 270px;
     padding-left: 30px;
     width: 300px;
-    font-family: 'header';
+    font-family: simple;
     font-size: 40px;
     font-weight: 100;
 }
@@ -164,11 +164,19 @@
     opacity: 0.7;
     
     top: 30px;
-    left: 240px;
+    left: 210px;
 }
 
 .btn-back:hover {
-    color: rgb(126, 126, 126);
+    color: rgb(46, 46, 46);
+}
+
+.back-img {
+    width: 18px;
+    height: 15px;
+
+    margin-bottom: 4px;
+    margin-right: 5px;
 }
 
 .other {

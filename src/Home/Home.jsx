@@ -82,22 +82,13 @@ export const Home = (props) => {
                         <div className='logo'></div>
                     </a>
                     <a href='/catalog'>
-                        <button className='nav-getstarted'>Get Started</button>
+                        <button className='nav-getstarted'>Начать</button>
                     </a>
                     <a href='/catalog'>
-                        <button className='nav-getstarted'>Shop</button>
+                        <button className='nav-getstarted'>Магазин</button>
                     </a>
                     <a href='/catalog'>
-                        <button className='nav-getstarted'>Health Tests</button>
-                    </a>
-                    <a href='/catalog'>
-                        <button className='nav-getstarted'>Take 5 Daily</button>
-                    </a>
-                    <a href='/catalog'>
-                        <button className='nav-getstarted'>Jrue's Collection</button>
-                    </a>
-                    <a href='/catalog'>
-                        <button className='nav-getstarted'>Help</button>
+                        <button className='nav-getstarted'>Помощь</button>
                     </a>
                     <div className='nav-bar-other'>
                         {isSearch? search : <button onClick={showSearch} className='search-img'></button>}

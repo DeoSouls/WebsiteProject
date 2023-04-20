@@ -1,5 +1,5 @@
 import React from 'react';
-import video from '../../videos/ghb.mp4';
+import video from '../../videos/video.mp4';
 import './Main.css';
 
 export const Main = (props) => {
@@ -8,10 +8,10 @@ export const Main = (props) => {
         <div>
             <div className='video-header'>
                 <h1 className='header'>
-                    Optimizing your  
-                    <span className='header-part-cursive'> health journey</span>
+                Live life  
+                    <span className='header-part-cursive'> to the fullest</span>
                 </h1>
-                <h1 className='header2'>With the most trusted name in scientific wellness</h1>
+                <h1 className='header2'>This is a legacy, and when all is said and done, leave a legacy in any way.</h1>
                 <video className='video-main' height='500' autoPlay loop muted playsInline>
                     <source className='video-settings' src={video} type='video/mp4'/>
                 </video>

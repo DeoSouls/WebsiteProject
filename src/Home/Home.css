@@ -21,7 +21,7 @@
 
 .nav-bar-btns {
     width: 100%;
-    min-width: 1000px;
+    min-width: 800px;
     height: 60px;
     margin-bottom: 1px;
     margin: 0 230px;
@@ -36,7 +36,7 @@
 
 .nav-bar-other {
     width: 100%;
-    min-width: 400px;
+    min-width: 200px;
     height: 60px;
 
     display: flex;
@@ -50,7 +50,7 @@
     height: 64px;
     margin-right: 25px;
     
-    background: url('../4.png') no-repeat;
+    background: url('../images/4.png') no-repeat;
 }
 
 .nav-getstarted {
@@ -83,7 +83,7 @@
 
     border: none;
     background-color: white;
-    background: url('../3.png') round;
+    background: url('../images/3.png') round;
 }
 
 .search {
@@ -108,7 +108,7 @@
     height: 18px;
     margin-left: 4px;
 
-    background: url('../3.png') round;
+    background: url('../images/3.png') round;
 }
 
 .search-input {
@@ -130,7 +130,7 @@
 
     border: none;
     background-color: white;
-    background: url('../2.png') round;
+    background: url('../images/2.png') round;
 }
 
 /*Авторизация*/
@@ -241,6 +241,7 @@
     font-family: try_cloth;
     font-size: 16px;
     color: black;
+    cursor: pointer;
 
     transition: all .2s ease-in-out; 
     text-decoration: none;
