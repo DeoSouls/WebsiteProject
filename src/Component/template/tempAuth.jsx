@@ -1,6 +1,5 @@
 import React, { useState} from "react";
 import { TempCover } from "./tempCover";
-import img from '../../images/back.png';
 
 
 export const TempAuth = (props) => {
@@ -12,7 +11,7 @@ export const TempAuth = (props) => {
                 <div className="reg-header">
                     <div>
                         <button className="btn-back" onClick={e => history.back()}>
-                            <img className="back-img" src={img} alt="" />
+                            <img className="back-img" src='http://localhost:5000/static/back.png' alt="" />
                             back
                         </button>
                     </div>

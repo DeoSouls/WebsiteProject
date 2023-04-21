@@ -6,6 +6,7 @@ const service = require('../Model/sequelize-service');
 const sequelize  = require('../Model/db');
 const MailService = require('../mail-service');
 const cookieParser = require('cookie-parser');
+const paginate = require('express-paginate');
 const bcrypt = require('bcrypt');
 const TokenService = require('../token-service');
 const jwt = require('jsonwebtoken');
@@ -18,6 +19,7 @@ class appMiddleware {
             
             const {email, password} = req.body;
             const model = new ModelService();
+            await sequelize.sync({});
 
             const user = await model.findUser({email: email});
             if(user[0] === undefined) {
@@ -34,9 +36,20 @@ class appMiddleware {
                 res.status(400).json({message: 'Неверный пароль'});
             }
 
-            model.deleteToken({where: {userId: userid}});
+            await model.deleteToken({where: {userId: userid}});
+            // const group = await model.createGroup({group_name: 'techno'});
+            // const good = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const good1 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const good2 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const good4 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const good5 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const good6 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const good7 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const good8 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const good9 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // const image = await model.createImage({img: 'http://localhost:5000/static/back.png', goodId: '1'});
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPass);
-            const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true})
+            const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true});
 
             await res.cookie('accessToken', tokens.accessToken, {maxAge: 1000 * 60 * 15, httpOnly: false});
 
@@ -175,6 +188,29 @@ class appMiddleware {
 
         } catch (e) {
             res.status(400).json({message: 'Не удалось получить данные о пользователе', error: e.message});
+        }
+    }
+    
+    async getGoods(req, res, next) {
+        try {
+            const model = new ModelService();
+
+            model.Good.findAndCountAll({limit: req.query.limit, offset: req.skip})
+            .then(async (results) =>  {
+                const itemCount = await results.count;
+                const pageCount = await Math.ceil(results.count / req.query.limit);
+                // res.render('api/goods', {
+                //     goods: results.rows,
+                //     pageCount,
+                //     itemCount,
+                //     pages: paginate.getArrayPages(req)(3, pageCount, req.query.page)
+                // });
+                const image = await model.findImage({id: results.rows[0]['id']});
+                res.json({results, pages: paginate.getArrayPages(req)(3, pageCount, req.query.page), image});
+            })
+            .catch(err => next(err))
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить данные о товаре', error: e.message});
         }
     } 
 }

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { RInput } from '../../../Component/Input';
 import api from '../../../axios-service';
 import { Loading } from '../../../Component/Load/Load';
+import { AccountContext } from '../../../App/Context';
 import './Account.css';
 
 export const Account = (props) => {
 
+    var firstname = props.name.first;
+    var lastname = props.name.last;
     var file = localStorage.getItem('file');
-    var firstname = localStorage.getItem('firstname');
-    var lastname = localStorage.getItem('lastname');
     var email = localStorage.getItem('email');
     const [fInput, savefInputValue] = useState(firstname);
     const [eInput, saveEInputValue] = useState(email);
@@ -17,6 +18,7 @@ export const Account = (props) => {
     const [dInput, savedInputValue] = useState('');
     const [gabInput, savegabInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [context, setContext] = useContext(AccountContext);
     var styles = null;
 
     useEffect(() => {
@@ -42,7 +44,8 @@ export const Account = (props) => {
         .then(response => {console.log(response.data['user'][0]['firstname']), 
         localStorage.setItem('firstname', response.data['user'][0]['firstname']),
         localStorage.setItem('lastname', response.data['user'][0]['lastname']),
-        localStorage.setItem('email', response.data['user'][0]['email'])})
+        localStorage.setItem('email', response.data['user'][0]['email']),
+        setContext(fInput)})
         .catch(error => {alert(error), console.log(error)});
     }
 

@@ -12,7 +12,7 @@ class PgService {
             user: 'postgres',
             host: 'localhost',
             database: 'postgres',
-            password: '*',
+            password: 'Sa12324047',
             port: '5432'
         });
         return pool;
@@ -23,7 +23,7 @@ class PgService {
             user: 'postgres',
             host: 'localhost',
             database: 'users',
-            password: '*',
+            password: 'Sa12324047',
             port: '5432'
         });
         return client;

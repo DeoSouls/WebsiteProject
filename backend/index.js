@@ -1,11 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const appRouter = require('./routes/route-service');
 const sequelize = require('./Model/db');
 const cookieParcer  = require('cookie-parser');
 
 const app = express();
+app.use('/static', express.static(path.join(__dirname, 'public'),{ maxAge: '1d'}));
 
 app.use(cookieParcer());
 app.use(cors({

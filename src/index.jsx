@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import './index.css';
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import {setupStore} from './slice/store';
 import { Provider } from 'react-redux';
@@ -14,11 +14,12 @@ const store = setupStore();
 const container = document.getElementById('root')
 const root = ReactDOMClient.createRoot(container);
 
+
 root.render(
     <Provider store={store}>
         <BrowserRouter>
             <CookiesProvider>
-                <App/>
+                    <App/>
             </CookiesProvider>
         </BrowserRouter>
     </Provider>

@@ -8,8 +8,8 @@ import './Profile.css';
 
 export const Profile = (props) => {
 
-    var firstname = localStorage.getItem('firstname');
-    var lastname = localStorage.getItem('lastname');
+    var firstname = props.first;
+    var lastname = props.last;
 
     return (
         <div>
@@ -49,7 +49,7 @@ export const Profile = (props) => {
                 </div>
                 <div className='profile-content'>
                     <Routes>
-                        <Route path='account' element={<Account/>}></Route>
+                        <Route path='account' element={<Account name={props}/>}></Route>
                     </Routes>
                 </div>
             </div>

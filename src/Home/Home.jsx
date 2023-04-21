@@ -8,22 +8,27 @@ import { Catalog } from './Catalog/Catalog';
 import { RootState } from '../slice/store';
 import { useAppDispatch, useAppSelector } from '../slice/hook/redux'
 import { fetchUsers } from '../slice/usersSlice';
+import { observable, observe } from 'mobx';
 import { Main } from '../Main/Main';
+import { useContext } from 'react';
+import { AccountContext } from '../App/Context';
 import './Home.css';
 
 export const Home = (props) => {
 
     const [isSearch, setIsSearch] = useState(false);
     const [selectMenu, openSelectMenu] = useState(false);
+    const [context, setContext] = useContext(AccountContext);
     const navigation = useNavigate();
     const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.users);
 
+    var name = observable({firstname: '', lastname: ''});
     var isActivate = false;
 
     useEffect(() => {
         dispatch(fetchUsers());
-    },[])
+    },[context])
 
 
     const search = (
@@ -68,11 +73,14 @@ export const Home = (props) => {
     if(Object.keys(token.error).length !== 0 & Object.keys(token.userData).length === 0){
         console.log(token);
         localStorage.removeItem('isActivate');
+        localStorage.removeItem('firstname');
+        localStorage.removeItem('lastname');
     }
 
     isActivate = localStorage.getItem('isActivate');
-    var firstname = localStorage.getItem('firstname');
-    var lastname = localStorage.getItem('lastname');
+    // var firstname = localStorage.getItem('firstname');
+    name.firstname = localStorage.getItem('firstname');
+    name.lastname = localStorage.getItem('lastname');
     
     return (
         <div>
@@ -92,7 +100,7 @@ export const Home = (props) => {
                     </a>
                     <div className='nav-bar-other'>
                         {isSearch? search : <button onClick={showSearch} className='search-img'></button>}
-                        {isActivate? <button onFocus={e => openSelectMenu(true)} className='profile-btn'>{firstname.substring(0,1).toUpperCase()}{lastname.substring(0,1).toUpperCase()}</button> : <button className='sign-btn' onClick={e => navigation('/authorization')}>Sign In</button>}
+                        {isActivate? <button onFocus={e => openSelectMenu(true)} className='profile-btn'>{name.firstname.substring(0,1).toUpperCase()}{name.lastname.substring(0,1).toUpperCase()}</button> : <button className='sign-btn' onClick={e => navigation('/authorization')}>Sign In</button>}
                         <button className='basket-btn'></button>
 
                         {selectMenu? <div className='css-figure'>
@@ -109,7 +117,7 @@ export const Home = (props) => {
 
             <Routes>
                 <Route path='/' element={<Main/>}></Route>
-                <Route path='profile/*' element={<Profile/>}></Route>
+                <Route path='profile/*' element={<Profile first={name.firstname} last={name.lastname}/>}></Route>
                 <Route path='catalog' element={<Catalog/>}></Route>
             </Routes>
         </div>
