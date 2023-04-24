@@ -20,23 +20,23 @@
 }
 
 .nav-bar-btns {
-    width: 100%;
-    min-width: 800px;
+    width: 1170px;
+    min-width: 600px;
     height: 60px;
     margin-bottom: 1px;
-    margin: 0 230px;
+    margin-left: 60px;
+    /* margin: 0 330px; */
 
     display: flex;
     align-items: center;
 
     background-color: white;
-    border-bottom: 1px solid rgb(231, 231, 231);
     /* rgb(201, 201, 201) */
 }
 
 .nav-bar-other {
-    width: 100%;
-    min-width: 200px;
+    width: 800px;
+    min-width: 300px;
     height: 60px;
 
     display: flex;

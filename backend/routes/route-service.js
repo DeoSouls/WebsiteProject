@@ -10,7 +10,7 @@ router.post('/update', appMiddleware.updateUser);
 router.post('/getuser', appMiddleware.getUser);
 router.get('/activating/:activate', appMiddleware.activate);
 router.get('/refresh', appMiddleware.refresh);
-router.get('/goods', paginate.middleware(2,4),appMiddleware.getGoods);
+router.get('/goods', paginate.middleware(9,9),appMiddleware.getGoods);
 
 
 module.exports = router;

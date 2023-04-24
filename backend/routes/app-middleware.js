@@ -37,17 +37,29 @@ class appMiddleware {
             }
 
             await model.deleteToken({where: {userId: userid}});
-            // const group = await model.createGroup({group_name: 'techno'});
-            // const good = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const good1 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const good2 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const good4 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const good5 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const good6 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const good7 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const good8 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const good9 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // const image = await model.createImage({img: 'http://localhost:5000/static/back.png', goodId: '1'});
+            const group = await model.createGroup({group_name: 'techno'});
+            const good = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image1.jpg', goodId: good.id});
+            const good1 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image2.jpg', goodId: good1.id});
+            const good2 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image3.jpg', goodId: good2.id});
+            const good4 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image4.jpg', goodId: good4.id});
+            const good5 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image5.jpg', goodId: good5.id});
+            const good6 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image6.jpeg', goodId: good6.id});
+            const good7 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image7.jpg', goodId: good7.id});
+            const good8 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image8.jpg', goodId: good8.id});
+            const good9 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image9.jpg', goodId: good9.id});
+            const good10 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image10.jpg', goodId: good10.id});
+            const good11 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            await model.createImage({img: 'http://localhost:5000/static/image11.jpg', goodId: good11.id});
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPass);
             const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true});
 
@@ -68,7 +80,7 @@ class appMiddleware {
 
             const mail = new MailService();
             const model = new ModelService();
-            await sequelize.sync({});
+            await sequelize.sync({force: true});
 
             // const checkEmail = await model.User.findAll({where: {email: email}});
             // if(checkEmail[0] !== undefined) {
@@ -198,15 +210,19 @@ class appMiddleware {
             model.Good.findAndCountAll({limit: req.query.limit, offset: req.skip})
             .then(async (results) =>  {
                 const itemCount = await results.count;
+                const {rows} = results;
                 const pageCount = await Math.ceil(results.count / req.query.limit);
-                // res.render('api/goods', {
-                //     goods: results.rows,
-                //     pageCount,
-                //     itemCount,
-                //     pages: paginate.getArrayPages(req)(3, pageCount, req.query.page)
-                // });
-                const image = await model.findImage({id: results.rows[0]['id']});
-                res.json({results, pages: paginate.getArrayPages(req)(3, pageCount, req.query.page), image});
+                // const images = await rows.map(row => {
+                //     const img = model.findImage({goodId: row._previousDataValues.id});
+                //     return img;
+                // })
+                // console.log(rows[0].dataValues.id);
+                var images = [];
+                for (let i = 0; i < rows.length; i++) {
+                    images.push(await model.findImage({goodId: rows[i].dataValues.id}));
+                }
+                
+                res.json({results, pages: paginate.getArrayPages(req)(3, pageCount, req.query.page), images});
             })
             .catch(err => next(err))
         } catch (e) {
