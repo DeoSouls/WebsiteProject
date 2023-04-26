@@ -149,6 +149,15 @@ class ModelService {
             throw Error(e.message);
         }
     }
+
+    async findGood(value) {
+        try {
+            let good = await this.Good.findAll({where: value});
+            return good;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
 }
 
 module.exports = ModelService;

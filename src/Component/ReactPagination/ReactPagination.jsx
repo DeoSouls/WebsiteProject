@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../axios-service';
 import './ReactPagination.css';
 
 export const ReactPagination = (props) => {
 
     const result = props.result;
-    const {images, pages, results} = result;
-
-    const {count, rows} = results;
+    const {pages, products, counts} = result;
+    const filterState = props.filter;
+    
+    // var filters = [];
+    // if(filterState.length > 0){
+    //     filterState.map(filter => {
+    //         filters.push(filter);
+    //     })
+    // }
+    console.log(filterState);
     const pagesLimit = pages.length;
-    const pageCount = Math.ceil(count / props.goodsCount);
+    const pageCount = Math.ceil(counts / props.goodsCount);
 
     let indexPages = 0;
     if (pagesLimit >= 3) {
@@ -21,10 +28,8 @@ export const ReactPagination = (props) => {
     const [pageValue, setPageValue] = useState(pages);
     const [indexValue, setIndexValue] = useState(indexPages);
     const [prevFocusBtn, setFocusBtn] = useState([]);
-    const [prevFocusInx, setFocusInx] = useState(1);
-    const [nextFocusInx, setNextFocusInx] = useState(1);
 
-    const pagesReact = pageValue.map((page, index) => {
+    const pagesReact = pages.map((page, index) => {
         const {number, url} = page;
         if(prevFocusBtn.length > 0 && number === prevFocusBtn[0]) {
             return <button className='btn-page' style={{backgroundColor: 'black', color: 'white'}} key={index} id={number} onClick={e => props.onClick(getNextPackage(e, number, url))}>{number}</button>
@@ -68,7 +73,7 @@ export const ReactPagination = (props) => {
         }
     });
 
-    const startingLabels = pageValue.map((page, index) =>{
+    const startingLabels = pages.map((page, index) =>{
         const {number, url} = page;
         if (pageCount - 1 != pagesLimit && pageCount != pagesLimit) {
             if(index === 0 && number >= 4) {
@@ -99,9 +104,8 @@ export const ReactPagination = (props) => {
         }
     });
 
-    const remainingLabels = pageValue.map((page, index) => {
+    const remainingLabels = pages.map((page, index) => {
         const {number, url} = page;
-        const {count, rows} = results;
         const pageLimit = pages.length;
         if (pageCount - 1 != pageLimit && pageCount != pageLimit) {
             if(index === pageLimit - 1 && number < pageCount - 2) {
@@ -137,7 +141,7 @@ export const ReactPagination = (props) => {
         
         setFocusBtn([number])
 
-        const packageInfo = api.get('http://localhost:5000'+ urlcode)
+        const packageInfo = api.post('http://localhost:5000'+ urlcode, {filter: filterState})
         .then((response) => {
             console.log(response.data);
             let {pages} = response.data;
@@ -147,15 +151,11 @@ export const ReactPagination = (props) => {
         })
         .catch(err => console.log(err));
 
-        // const elem = document.getElementById(number);
-
-        // elem.style.backgroundColor = 'black';
-        // elem.style.color = 'white';
-
         return packageInfo
     }
 
     console.log(prevFocusBtn);
+    console.log(pages);
 
     return (
         <div className='btns-line'>

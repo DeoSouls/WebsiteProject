@@ -1,30 +1,64 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { ReactPagination } from '../../Component/ReactPagination/ReactPagination';
 import { ProductSummary } from './ProductSummary/ProductSummary';
 import api from '../../axios-service';
-import { useState } from 'react';
 import './Catalog.css';
 
 export const Catalog = (props) => {
 
     useEffect(() => {
-        getGoods();
+        getGoods(state);
     }, [])
-
+    
     const [goods, setGoods] = useState([]);
     const [goodPackage, setGoodPackage] = useState([]);
+    const [updateState, setUpdateState] = useState([]);
 
-    function getGoods() {
-        api.get('http://localhost:5000/api/goods')
-        .then(response => {setGoods(response.data), setGoodPackage(response.data.results.rows)})
+    const reducer = (state, update) => ({
+        ...state,
+        ...update,
+    });
+
+    const [state, dispatch] = useReducer(reducer, {
+        phone: {
+            filterName: '',
+            checked: false
+        },
+        TV: {
+            filterName: '',
+            checked: false
+        },
+        headphone: {
+            filterName: '',
+            checked: false
+        } 
+    });
+
+
+    function getGoods(state) {
+        console.log(state);
+        api.post('http://localhost:5000/api/goods', {filter: state})
+        .then(response => {setGoods(response.data), setGoodPackage(response.data.products)})
         .catch(err => alert(err.message));
     }
 
     function handlerClick(goods) {
 
         goods.then(p => setGoods(p));
+        console.log(goods);
+    }
+    
+    const filterObject =  (event) => {
+        console.log(event.target.checked);
+        console.log(event.target.name);
+        const value = event.target.name;
 
-        console.log(goods)
+        var action = {[value]: {filterName: event.target.name, checked: event.target.checked}};
+        dispatch(action);
+
+        const nextState = reducer(state, action);
+
+        getGoods(nextState);
     }
 
     const paginate = () => {
@@ -33,7 +67,7 @@ export const Catalog = (props) => {
         if(Object.keys(goods).length > 0 ) {
             result = goods;
             console.log(result);
-            return <ReactPagination result={result} onClick={handlerClick} goodsCount={goodPackage.length}/>
+            return <ReactPagination filter={state} result={result} onClick={handlerClick} goodsCount={goodPackage.length}/>
         }
     };
 
@@ -41,11 +75,12 @@ export const Catalog = (props) => {
     var startPackage;
     var endPackage;
     if(Object.keys(goods).length > 0) {
-        countProducts = goods.results.count;
-        startPackage = goods.results.rows[0].id;
-        endPackage =  goods.results.rows[goods.results.rows.length - 1].id;
+        countProducts = goods.counts;
+        startPackage = 1;
+        endPackage =  goods.products.length;
     }
 
+    console.log(state);
 
     return (
         <div>
@@ -70,12 +105,16 @@ export const Catalog = (props) => {
                         <p>Product Type</p>
                     </div>
                     <div>
-                        <input name='filter-phone' type="checkbox" className='filter-phone'/>
-                        <label className='label-check-phone' htmlFor='filter-phone' >Phone</label>
+                        <input name='phone' type="checkbox" className='filter-phone' onChange={e => filterObject(e)}/>
+                        <label className='label-check-phone' htmlFor='phone' >Phone</label>
                     </div>
                     <div>
-                        <input name='filter-TV' type="checkbox" className='filter-TV'/>
-                        <label className='label-check-TV' htmlFor='filter-TV'>TV</label>
+                        <input name='TV' type="checkbox" className='filter-TV' onChange={e => filterObject(e)}/>
+                        <label className='label-check-TV' htmlFor='TV'>TV</label>
+                    </div>
+                    <div>
+                        <input name='headphone' type="checkbox" className='filter-headphone' onChange={e => filterObject(e)}/>
+                        <label className='label-check-headphone' htmlFor='headphone'>Headphone</label>
                     </div>
                 </div>
                 <div className='catalog-cards'>

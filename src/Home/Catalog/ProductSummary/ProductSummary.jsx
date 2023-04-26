@@ -5,15 +5,15 @@ export const ProductSummary = (props) => {
     
     var totalProd;
     var cardProduct;
-    const {images, results} = props.prod;
+    const {img, products} = props.prod;
 
-    if(Object.keys(props.prod).length > 0) {
-        totalProd = results.rows;
+    if(Object.keys(props.prod).length > 0 && img.length > 0) {
+        totalProd = products;
         cardProduct = totalProd.map((good, index) => {
             return (
             <div className='products-card'>
                 <div>
-                    <img className='product-image' src={images[index][0].img} alt="" />
+                    <img className='product-image' src={img[index][0].img} alt="" />
                     <p className='product-card-data'>{good.name}</p>
                     <p className='product-card-data'>{good.price}</p>
                 </div>
