@@ -30,3 +30,31 @@
     font-family: try_cloth;
 }
 
+.description-background {
+    width: 295px;
+    height: 260px;
+
+    background: transparent;
+    backdrop-filter: blur(10px);
+    position: absolute;
+}
+
+
+.description-product {
+
+    position: absolute;
+    width: 250px;
+    margin-left: 30px;
+    margin-top: 30px;
+
+    font-size: 13px;
+    font-family: header_edit; 
+
+    color: black;
+    text-decoration: none;
+}
+
+.product-ref {
+    width: 295px;
+    height: 260px;
+}

@@ -158,6 +158,15 @@ class ModelService {
             throw Error(e.message);
         }
     }
+
+    async findGroup(value) {
+        try {
+            let group = await this.Group.findAll({where: value});
+            return group;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
 }
 
 module.exports = ModelService;

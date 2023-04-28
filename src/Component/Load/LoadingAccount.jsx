@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSpring, useTransition, animated, useSpringRef, easings } from '@react-spring/web';
-import './Load.css';
+import './LoadingAccount.css';
 
-export const Loading = (props) => {
+export const LoadingAccount = (props) => {
     
     const springs = useSpring({
         from: { background: 'linear-gradient(90deg,rgb(218, 218, 218), rgb(248, 248, 248),1%,rgb(248, 248, 248),20%,rgb(238, 238, 238))'},

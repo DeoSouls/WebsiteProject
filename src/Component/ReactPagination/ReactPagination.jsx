@@ -7,13 +7,9 @@ export const ReactPagination = (props) => {
     const result = props.result;
     const {pages, products, counts} = result;
     const filterState = props.filter;
+    const prodGroup = props.group;
     
-    // var filters = [];
-    // if(filterState.length > 0){
-    //     filterState.map(filter => {
-    //         filters.push(filter);
-    //     })
-    // }
+
     console.log(filterState);
     const pagesLimit = pages.length;
     const pageCount = Math.ceil(counts / props.goodsCount);
@@ -141,7 +137,7 @@ export const ReactPagination = (props) => {
         
         setFocusBtn([number])
 
-        const packageInfo = api.post('http://localhost:5000'+ urlcode, {filter: filterState})
+        const packageInfo = api.post('http://localhost:5000'+ urlcode, {filter: filterState, group: prodGroup})
         .then((response) => {
             console.log(response.data);
             let {pages} = response.data;

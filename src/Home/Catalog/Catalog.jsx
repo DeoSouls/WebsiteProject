@@ -1,18 +1,28 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { ReactPagination } from '../../Component/ReactPagination/ReactPagination';
 import { ProductSummary } from './ProductSummary/ProductSummary';
+import { LoadingCatalog } from '../../Component/Load/LoadingCatalog';
 import api from '../../axios-service';
 import './Catalog.css';
 
 export const Catalog = (props) => {
 
-    useEffect(() => {
-        getGoods(state);
-    }, [])
-    
     const [goods, setGoods] = useState([]);
     const [goodPackage, setGoodPackage] = useState([]);
-    const [updateState, setUpdateState] = useState([]);
+    const [isLoading, setloading] = useState(false)
+
+    var productsGroup = props.prodGroup;
+
+    if(productsGroup === undefined || productsGroup === '') {
+        productsGroup = 'all';
+    }
+
+    useEffect(() => {
+        getGoods(state, productsGroup);
+        setTimeout(() => {
+            setloading(true);
+        }, 1000)
+    }, [])
 
     const reducer = (state, update) => ({
         ...state,
@@ -35,9 +45,10 @@ export const Catalog = (props) => {
     });
 
 
-    function getGoods(state) {
+    function getGoods(state, group) {
         console.log(state);
-        api.post('http://localhost:5000/api/goods', {filter: state})
+        console.log(group)
+        api.post('http://localhost:5000/api/goods', {filter: state, group: group})
         .then(response => {setGoods(response.data), setGoodPackage(response.data.products)})
         .catch(err => alert(err.message));
     }
@@ -49,16 +60,14 @@ export const Catalog = (props) => {
     }
     
     const filterObject =  (event) => {
-        console.log(event.target.checked);
-        console.log(event.target.name);
         const value = event.target.name;
 
         var action = {[value]: {filterName: event.target.name, checked: event.target.checked}};
         dispatch(action);
 
         const nextState = reducer(state, action);
-
-        getGoods(nextState);
+        
+        getGoods(nextState, productsGroup);
     }
 
     const paginate = () => {
@@ -67,7 +76,7 @@ export const Catalog = (props) => {
         if(Object.keys(goods).length > 0 ) {
             result = goods;
             console.log(result);
-            return <ReactPagination filter={state} result={result} onClick={handlerClick} goodsCount={goodPackage.length}/>
+            return <ReactPagination filter={state} group={productsGroup} result={result} onClick={handlerClick} goodsCount={goodPackage.length}/>
         }
     };
 
@@ -92,7 +101,7 @@ export const Catalog = (props) => {
                             /
                             <a className='pseudo-ref' href="/catalog">Product</a>
                         </div>
-                        <h1 className='header-name'>Root Bundle</h1>
+                        <h1 className='header-name'>{productsGroup} Bundle</h1>
                     </div>
                 </div>
             </div>
@@ -118,7 +127,7 @@ export const Catalog = (props) => {
                     </div>
                 </div>
                 <div className='catalog-cards'>
-                    <ProductSummary prod={goods} />
+                    {isLoading?  <ProductSummary prod={goods} /> : <LoadingCatalog/>}
                     {paginate()}
                 </div>
             </div>

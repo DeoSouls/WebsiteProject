@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from "react-bootstrap/Navbar";
-import Container from 'react-bootstrap/Container';
 import { Route, Routes, useNavigate} from 'react-router';
 import { Profile } from './Profile/Profile';
 import { Catalog } from './Catalog/Catalog';
-import { RootState } from '../slice/store';
 import { useAppDispatch, useAppSelector } from '../slice/hook/redux'
 import { fetchUsers } from '../slice/usersSlice';
-import { observable, observe } from 'mobx';
+import { observable} from 'mobx';
 import { Main } from '../Main/Main';
 import { useContext } from 'react';
 import { AccountContext } from '../App/Context';
+import { ProductPage } from '../Home/Catalog/ProductPage/ProductPage';
 import './Home.css';
 
 export const Home = (props) => {
 
     const [isSearch, setIsSearch] = useState(false);
     const [selectMenu, openSelectMenu] = useState(false);
+    const [groupValue, setGroup] = useState('');
+
     const [context, setContext] = useContext(AccountContext);
+
     const navigation = useNavigate();
+
     const dispatch = useAppDispatch();
     const token = useAppSelector((state) => state.users);
 
@@ -54,6 +55,13 @@ export const Home = (props) => {
         localStorage.removeItem('firstname');
 
         navigation('/authorization');
+    }
+
+    function onGroup(event) {
+
+        setGroup(event.target.id);
+
+        navigation('/catalog');
     }
 
     if(Object.keys(token.userData).length !== 0) {
@@ -116,9 +124,11 @@ export const Home = (props) => {
             </div>
 
             <Routes>
-                <Route path='/' element={<Main/>}></Route>
+                <Route path='/' element={<Main onGroup={e => onGroup(e)} />}></Route>
                 <Route path='profile/*' element={<Profile first={name.firstname} last={name.lastname}/>}></Route>
-                <Route path='catalog' element={<Catalog/>}></Route>
+                <Route path='catalog' element={<Catalog prodGroup={groupValue}/>}></Route>
+                <Route path='catalog/product/:prodId' element={<ProductPage/>}></Route>
+                <Route path='*' element={<h1>Страница не найдена</h1>}></Route>
             </Routes>
         </div>
     )

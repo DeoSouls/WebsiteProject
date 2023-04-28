@@ -1,0 +1,35 @@
+.load-catalog-container {
+    margin-left: 70px;
+    margin-top: 20px;
+
+    width: 1000px;
+    height: 270px;
+
+    display: flex;
+}
+
+.load-img-catalog {
+    width: 230px;
+    height: 200px;
+
+    margin-left: 25px;
+    border-radius: 15px;
+}
+
+.load-about-catalog {
+    width: 210px;
+    height: 10px;
+    margin-top: 14px;
+    margin-left: 25px;
+
+    border-radius: 10px;
+}
+
+.load-price-catalog {
+    width: 160px;
+    height: 8.5px;
+    margin-top: 9px;
+    margin-left: 25px;
+
+    border-radius: 10px;
+}

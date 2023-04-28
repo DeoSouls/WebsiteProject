@@ -37,29 +37,29 @@ class appMiddleware {
             }
 
             await model.deleteToken({where: {userId: userid}});
-            const group = await model.createGroup({group_name: 'techno'});
-            const good = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image1.jpg', goodId: good.id});
-            const good7 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image7.jpg', goodId: good7.id});
-            const good1 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image2.jpg', goodId: good1.id});
-            const good8 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image8.jpg', goodId: good8.id});
-            const good9 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image9.jpg', goodId: good9.id});
-            const good2 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image3.jpg', goodId: good2.id});
-            const good4 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image4.jpg', goodId: good4.id});
-            const good10 = await model.createGood({name: 'IPhone Pro Max', type: 'TV', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image10.jpg', goodId: good10.id});
-            const good5 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image5.jpg', goodId: good5.id});
-            const good11 = await model.createGood({name: 'IPhone Pro Max', type: 'TV', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image11.jpg', goodId: good11.id});
-            const good6 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            await model.createImage({img: 'http://localhost:5000/static/image6.jpeg', goodId: good6.id});
+            // const group = await model.createGroup({group_name: 'food'});
+            // const good = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image1.jpg', goodId: good.id});
+            // const good7 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image7.jpg', goodId: good7.id});
+            // const good1 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image2.jpg', goodId: good1.id});
+            // const good8 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image8.jpg', goodId: good8.id});
+            // const good9 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image9.jpg', goodId: good9.id});
+            // const good2 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image3.jpg', goodId: good2.id});
+            // const good4 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image4.jpg', goodId: good4.id});
+            // const good10 = await model.createGood({name: 'IPhone Pro Max', type: 'TV', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image10.jpg', goodId: good10.id});
+            // const good5 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image5.jpg', goodId: good5.id});
+            // const good11 = await model.createGood({name: 'IPhone Pro Max', type: 'TV', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image11.jpg', goodId: good11.id});
+            // const good6 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image6.jpeg', goodId: good6.id});
             
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPass);
             const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true});
@@ -209,17 +209,17 @@ class appMiddleware {
         try {
             
             const model = new ModelService();
-            const {filter} = req.body;
+            const {filter, group} = req.body;
 
             const filterObject = Object.entries(filter);
             console.log(filterObject);
 
             model.Good.findAndCountAll({limit: req.query.limit, offset: req.skip})
             .then(async (results) =>  {
-                const {rows, count} = results;
 
                 var prevfilter = '';
                 var allprod = null;
+                var productGroup = null;
                 var prod = [];
                 var products = [];
                 var img = [];
@@ -229,7 +229,7 @@ class appMiddleware {
                 var skip = req.skip/req.query.limit;
                 var size = req.query.limit;
 
-                const filterWorked = async (filter) => {
+                const filterWorked = async (filter, group) => {
 
                     var totalFilter = [];
 
@@ -242,14 +242,24 @@ class appMiddleware {
 
                     if(totalFilter.length > 0) {
 
-                        allprod = await model.findGood();
+                        if(group === 'all') {
+                            allprod = await model.findGood();
+
+                        } else {
+                            productGroup = await model.findGroup({group_name: group});
+                            console.log(productGroup[0]);
+                            if(productGroup[0] !== undefined) {
+
+                                allprod = await model.findGood({groupId: productGroup[0].dataValues.id});
+                            }
+                        }
 
                         for (let i = 0; i < totalFilter.length; i++) {
 
                             const good = await model.findGood({type: totalFilter[i]});
                             prevfilter = totalFilter[i - 1];
 
-                            if(good[0] !== undefined ) {
+                            if(good[0] !== undefined) {
                                 if(products[0] !== undefined ){
 
                                     var product = await model.findGood({type: totalFilter[i]});
@@ -267,7 +277,7 @@ class appMiddleware {
 
                             var sliceProducts = [];
                             
-                            if( products[0] !== undefined) {
+                            if( products[0] !== undefined && allprod !== null) {
 
                                 for (let i = 0; i < allprod.length; i++) {
                                     products[0].forEach(prod => {
@@ -354,7 +364,7 @@ class appMiddleware {
                                     prod = subArray[skip];
                                 }
 
-                                counts = products[0].length;
+                                counts = sliceProducts.length;
                                 products = [...products];
 
                             } else {
@@ -365,20 +375,64 @@ class appMiddleware {
                         return {image: images, prod: prod, cnt: counts}
                         
                     } else {
-                        for (let i = 0; i < rows.length; i++) {
-                            const prod = await model.findGood({id: rows[i].dataValues.id});
-                            products.push(prod[0]);
+
+                        if(group === 'all') {
+                            allprod = await model.findGood();
+
+                        } else {
+                            productGroup = await model.findGroup({group_name: group});
+                            if(productGroup[0] !== undefined) {
+                                allprod = await model.findGood({groupId: productGroup[0].dataValues.id});
+                            }
+                            console.log(allprod);
                         }
+
+                        var subAllProd = [];
+
+                        if(allprod !== undefined && allprod !== null) {
+                            for (let i = 0; i < Math.ceil(allprod.length/size); i++) {
+                                var addsize = size;
+                                subAllProd[i] = allprod.slice((i * size), (i * size) + addsize);
+                            }
+
+                            for (let i = 0; i < subAllProd[skip].length; i++) {
+                                const prod = await model.findGood({id: subAllProd[skip][i].dataValues.id});
+                                products.push(prod[0]);
+                            }
+        
+                            for (let i = 0; i < products.length; i++) {
+                                img.push(await model.findImage({goodId: subAllProd[skip][i].dataValues.id}));
+                            }
+
+                            counts = allprod.length;
+                        } else {
+                            counts = 0;
+                        }
+                        
+
+                        // for (let i = 0; i < rows.length; i++) {
+                        //     const prod = await model.findGood({id: rows[i].dataValues.id});
+                        //     products.push(prod[0]);
+                        // }
     
-                        for (let i = 0; i < products.length; i++) {
-                            img.push(await model.findImage({goodId: rows[i].dataValues.id}));
-                        }
-                        counts = count;
+                        // for (let i = 0; i < products.length; i++) {
+                        //     img.push(await model.findImage({goodId: rows[i].dataValues.id}));
+                        // }
                         return {image: img, prod: products, cnt: counts}
                     }
                 };
 
-                const reaction = filterWorked(filterObject);
+                var interim_group = [];
+                var reaction = null;
+
+                if(group === '' || group === undefined) {
+                    interim_group = 'all';
+                    reaction = filterWorked(filterObject, interim_group);
+                } else {
+                    reaction = filterWorked(filterObject, group);
+                }
+
+
                 if(reaction !== null) {
 
                     img = (await reaction).image;
@@ -395,8 +449,9 @@ class appMiddleware {
 
                 const pgCount = await Math.ceil(counts / req.query.limit);
                 console.log(pgCount);
+                console.log(counts);
 
-                res.json({results, pages: paginate.getArrayPages(req)(3, pgCount, req.query.page), img, products, counts, filter});
+                res.json({results, pages: paginate.getArrayPages(req)(3, pgCount, req.query.page), img, products, counts, filter, group});
             })
             .catch(err => next(err))
         } catch (e) {

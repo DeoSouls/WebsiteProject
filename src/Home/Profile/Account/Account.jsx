@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { RInput } from '../../../Component/Input';
 import api from '../../../axios-service';
-import { Loading } from '../../../Component/Load/Load';
+import { LoadingAccount } from '../../../Component/Load/LoadingAccount';
 import { AccountContext } from '../../../App/Context';
 import './Account.css';
 
@@ -53,7 +53,7 @@ export const Account = (props) => {
         // setTimeout(() => {
         //     setIsLoading(true)
         // },2000);
-        return <Loading/>
+        return <LoadingAccount/>
     }
 
     const handlerClick = (files) => {

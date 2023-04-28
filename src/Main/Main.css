@@ -47,3 +47,13 @@
     font-weight: 100;
     font-family: nav_font;
 }
+
+.btn-groups {
+    width: 70px;
+    height: 70px;
+}
+
+.btn-group {
+    background-color: white;
+    border: none;
+}
