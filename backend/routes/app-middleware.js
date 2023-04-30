@@ -37,29 +37,51 @@ class appMiddleware {
             }
 
             await model.deleteToken({where: {userId: userid}});
-            // const group = await model.createGroup({group_name: 'food'});
-            // const good = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image1.jpg', goodId: good.id});
-            // const good7 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image7.jpg', goodId: good7.id});
-            // const good1 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image2.jpg', goodId: good1.id});
-            // const good8 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image8.jpg', goodId: good8.id});
-            // const good9 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image9.jpg', goodId: good9.id});
-            // const good2 = await model.createGood({name: 'IPhone Pro Max', type: 'headphone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image3.jpg', goodId: good2.id});
-            // const good4 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image4.jpg', goodId: good4.id});
-            // const good10 = await model.createGood({name: 'IPhone Pro Max', type: 'TV', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image10.jpg', goodId: good10.id});
-            // const good5 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image5.jpg', goodId: good5.id});
-            // const good11 = await model.createGood({name: 'IPhone Pro Max', type: 'TV', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image11.jpg', goodId: good11.id});
-            // const good6 = await model.createGood({name: 'IPhone Pro Max', type: 'phone', good_info: 'что то о товаре', price: '50000', groupId: group.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image6.jpeg', goodId: good6.id});
+            const group = await model.createGroup({group_name: 'techno'});
+            const good = await model.createGood({name: 'Meizu 16s', type: 'phone', price: '26346', brand: 'meizu', groupId: group.id});
+            await model.createGoodInfo({color: 'red&black&white', info: 'Смартфон Meizu 16S глобальной версии, экран 6,2 дюйма, двойная фронтальная камера, 8 ГБ ОЗУ 128 Гб ПЗУ, Восьмиядерный процессор Snapdragon 855, 4G, 3600 мАч', goodId: good.id});
+            await model.createImage({img: 'http://localhost:5000/static/image1.jpg', goodId: good.id});
+            await model.createDiscount({value: '65865', goodId: good.id});
+            const good7 = await model.createGood({name: 'Xiaomi Redmi Note 7', type: 'phone', price: '14490', brand: 'redmi', groupId: group.id});
+            await model.createGoodInfo({color: 'red&white', info: 'Смартфон Xiaomi Redmi Note 7, 4 Гб + 64 ГБ, Snapdragon 660AIE, Android мобильный телефон, задняя камера 48 Мп + 5 МП', goodId: good7.id});
+            await model.createImage({img: 'http://localhost:5000/static/image12.jpg', goodId: good7.id});
+            await model.createDiscount({value: '20000', goodId: good7.id});
+            const good1 = await model.createGood({name: 'Xiaomi Redmi Note 11', type: 'phone', price: '13860', brand: 'apple', groupId: group.id});
+            await model.createGoodInfo({color: 'white', info: 'Глобальная версия смартфона Xiaomi Redmi Note 11, Snapdragon 680 33W Pro, быстрая зарядка, 50 МП, Quad Camera', goodId: good1.id});
+            await model.createImage({img: 'http://localhost:5000/static/image2.jpg', goodId: good1.id});
+            await model.createDiscount({value: '17703', goodId: good1.id});
+            const good8 = await model.createGood({name: 'Meizu 16th', type: 'phone', price: '19050', brand: 'meizu', groupId: group.id});
+            await model.createGoodInfo({color: 'black', info: 'Смартфон Meizu 16th с глобальной прошивкой, 6,0 дюйма, двойная фронтальная камера, 8 ГБ ОЗУ, 128 Гб ПЗУ, Восьмиядерный процессор Snapdragon 845, 4G, 3010 мАч', goodId: good8.id});
+            await model.createImage({img: 'http://localhost:5000/static/image8.jpg', goodId: good8.id}); //Удалить 8 картинку
+            await model.createDiscount({value: '20383', goodId: good8.id});
+            const good9 = await model.createGood({name: 'Honor Choice Earbuds X3', type: 'headphone', price: '2358', brand: 'honor', groupId: group.id});
+            await model.createGoodInfo({color: 'red&black&white', info: 'Беспроводные наушники Honor Choice Earbuds X3 Lite', goodId: good9.id});
+            await model.createImage({img: 'http://localhost:5000/static/image13.jpg', goodId: good9.id});
+            await model.createDiscount({value: '3683', goodId: good9.id});
+            const good2 = await model.createGood({name: 'Honor Earbuds 2 SE', type: 'headphone', price: '4031', brand: 'honor', groupId: group.id});
+            await model.createGoodInfo({color: 'black&white', info: 'Беспроводные наушники Honor Earbuds 2 SE TWS', goodId: good2.id});
+            await model.createImage({img: 'http://localhost:5000/static/image14.jpg', goodId: good2.id});
+            await model.createDiscount({value: '7606', goodId: good2.id});
+            const good4 = await model.createGood({name: 'TWS i12', type: 'headphone', price: '495', brand: 'other', groupId: group.id});
+            await model.createGoodInfo({color: 'white', info: 'Bluetooth наушники TWS i12 (в комплекте: зарядный бокс, два наушника)', goodId: good4.id});
+            await model.createImage({img: 'http://localhost:5000/static/image15.jpg', goodId: good4.id});
+            await model.createDiscount({value: '0', goodId: good4.id});
+            const good10 = await model.createGood({name: 'Apple AirPods 2', type: 'headphone', price: '12280', brand: 'apple', groupId: group.id});
+            await model.createGoodInfo({color: 'white', info: 'Наушники Apple AirPods 2 с зарядным чехлом', goodId: good10.id});
+            await model.createImage({img: 'http://localhost:5000/static/image16.jpg', goodId: good10.id});
+            await model.createDiscount({value: '0', goodId: good10.id});
+            const good5 = await model.createGood({name: 'TCL 43P635', type: 'TV', price: '33110', brand: 'TCL', groupId: group.id});
+            await model.createGoodInfo({color: 'black', info: 'TCL 43P635 телевизор smart tv 43 дюймов 4к Google P WIFI 2.4G Bluetooth 5.0 телевизор смарт тв 4K Ultra HD LED Гарантия 1 год', goodId: good5.id});
+            await model.createImage({img: 'http://localhost:5000/static/image17.png', goodId: good5.id});
+            await model.createDiscount({value: '35990', goodId: good5.id});
+            const good11 = await model.createGood({name: 'Maibenben Smart TV 65M2UC', type: 'TV', price: '44789', brand: 'Maibenben', groupId: group.id});
+            await model.createGoodInfo({color: 'black', info: 'Maibenben Smart TV 65M2UC 65 дюймов 4K HDR Bluetooth 5.0 WIFI телевизор с узкими рамками', goodId: good11.id});
+            await model.createImage({img: 'http://localhost:5000/static/image18.png', goodId: good11.id});
+            await model.createDiscount({value: '55987', goodId: good11.id});
+            const good6 = await model.createGood({name: 'TV 55" Samsung', type: 'TV', price: '43092', brand: 'samsung', groupId: group.id});
+            await model.createGoodInfo({color: 'black', info: 'Телевизор 55" Samsung UE55TU8000UXRU - 4K | Smart TV | матрица VA 120 Гц | гарантия производителя | быстрая доставка из Москвы', goodId: good6.id});
+            await model.createImage({img: 'http://localhost:5000/static/image19.jpg', goodId: good6.id});
+            await model.createDiscount({value: '49990', goodId: good6.id});
             
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPass);
             const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true});
@@ -156,6 +178,24 @@ class appMiddleware {
         }
     }
 
+    async getDataGoods(req, res) {
+        try {
+            const { prodId } = req.body;
+            const model = new ModelService();
+
+            const good = await model.findGood({id: prodId});
+            const info = await model.findGoodData({goodId: good[0]['dataValues']['id']});
+            const group = await model.findGroup({id: good[0]['dataValues']['groupId']});
+            const image = await model.findImage({goodId: good[0]['dataValues']['id']});
+            const discount = await model.findDiscount({goodId: good[0]['dataValues']['id']});
+
+            res.json({data: info[0], group: group[0], product: good[0], image: image[0], discount: discount[0]});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить данные о товарах'});
+        }
+    }
+
     async activate(req, res) {
         try {
             const link = req.params.activate;
@@ -165,7 +205,6 @@ class appMiddleware {
             if(user === undefined) {
                 res.status(400).json({message: 'Не удалось активировать аккаунт'});
             }
-            console.log(`-----${user[0]['dataValues']['id']}`);
 
             const token = await model.findToken({userId: user[0]['dataValues']['id']});
             if(token === undefined) {

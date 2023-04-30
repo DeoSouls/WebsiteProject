@@ -99,7 +99,7 @@ export const Catalog = (props) => {
                         <div className='pseudo-navigation'>
                             <a className='pseudo-ref' href="/">Home</a>
                             /
-                            <a className='pseudo-ref' href="/catalog">Product</a>
+                            <a className='pseudo-ref' href="/catalog">Catalog</a>
                         </div>
                         <h1 className='header-name'>{productsGroup} Bundle</h1>
                     </div>

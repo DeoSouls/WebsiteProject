@@ -10,6 +10,7 @@ class ModelService {
     Image;
     Basket;
     Review;
+    GoodInfo;
     Discount;
     BasketGood;
 
@@ -21,6 +22,7 @@ class ModelService {
         this.Image = service.Image;
         this.Basket = service.Basket;
         this.Review = service.Review;
+        this.GoodInfo = service.GoodInfo;
         this.Discount = service.Discount;
         this.BasketGood = service.BasketGood;
     }
@@ -106,6 +108,15 @@ class ModelService {
         }
     }
 
+    createGoodInfo(value) {
+        try {
+            const good_info = this.GoodInfo.create(value);
+            return good_info;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
     deleteToken(value) {
         try {
             let token = this.Token.destroy(value);
@@ -159,10 +170,28 @@ class ModelService {
         }
     }
 
+    async findGoodData(value) {
+        try {
+            let good_info = await this.GoodInfo.findAll({where: value});
+            return good_info;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
     async findGroup(value) {
         try {
             let group = await this.Group.findAll({where: value});
             return group;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
+    async findDiscount(value) {
+        try {
+            let discount = await this.Discount.findAll({where: value});
+            return discount;
         } catch (e) {
             throw Error(e.message);
         }

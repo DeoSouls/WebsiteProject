@@ -22,8 +22,8 @@ const Good = sequelize.define('good',{
     id: {type: DataTypes.INTEGER,autoIncrement: true, primaryKey: true},
     name: {type: DataTypes.STRING,allowNull: false},
     type: {type: DataTypes.STRING,allowNull: false},
-    good_info: {type: DataTypes.TEXT,allowNull: false},
-    price: {type: DataTypes.STRING,allowNull: false}
+    price: {type: DataTypes.STRING,allowNull: false},
+    brand: {type: DataTypes.STRING,allowNull: false}
 });
 
 const Group = sequelize.define('group',{
@@ -53,6 +53,12 @@ const Review = sequelize.define('review',{
     id: {type: DataTypes.INTEGER,autoIncrement: true, primaryKey: true},
     rate: {type: DataTypes.INTEGER,allowNull: false},
     comment: {type: DataTypes.TEXT,allowNull: false}
+});
+
+const GoodInfo = sequelize.define('good_info', {
+    id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
+    color: {type: DataTypes.STRING, allowNull: false},
+    info: {type: DataTypes.TEXT,allowNull: false}
 });
 
 User.hasOne(Token, {
@@ -118,6 +124,13 @@ User.hasMany(Review, {
 });
 Review.belongsTo(User);
 
+Good.hasOne(GoodInfo, {
+    foreignKey: {
+        allowNull: false
+    }
+});
+GoodInfo.belongsTo(Good);
+
 module.exports = {
-    User, Token, Good, Group, Basket, BasketGood, Review, Discount, Image
+    User, Token, Good, Group, Basket, BasketGood, Review, Discount, Image, GoodInfo
 };

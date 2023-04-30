@@ -241,3 +241,8 @@
     font-family: "try_cloth";
     src: url('../../fonts/try-clother-light.ttf');
 }
+
+@font-face {
+    font-family: "global";
+    src: url('../../fonts/globersemiboldfree.ttf');
+}
