@@ -52,7 +52,8 @@ const BasketGood = sequelize.define('basket_good',{
 const Review = sequelize.define('review',{
     id: {type: DataTypes.INTEGER,autoIncrement: true, primaryKey: true},
     rate: {type: DataTypes.INTEGER,allowNull: false},
-    comment: {type: DataTypes.TEXT,allowNull: false}
+    title: {type: DataTypes.STRING,allowNull: false},
+    review: {type: DataTypes.TEXT,allowNull: false},
 });
 
 const GoodInfo = sequelize.define('good_info', {

@@ -188,6 +188,15 @@ class ModelService {
         }
     }
 
+    async findReview(value) {
+        try {
+            let review = await this.Review.findAll({where: value});
+            return review;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
     async findDiscount(value) {
         try {
             let discount = await this.Discount.findAll({where: value});
