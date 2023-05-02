@@ -23,8 +23,8 @@
     text-decoration: none;
 
     color: black;
-    font-family: REX;
-    font-size: 15px;
+    font-family: try_cloth;
+    font-size: 16px;
     transition: all 0.3s;
 }
 
@@ -34,6 +34,7 @@
 
 .header-name {
     margin-left: 67px;
+    margin-top: -20px;
 
     font-size: 60px;
     font-family: nav_font;
@@ -53,6 +54,11 @@
 .catalog-cards {
     width: 870px;
     min-width: 870px;
+}
+
+.nav-slash {
+    font-family: try_cloth;
+    margin: 0 5px 0 5px;
 }
 
 .under-header {
@@ -79,8 +85,8 @@
     height: 40px;
     border-bottom: 1px solid rgb(230, 230, 230);
 
-    font-size: 15px;
-    font-family: nav_font2;
+    font-size: 17px;
+    font-family: header_edit;
 }
 
 input[type='checkbox'] {
@@ -89,20 +95,20 @@ input[type='checkbox'] {
 
 .label-check-phone {
     margin-top: 15px;
-
-    font-family: try_cloth;
+    font-size: 14px;
+    font-family: simple;
 }
 
 .label-check-TV {
     margin-top: 5px;
-
-    font-family: try_cloth;
+    font-size: 14px;
+    font-family: simple;
 }
 
 .label-check-headphone {
     margin-top: 5px;
-
-    font-family: try_cloth;
+    font-size: 14px;
+    font-family: simple;
 }
 
 

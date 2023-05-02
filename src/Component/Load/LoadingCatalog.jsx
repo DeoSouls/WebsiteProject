@@ -50,23 +50,6 @@ export const LoadingCatalog = (props) => {
                     <animated.div className='load-price-catalog' style={{...springs}} ></animated.div>
                 </div>
            </div>
-           <div className='load-catalog-container'>
-                <div>
-                    <animated.div className='load-img-catalog' style={{...springs}} ></animated.div>
-                    <animated.div className='load-about-catalog' style={{...springs}} ></animated.div>
-                    <animated.div className='load-price-catalog' style={{...springs}} ></animated.div>
-                </div>
-                <div>
-                    <animated.div className='load-img-catalog' style={{...springs}} ></animated.div>
-                    <animated.div className='load-about-catalog' style={{...springs}} ></animated.div>
-                    <animated.div className='load-price-catalog' style={{...springs}} ></animated.div>
-                </div>
-                <div>
-                    <animated.div className='load-img-catalog' style={{...springs}} ></animated.div>
-                    <animated.div className='load-about-catalog' style={{...springs}} ></animated.div>
-                    <animated.div className='load-price-catalog' style={{...springs}} ></animated.div>
-                </div>
-           </div>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 .load-catalog-container {
-    margin-left: 70px;
-    margin-top: 20px;
+    margin-left: 10px;
+    margin-top: 30px;
+    margin-bottom: 70px;
 
     width: 1000px;
     height: 270px;
@@ -9,16 +10,16 @@
 }
 
 .load-img-catalog {
-    width: 230px;
-    height: 200px;
+    width: 300px;
+    height: 260px;
 
     margin-left: 25px;
     border-radius: 15px;
 }
 
 .load-about-catalog {
-    width: 210px;
-    height: 10px;
+    width: 260px;
+    height: 12px;
     margin-top: 14px;
     margin-left: 25px;
 
@@ -26,8 +27,8 @@
 }
 
 .load-price-catalog {
-    width: 160px;
-    height: 8.5px;
+    width: 200px;
+    height: 12px;
     margin-top: 9px;
     margin-left: 25px;
 

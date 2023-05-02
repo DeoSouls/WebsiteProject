@@ -38,6 +38,7 @@ export const ReactPagination = (props) => {
 
         const {props} = prop;
         const interimIndex = indexValue - indexPages;
+        console.log(props);
         if(interimIndex === 0 && props.children === 1) {
             return <button className='prevBtn' key={index} onClick={e => props.onClick()}>
                 <img className='prevBtn-img' src="http://localhost:5000/static/back.png" alt="" />
@@ -48,7 +49,13 @@ export const ReactPagination = (props) => {
                 <img className='prevBtn-img' src="http://localhost:5000/static/back.png" alt="" />
             </button>
         }
-        if(interimIndex !== 0 && interimIndex === props.children - 1 && pagesLimit === 2) {
+
+        if(interimIndex === 1 && interimIndex === props.children && pagesLimit === 2) {
+            return <button className='prevBtn' key={index} onClick={e => props.onClick()}>
+                <img className='prevBtn-img' src="http://localhost:5000/static/back.png" alt="" />
+            </button>
+        }
+        if(interimIndex === 2 && props.children === 1 && pagesLimit === 2) {
             return <button className='prevBtn' key={index} onClick={e => props.onClick()}>
                 <img className='prevBtn-img' src="http://localhost:5000/static/back.png" alt="" />
             </button>

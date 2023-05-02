@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
 
-    margin: 40px 0 30px 90px;
+    margin: 20px 0 30px 215px;
 }
 
 .btn-page {
@@ -13,8 +13,13 @@
     border: none;
     background-color: white;
 
-    margin: 6px 0 0 10px;
+    margin: 3px 0 0 5px;
 }
+
+.btn-page:hover {
+    background-color: rgb(235, 235, 235);
+}
+
 
 .start-btn {
     width: 30px;

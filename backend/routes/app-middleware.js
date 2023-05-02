@@ -295,6 +295,8 @@ class appMiddleware {
                 var products = [];
                 var img = [];
                 var images = [];
+                var review = [];
+                var info = [];
                 var counts = 0;
                 var final = false;
                 var skip = req.skip/req.query.limit;
@@ -318,29 +320,68 @@ class appMiddleware {
 
                         } else {
                             productGroup = await model.findGroup({group_name: group});
-                            console.log(productGroup[0]);
                             if(productGroup[0] !== undefined) {
 
                                 allprod = await model.findGood({groupId: productGroup[0].dataValues.id});
-                            }
+                            } 
                         }
 
                         for (let i = 0; i < totalFilter.length; i++) {
 
-                            const good = await model.findGood({type: totalFilter[i]});
+                            var good = await model.findGood({type: totalFilter[i]});
+                            if(good[0] === undefined) {
+                                good = await model.findGood({brand: totalFilter[i]});
+                            }
+
                             prevfilter = totalFilter[i - 1];
 
                             if(good[0] !== undefined) {
                                 if(products[0] !== undefined ){
-
                                     var product = await model.findGood({type: totalFilter[i]});
-                                    products = [[...products[0], ...product]];
+
+                                    if(product[0] === undefined) {
+                                        var interimprod = [];
+                                        var nextprod = [];
+
+                                        var product = await model.findGood({brand: totalFilter[i]});
+                                        product.forEach((prod, index) => {
+                                            for (let i = 0; i < products[0].length; i++) {
+                                                if(prod.dataValues.id === products[0][i].dataValues.id) {
+                                                    interimprod.push(prod);
+                                                }
+                                            }
+                                        })
+
+                                        nextprod = products[0].filter(prod => prod.dataValues.brand !== product[0].dataValues.brand);
+
+                                        if(interimprod[0] === undefined) {
+
+                                            products = [[...products[0], ...product]];
+                                        } else {
+                                            if(product.length > interimprod.length || product.length < interimprod.length){
+
+                                                products = [[...nextprod, ...product]];
+                                            } else {
+
+                                                products = [[...nextprod, ...interimprod]];
+                                            }
+                                        }
+                                    } else {
+                                        products = [[...products[0], ...product]];
+                                    }
+
                                 } else {
                                     var product = await model.findGood({type: totalFilter[i]});
-                                    products = [[...product]];
+
+                                    if(product[0] === undefined) {
+                                        var product = await model.findGood({brand: totalFilter[i]});
+                                        products = [[...product]];
+                                    } else {
+                                        products = [[...product]];
+                                    }
                                 }
-                               
                             }
+                    
 
                             if(totalFilter.length > 1) {
                                 final = true;
@@ -369,15 +410,31 @@ class appMiddleware {
                                     if(prod === undefined && subArray[skip] !== undefined) {
 
                                         var totalImages = [];
+                                        var totalReviews = [];
+                                        var totalInfos = [];
 
                                         for (let i = 0; i < subArray[skip].length; i++) {
                                             const imgProd = await model.findImage({goodId: subArray[skip][i].dataValues.id});
+                                            const reviews = await model.findReview({goodId: subArray[skip][i].dataValues.id});
+                                            const infos = await model.findGoodData({goodId: subArray[skip][i].dataValues.id});
+
                                             if(imgProd.length > 0) {
                                                 totalImages.push(imgProd);
+                                            }
+
+                                            if(reviews.length > 0) {
+                                                totalReviews.push(reviews);
+                                            }
+
+                                            if(infos.length > 0) {
+                                                totalInfos.push(infos[0]);
                                             }
                                         }
 
                                         images = [...totalImages];
+                                        review = [...totalReviews];
+                                        info = [...totalInfos];
+
                                         prod = [];
 
                                     } else if (subArray[skip] === undefined) {
@@ -386,14 +443,33 @@ class appMiddleware {
                                     }
                                 } else {
                                     if (prod.length === 0) {
+
                                         var totalImages = [];
+                                        var totalReviews = [];
+                                        var totalInfos = [];
+
                                         for (let i = 0; i < subArray[skip].length; i++) {
                                             const imgProd = await model.findImage({goodId: subArray[skip][i].dataValues.id});
+                                            const reviews = await model.findReview({goodId: subArray[skip][i].dataValues.id});
+                                            const infos = await model.findGoodData({goodId: subArray[skip][i].dataValues.id});
+
                                             if(imgProd.length > 0) {
                                                 totalImages.push(imgProd);
                                             }
+
+                                            if(reviews.length > 0) {
+                                                totalReviews.push(reviews);
+                                            }
+
+                                            if(infos.length > 0) {
+                                                totalInfos.push(infos[0]);
+                                            }
                                         }
+
                                         images = [...totalImages];
+                                        review = [...totalReviews];
+                                        info = [...totalInfos];
+
                                     }
                                 }
                                 
@@ -401,28 +477,65 @@ class appMiddleware {
                                 if(prod.length !== 0) {
 
                                     var totalImages = [];
+                                    var totalReviews = [];
+                                    var totalInfos = [];
+
                                     for (let i = 0; i < subArray[skip].length; i++) {
                                         const imgProd = await model.findImage({goodId: subArray[skip][i].dataValues.id});
+                                        const reviews = await model.findReview({goodId: subArray[skip][i].dataValues.id});
+                                        const infos = await model.findGoodData({goodId: subArray[skip][i].dataValues.id});
+
                                         if(imgProd.length > 0) {
                                             totalImages.push(imgProd);
+                                        }
+
+                                        if(reviews.length > 0) {
+                                            totalReviews.push(reviews);
+                                        }
+
+                                        if(infos.length > 0) {
+                                            totalInfos.push(infos[0]);
                                         }
                                     }
 
                                     images = [...totalImages];
+                                    review = [...totalReviews];
+                                    info = [...totalInfos];
+
                                     var filterData = [];
 
                                     subArray[nextskip].forEach((arr, index) => {
                                         if(subArray[nextskip][index] !== undefined) {
 
-                                            if(arr.dataValues.type === prevfilter) {
+                                            if(arr.dataValues.type === prevfilter || arr.dataValues.brand === prevfilter) {
                                                 filterData.push(subArray[nextskip][index]);
 
-                                            } else if (arr.dataValues.type === totalFilter[i]) {
-                                                if(arr.dataValues.type === totalFilter[i]) {
+                                            } else if (arr.dataValues.type === totalFilter[i] || arr.dataValues.brand === totalFilter[i]) {
+                                                if(arr.dataValues.type === totalFilter[i] || arr.dataValues.brand === totalFilter[i]) {
                                                     filterData.push(subArray[nextskip][index]);
                                                 }
-                                            } else {
-                                                if(arr.dataValues.type === totalFilter[i - 2]) {
+                                            } else if (arr.dataValues.type === totalFilter[i - 2] || arr.dataValues.brand === totalFilter[i - 2]) {
+                                                if(arr.dataValues.type === totalFilter[i - 2] || arr.dataValues.brand === totalFilter[i - 2]) {
+                                                    filterData.push(subArray[nextskip][index]);
+                                                }
+                                            } else if (arr.dataValues.type === totalFilter[i - 3] || arr.dataValues.brand === totalFilter[i - 3]) {
+                                                if(arr.dataValues.type === totalFilter[i - 3] || arr.dataValues.brand === totalFilter[i - 3]) {
+                                                    filterData.push(subArray[nextskip][index]);
+                                                }
+                                            } else if (arr.dataValues.type === totalFilter[i - 4] || arr.dataValues.brand === totalFilter[i - 4]) {
+                                                if(arr.dataValues.type === totalFilter[i - 4] || arr.dataValues.brand === totalFilter[i - 4]) {
+                                                    filterData.push(subArray[nextskip][index]);
+                                                }
+                                            } else if (arr.dataValues.type === totalFilter[i - 5] || arr.dataValues.brand === totalFilter[i - 5]) {
+                                                if(arr.dataValues.type === totalFilter[i - 5] || arr.dataValues.brand === totalFilter[i - 5]) {
+                                                    filterData.push(subArray[nextskip][index]);
+                                                }
+                                            } else if (arr.dataValues.type === totalFilter[i - 6] || arr.dataValues.brand === totalFilter[i - 6]) {
+                                                if(arr.dataValues.type === totalFilter[i - 6] || arr.dataValues.brand === totalFilter[i - 6]) {
+                                                    filterData.push(subArray[nextskip][index]);
+                                                }
+                                            } else if (arr.dataValues.type === totalFilter[i - 7] || arr.dataValues.brand === totalFilter[i - 7]) {
+                                                if(arr.dataValues.type === totalFilter[i - 7] || arr.dataValues.brand === totalFilter[i - 7]) {
                                                     filterData.push(subArray[nextskip][index]);
                                                 }
                                             }
@@ -443,7 +556,7 @@ class appMiddleware {
                             }
                         }
 
-                        return {image: images, prod: prod, cnt: counts}
+                        return {image: images, prod: prod, cnt: counts, infos: info, reviews: review}
                         
                     } else {
 
@@ -470,6 +583,21 @@ class appMiddleware {
                                 const prod = await model.findGood({id: subAllProd[skip][i].dataValues.id});
                                 products.push(prod[0]);
                             }
+
+                            for (let i = 0; i < subAllProd[skip].length; i++) {
+                                const review = await model.findReview({goodId: subAllProd[skip][i].dataValues.id});
+                                review.push(review[0]);
+                            }
+
+                            for (let i = 0; i < subAllProd[skip].length; i++) {
+                                const reviews = await model.findReview({goodId: subAllProd[skip][i].dataValues.id});
+                                review.push(reviews);
+                            }
+
+                            for (let i = 0; i < subAllProd[skip].length; i++) {
+                                const infos = await model.findGoodData({goodId: subAllProd[skip][i].dataValues.id});
+                                info.push(infos[0]);
+                            } 
         
                             for (let i = 0; i < products.length; i++) {
                                 img.push(await model.findImage({goodId: subAllProd[skip][i].dataValues.id}));
@@ -480,16 +608,7 @@ class appMiddleware {
                             counts = 0;
                         }
                         
-
-                        // for (let i = 0; i < rows.length; i++) {
-                        //     const prod = await model.findGood({id: rows[i].dataValues.id});
-                        //     products.push(prod[0]);
-                        // }
-    
-                        // for (let i = 0; i < products.length; i++) {
-                        //     img.push(await model.findImage({goodId: rows[i].dataValues.id}));
-                        // }
-                        return {image: img, prod: products, cnt: counts}
+                        return {image: img, prod: products, cnt: counts, infos: info, reviews: review}
                     }
                 };
 
@@ -508,7 +627,8 @@ class appMiddleware {
 
                     img = (await reaction).image;
                     products = (await reaction).prod;
-                    counts = (await reaction).cnt;
+                    review = (await reaction).reviews;
+                    info = (await reaction).infos;
                 } 
 
                 if(products === undefined) {
@@ -522,7 +642,7 @@ class appMiddleware {
                 console.log(pgCount);
                 console.log(counts);
 
-                res.json({results, pages: paginate.getArrayPages(req)(3, pgCount, req.query.page), img, products, counts, filter, group});
+                res.json({results, pages: paginate.getArrayPages(req)(3, pgCount, req.query.page), img, products, counts, filter, group, info: info, review: review});
             })
             .catch(err => next(err))
         } catch (e) {

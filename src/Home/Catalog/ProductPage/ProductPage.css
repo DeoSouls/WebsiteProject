@@ -2,8 +2,8 @@
     text-decoration: none;
     color: black;
 
-    font-size: 15px;
-    font-family: REX;
+    font-size: 16px;
+    font-family: try_cloth;
     transition: all 0.3s ease-in-out; 
 }
 
@@ -32,7 +32,7 @@
     text-decoration: none;
     font-size: 17px;
     color: black;
-    font-family: REX;
+    font-family: simple;
 
     transition: all 0.3s ease-in-out;
 
@@ -94,10 +94,9 @@
 }
 
 .description-card {
-    width: 300px;
+    min-width: 300px;
 
     height: 900px;
-    border-left: 1px solid rgb(231, 231, 231);
 }
 
 .btn-look {
@@ -133,15 +132,17 @@
 }
 
 .description-form {
-    width: 300px;
+    width: auto;
     height: max-content;
+    position: absolute;
     
     border-bottom: 1px solid rgb(231, 231, 231);
 }
 
 .description-title {
-    margin-top: 30px;
+    margin-top: 40px;
     margin-left: 25px;
+    width: 557px;
 
     font-size: 22px;
     font-weight: 500;
@@ -149,6 +150,7 @@
 }
 
 .description-content {
+    width: 300px;
     margin-top: 20px;
     margin-left: 25px;
     margin-right: 25px;
@@ -201,7 +203,7 @@
 }
 
 .total-price {
-    margin-top: 20px;
+    margin-top: 30px;
     margin-left: 25px;
 }
 
@@ -241,7 +243,7 @@
     display: flex;
     margin-left: 25px;
     margin-top: 40px;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
 }
 
 .counter-manager {
@@ -306,8 +308,8 @@
 }
 
 .btn-addbusket {
-    margin-left: 50px;
-    width: 130px;
+    margin-left: 30px;
+    width: 155px;
 
     border: none;
     border-radius: 7px;
@@ -324,3 +326,177 @@
 .btn-addbusket:hover {
     background-color: rgb(132, 132, 132);
 } 
+
+.prod-characteristics {
+
+    width: 700px;
+    height: 160px;
+    margin-top: 60px;
+    margin-left: 50px;
+}
+
+.characteristics-header {
+    font-size: 24px;
+    font-family: header_edit;
+    margin-bottom: 30px;
+
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.characteristics-content {
+    font-size: 17px;
+    font-family: REX;
+}
+
+.characteristics-review {
+    margin-left: 50px;
+
+    font-size: 24px;
+    font-family: header_edit;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.btn-review {
+    margin-left: 43px;
+
+    border: none;
+    background: white;
+    text-decoration:underline;
+
+    font-family: REX;
+    font-weight: 800;
+
+    transition: all 0.1s ease-in-out;
+}
+
+.btn-review:hover {
+    color:rgb(107, 107, 107)
+}
+
+.add-review-container {
+    width: 700px;
+    height: max-content;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.add-review-header {
+    width: 480px;
+    height: 40px;
+    padding-left: 20px;
+
+    border: 1px solid black;
+    border-radius: 4px;
+    outline: none;
+}
+
+.label-header {
+    font-size: 14px;
+    font-family: REX;
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+.star-review {
+    width: 35px;
+    height: 35px;
+
+    margin-bottom: 10px;
+} 
+
+.review-area {
+    width: 700px;
+    height: 60px;
+    padding-left: 20px;
+    outline: none;
+
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.container-product {
+    height:max-content;
+    border-right: 1px solid rgb(231, 231, 231);
+}
+
+.btn-submit-review-container {
+    display: flex;
+    justify-content: end;
+    height: 70px;
+
+    margin-top: 5px;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.btn-submit-review {
+    width: 100px;
+    height: 40px;
+
+    font-size: 12px;
+    font-family: try_cloth;
+    font-weight: 900;
+    transition: all 0.1s ease-in-out;
+
+    border:none;
+    border-radius: 4px;
+
+    background-color: black;
+    color: white;
+}
+
+.btn-submit-review:hover {
+    background-color: rgb(164, 164, 164);
+} 
+
+.user-rate {
+    display:flex;
+    margin-top: 20px;
+}
+
+.review-title,
+.user-review-container {
+    width: 350px;
+    height: max-content;
+
+    margin-bottom: 5px;
+}
+
+.review-username {
+    font-size: 15px;
+    font-family: try_cloth;
+    font-weight: 900;
+}
+
+.review-img-user {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.review-container {
+    display: flex;
+    margin-left: 45px;
+    width: 700px;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.review-date {
+    font-size: 15px;
+    font-family: simple;
+}
+
+.title {
+    font-size: 21px;
+    font-family: header_edit;
+    font-weight: 900;
+    margin-top: 10px;
+}
+
+.review {
+    font-size: 15px;
+    font-family: try_cloth;
+    font-weight: 900;
+    margin-top: -15px;
+}
