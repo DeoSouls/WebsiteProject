@@ -49,11 +49,154 @@
 }
 
 .btn-groups {
-    width: 70px;
-    height: 70px;
+    width: auto;
+    height: 600px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-group {
-    background-color: white;
-    border: none;
+    background-color:  rgb(250, 248, 248);
+
+    border: 1px solid rgb(241, 241, 241);
+    border-radius: 10px;
+    
+    width: 350px;
+    height: 215px;
+    margin-bottom: 20px;
+
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.btn-group-tech {
+    width: 350px;
+    height: 450px;
+    margin-right: 30px;
+
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-block {
+    position: absolute;
+    width: 350px;
+    height: 450px;
+
+    cursor: pointer;
+    overflow: hidden;
+    background-color: rgb(250, 248, 248);
+
+    border-radius: 10px;
+    border: 1px solid rgb(241, 241, 241);
+}
+
+.techno-img {
+    position: absolute;
+    top: 260px;
+    left: 60px;
+
+    width: 340px;
+    transition: all 0.2s ease-in-out;
+}
+
+.cloth-img {
+    position: absolute;
+    top: 60px;
+    left: 160px;
+
+    width: 200px;
+    height: 200px;
+    transition: all 0.3s ease-in-out;
+
+    background: url('http://localhost:5000/static/clothbc.png') round; 
+}
+
+.btn-group:hover > .cloth-img {
+    transform: scale(1.1) translate(-10px, -10px);
+}
+
+.jewelry-img {
+    position: absolute;
+    top: 85px;
+    left: 210px;
+
+    width: 130px;
+    height: 130px;
+    transition: all 0.3s ease-in-out;
+
+    background: url('http://localhost:5000/static/jewelryback.png') round; 
+}
+
+.btn-group:hover > .jewelry-img {
+    transform: scale(1.1) translate(-10px, -10px);
+}
+
+.help-img {
+    position: absolute;
+    top: 50px;
+    left: 190px;
+
+    width: 160px;
+    height: 160px;
+    transition: all 0.3s ease-in-out;
+
+    background: url('http://localhost:5000/static/contactback.png') round;
+}
+
+.btn-group:hover > .help-img {
+    transform: scale(1.1) translate(-10px, -10px);
+}
+
+.start-img {
+    position: absolute;
+    top: 60px;
+    left: 190px;
+
+    width: 150px;
+    height: 150px;
+    transition: all 0.3s ease-in-out;
+
+    background: url('http://localhost:5000/static/profilebacked.png') round;
+}
+
+.btn-group:hover > .start-img {
+    transform: scale(1.1) translate(-10px, -10px);
+}
+
+.start-header,
+.help-header,
+.jewelry-header,
+.cloth-header,
+.techno-header {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+
+    font-family: nav_font2;
+}
+
+.techno-description {
+    position: absolute;
+    top: 90px;
+    left: 25px;
+
+    width: 300px;
+    text-align: left;
+    font-size: 15px;
+    font-family: try_cloth;
+}
+
+.btn-block:hover > .techno-img {
+    transform: scale(1.1) translate(-10px, -10px);
+}
+
+.block-btn-group {
+    display: block;
+    padding-top: 20px;
+    margin-right: 30px;
+
+    width: 350px;
 }

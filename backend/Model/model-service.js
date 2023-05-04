@@ -205,6 +205,24 @@ class ModelService {
             throw Error(e.message);
         }
     }
+
+    async findBasket(value) {
+        try {
+            let basket = await this.Basket.findAll({where: value});
+            return basket;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
+    async findBasketGood(value) {
+        try {
+            let basketgood = await this.BasketGood.findAll({where: value});
+            return basketgood;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
 }
 
 module.exports = ModelService;

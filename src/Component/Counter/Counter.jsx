@@ -9,6 +9,7 @@ class Counter {
             increment: action,
             decrement: action
         })
+        
         this.count = count;
     }
 

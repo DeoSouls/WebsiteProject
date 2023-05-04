@@ -246,3 +246,8 @@
     font-family: "global";
     src: url('../../fonts/globersemiboldfree.ttf');
 }
+
+@font-face {
+    font-family: "anonym";
+    src: url('../../fonts/Anonymous_Pro.ttf');
+}

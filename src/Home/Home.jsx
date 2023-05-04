@@ -8,6 +8,7 @@ import { observable} from 'mobx';
 import { Main } from '../Main/Main';
 import { useContext } from 'react';
 import { AccountContext } from '../App/Context';
+import { Basket } from './Basket/Basket'; 
 import { ProductPage } from '../Home/Catalog/ProductPage/ProductPage';
 import './Home.css';
 
@@ -94,8 +95,9 @@ export const Home = (props) => {
         <div>
             <div className='nav-bar'>
                 <div className='nav-bar-btns'>
-                    <a href='/' > 
-                        <div className='logo'></div>
+                    <a className='website-logo' href='/' > 
+                        {/* <div className='logo'></div> */}
+                        <p className='website-logo'>WebSite</p>
                     </a>
                     <a href='/catalog'>
                         <button className='nav-getstarted'>Начать</button>
@@ -109,7 +111,7 @@ export const Home = (props) => {
                     <div className='nav-bar-other'>
                         {isSearch? search : <button onClick={showSearch} className='search-img'></button>}
                         {isActivate? <button onFocus={e => openSelectMenu(true)} className='profile-btn'>{name.firstname.substring(0,1).toUpperCase()}{name.lastname.substring(0,1).toUpperCase()}</button> : <button className='sign-btn' onClick={e => navigation('/authorization')}>Sign In</button>}
-                        <button className='basket-btn'></button>
+                        <button className='basket-btn' onClick={e => navigation('/basket')} ></button>
 
                         {selectMenu? <div className='css-figure'>
                             <button className='btn-figure' onClick={e => openSelectMenu(false)}></button>
@@ -128,6 +130,7 @@ export const Home = (props) => {
                 <Route path='profile/*' element={<Profile first={name.firstname} last={name.lastname}/>}></Route>
                 <Route path='catalog' element={<Catalog prodGroup={groupValue}/>}></Route>
                 <Route path='catalog/product/:prodId' element={<ProductPage/>}></Route>
+                <Route path='basket' element={<Basket/>}></Route>
                 <Route path='*' element={<h1>Страница не найдена</h1>}></Route>
             </Routes>
         </div>

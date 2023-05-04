@@ -251,11 +251,11 @@
 }
 
 .counter-input {
-    width: 65px;
+    width: 60px;
     height: 55px;
 
-    padding-left: 27px;
-    border: 1px solid black;
+    padding-left: 25px;
+    border: 1px solid rgb(179, 179, 179);
 
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
@@ -263,13 +263,18 @@
     outline: none;
 }
 
+.counter-input:hover {
+    border-color:rgb(155, 155, 155);
+}
+
+
 .btn-increment {
     width: 24px;
     height: 27.5px;
 
-    border: 1px solid black;
+    border: 1px solid rgb(179, 179, 179);
     border-left: none;
-    background-color: rgb(243, 243, 243);
+    background-color: white;
     border-top-right-radius: 7px;
 }
 
@@ -277,21 +282,21 @@
     width: 24px;
     height: 27.5px;
 
-    border: 1px solid black;
+    border: 1px solid rgb(179, 179, 179);
     border-bottom-right-radius: 7px;
 
     border-left: none;
     border-top: none;
 
-    background-color: rgb(243, 243, 243);
+    background-color: white;
 }
 
 .btn-decrement:hover {
-    background-color: rgb(208, 208, 208);
+    background-color: rgb(246, 243, 243);
 }
 
 .btn-increment:hover {
-    background-color: rgb(208, 208, 208);
+    background-color: rgb(246, 243, 243);
 }
 
 .counter-inc-img {

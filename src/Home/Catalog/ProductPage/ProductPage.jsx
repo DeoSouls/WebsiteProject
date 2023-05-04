@@ -15,7 +15,6 @@ export const ProductPage = () => {
     const [borderValue, setBorder] = useState({container: [], color: ''});
     const [isReview, setIsReview] = useState(false);
     const [reviewValues, setReviewValues] = useState([]);
-    const [ref, setRef] = useState(false);
 
     const MobCounter = observer(({ counter }) => 
         <input className='counter-input' type="text" onChange={handlerChange}  value={counter.count} />
@@ -24,7 +23,7 @@ export const ProductPage = () => {
     useEffect(() => {
         api.post('http://localhost:5000/api/data', { prodId: prodId })
         .then(response => settingProdData(response.data));
-    }, [ref]);
+    }, []);
 
     const reducer = (state, update) => ({
         ...state,
@@ -37,14 +36,20 @@ export const ProductPage = () => {
         rate: 0,
     });
 
+    function submitAddToCart() {
+        if(borderValue.color !== '') {
+            api.post('http://localhost:5000/api/add_cart', {productId: prodData.product.id, color: borderValue.color, count: counter.count})
+            .then(response => alert(response.data.message))
+            .catch(err => alert(err.message));
+        } else {
+            alert('Выберите цвет товара');
+        }
+    }
+
     function settingProdData(data) {
         console.log(data);
         setData({header: data.product.name, product: data.product, rate: prodData.rate, 
             image: data.image.img, prodinfo: data.data, discount: data.discount.value, user: data.user, review: data.review, usersReview: data.usersreview});
-            // setReviewValues([...reviewValues, ...prodData.review])
-        // if(prodData.review.length > 0) {
-        //     console.log(prodData.review)
-        // }
         interimFunc();
     }
 
@@ -400,7 +405,7 @@ export const ProductPage = () => {
                                     <img className='counter-dec-img' src="http://localhost:5000/static/back.png" alt="" />
                                 </button>
                             </div>
-                            <button className='btn-addbusket'>Add to cart</button>
+                            <button onClick={submitAddToCart} className='btn-addbusket'>Add to cart</button>
                         </div>
                     </div>
                 </div>

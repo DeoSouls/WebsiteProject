@@ -36,6 +36,7 @@ class appMiddleware {
                 res.status(400).json({message: 'Неверный пароль'});
             }
 
+            // const basket = await model.createBasket({userId: 1});
             // await model.deleteToken({where: {userId: userid}});
             // const group = await model.createGroup({group_name: 'techno'});
             // const good = await model.createGood({name: 'Meizu 16s', type: 'phone', price: '26346', brand: 'meizu', groupId: group.id});
@@ -272,6 +273,77 @@ class appMiddleware {
 
         } catch (e) {
             res.status(400).json({message: 'Не удалось получить данные о пользователе', error: e.message});
+        }
+    }
+
+    async add_to_cart(req, res) {
+        try {
+            const {productId, count, color} = req.body;
+
+            const model = new ModelService();
+
+            const { accessToken } = req.cookies;
+            if (accessToken === undefined) {
+                throw Error('Токен не найден, пожалуйста авторизуйтесь');
+            }
+
+            const token = await model.findToken({accessToken: accessToken});
+            const user = await model.findUser({id: token[0]['dataValues']['userId']});
+            const basket = await model.findBasket({userId: user[0]['dataValues']['id']});
+
+            await model.createBasketGood({basketId: basket[0]['dataValues']['id'], goodId: productId, count: count, color: color});
+
+            res.json({message: 'Товар добавлен в корзину'});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось добавить товар в корзину', error: e.message});
+        }
+    }
+
+    async get_data_busket(req, res) {
+        try {
+            const model = new ModelService();
+            
+            const { accessToken } = req.cookies;
+            if (accessToken === undefined) {
+                throw Error('Токен не найден, пожалуйста авторизуйтесь');
+            }
+            
+            const token = await model.findToken({accessToken: accessToken});
+            const user = await model.findUser({id: token[0]['dataValues']['userId']});
+            const basket = await model.findBasket({userId: user[0]['dataValues']['id']});
+            const basket_goods = await model.findBasketGood({basketId: basket[0]['dataValues']['id']});
+            
+            var goods = [];
+            for (let i = 0; i < basket_goods.length; i++) {
+                goods.push(await model.findGood({id: basket_goods[i]['dataValues']['goodId']}));
+            }  
+
+            console.log(goods);
+
+            var image = [];
+            for (let i = 0; i < basket_goods.length; i++) {
+                image.push(await model.findImage({goodId: basket_goods[i]['dataValues']['goodId']}));
+            }  
+
+            console.log(image);
+
+            var info = [];
+            for (let i = 0; i < basket_goods.length; i++) {
+                info.push(await model.findGoodData({goodId: basket_goods[i]['dataValues']['goodId']}));
+            }
+
+            console.log(info);
+
+            var discount = [];
+            for (let i = 0; i < basket_goods.length; i++) {
+                discount.push(await model.findDiscount({goodId: basket_goods[i]['dataValues']['goodId']}));
+            }
+
+            res.json({goods: goods, image: image, info: info, discount: discount, basket: basket_goods});
+            
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить данные корзины', error: e.message});
         }
     }
     

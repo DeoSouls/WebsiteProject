@@ -46,7 +46,9 @@ const Basket = sequelize.define('basket',{
 });
 
 const BasketGood = sequelize.define('basket_good',{
-    id: {type: DataTypes.INTEGER,autoIncrement: true, primaryKey: true}
+    id: {type: DataTypes.INTEGER,autoIncrement: true, primaryKey: true},
+    color: {type: DataTypes.STRING, allowNull: false},
+    count: {type: DataTypes.INTEGER, allowNull: false}
 });
 
 const Review = sequelize.define('review',{

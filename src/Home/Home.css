@@ -19,6 +19,15 @@
     /* rgb(184, 184, 184) */
 }
 
+.website-logo {
+    color: black;
+    font-family: nav_font2;
+    font-size: 30px;
+    margin-top: 7px;
+    
+    text-decoration:none;
+}
+
 .nav-bar-btns {
     width: 1170px;
     min-width: 600px;

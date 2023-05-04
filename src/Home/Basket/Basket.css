@@ -1,0 +1,277 @@
+.header-container {
+    width: auto;
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.header-content {
+    width: 1110px;
+    margin-top: 60px;
+    font-size: 53px;
+    font-weight: 100;
+    font-family: anonym;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    margin-left: 40px;
+    height: max-content;
+    border-bottom: 1px solid rgb(231,231,231);
+}
+
+.cart-content {
+    width: auto;
+
+    display: flex;
+    justify-content: end;
+    border-right: 1px solid rgb(231,231,231);
+}
+
+.totalcost-content {
+    width: auto;
+    display: flex;
+    justify-content:start;
+}
+
+.cart-elements {
+    width: 850px;
+    height: max-content;
+    min-height: 400px;
+    margin-bottom: 40px;
+}
+
+.element-descriptions {
+    width: 300px;
+    height: 500px;
+    padding: 40px 0 0 50px;
+}
+
+.order-summary {
+    height: 50px;
+    width: 300px;
+
+    font-size: 20px;
+    font-family: header_edit;
+    font-weight: 900;
+
+    border-bottom: 1px solid rgb(231,231,231);
+}
+
+.total-sum-container {
+    width: 300px;
+    height: 100px;
+
+    border-bottom: 1px solid rgb(231,231,231);
+}
+
+.price-container,
+.total-disc {
+    display: flex;
+    width: 300px;
+}
+
+.discount-header {
+    margin-top: 15px;
+    width: 200px;
+    color: black;
+    font-family: REX;
+    font-weight: 900;
+}
+
+.price-header {
+    margin-top: -8px;
+    width: 180px;
+
+    font-size: 24px;
+    color: black;
+    font-family: REX;
+    font-weight: 900;
+}
+
+.discount-sum {
+    width: 150px;
+    display: flex;
+    justify-content: end;
+    color: rgb(255, 54, 54);
+    margin-top: 20px;
+
+    font-size: 18px;
+    font-family: nav_font;
+}
+
+.price-sum {
+    width: 150px;
+    display: flex;
+    justify-content: end;
+    margin-top: -2px;
+    
+    color: black;
+    font-size: 21px;
+    font-family: nav_font;
+}
+
+.btn-payment {
+    width: 300px;
+    height: 30px;
+    margin-top: 40px;
+
+    font-size: 17px;
+    font-family: header_edit;
+
+    color: white;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.contact-description {
+    width: 300px; 
+    margin-top: 30px;
+    font-size: 15px;
+    font-family: try_cloth;
+    color: black;
+    font-weight: 900;
+}
+
+.product-attributes {
+    margin-top: 45px;
+    height: 60px;
+
+    display: flex;
+    border-top: 1px solid rgb(231,231,231);
+    border-bottom: 1px solid rgb(231,231,231);
+}
+
+.column-product {
+    width: 150px;
+    text-align: center;
+
+    padding-top: 16px;
+
+    font-size: 15px;
+    font-family: header_edit;
+    font-weight: 900;
+}
+
+.column-description {
+    width: 350px;
+    text-align: center;
+
+    padding-top: 17px;
+
+    font-size: 15px;
+    font-family: header_edit;
+    font-weight: 900;
+}
+
+.column-price {
+    width: 80px;
+    text-align: center;
+
+    padding-top: 17px;
+    margin-right: 10px;
+
+    font-size: 15px;
+    font-family: header_edit;
+    font-weight: 900;
+}
+
+.column-qty {
+    width: 90px;
+    text-align: center;
+
+    padding-top: 17px;
+
+    font-size: 15px;
+    font-family: header_edit;
+    font-weight: 900;
+}
+
+.column-type {
+    width: 90px;
+    text-align: center;
+
+    padding-top: 17px;
+
+    font-size: 15px;
+    font-family: header_edit;
+    font-weight: 900;
+}
+
+.column-total {
+    width: 100px;
+    text-align: center;
+
+    padding-top: 17px;
+    padding-right: 9px;
+
+    font-size: 15px;
+    font-family: header_edit;
+    font-weight: 900;
+}
+
+.product-card {
+    width: 850px;
+    height: 120px;
+    display: flex;
+
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.card-image {
+    width: 150px;
+    height: 120px;
+    padding: 20px 30px;
+}
+
+.card-info {
+    width: 330px;
+    height: 120px;
+
+    padding: 25px 0 0 20px;
+
+    font-size: 12px;
+    font-family: try_cloth;
+}
+.card-total,
+.card-price {
+    width: 100px;
+    height: 120px;
+
+    text-align: center;
+    margin-top: 45px;
+
+    font-size: 16px;
+    font-family: try_cloth;
+}
+
+.card-type {
+    width: 70px;
+    height: 120px;
+
+    padding-left:32px;
+    font-size: 16px;
+    font-family: try_cloth;
+    margin-top: 43px;
+}
+
+.card-count {
+    display: flex;
+    margin-top: 30px;
+}
+
+.card-delete {
+    position: absolute;
+    cursor: pointer;
+    background: url('http://localhost:5000/static/крестик.png') round;
+    width: 8px;
+    height: 8px;
+
+
+    margin-top: 53px;
+    margin-left: 831px;
+}
