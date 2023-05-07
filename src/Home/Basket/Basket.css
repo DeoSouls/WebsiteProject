@@ -8,11 +8,11 @@
 }
 
 .header-content {
-    width: 1110px;
+    width: 1210px;
     margin-top: 60px;
     font-size: 53px;
-    font-weight: 100;
-    font-family: anonym;
+    font-weight: 900;
+    font-family: try_cloth;
 }
 
 .content-container {
@@ -48,6 +48,7 @@
     width: 300px;
     height: 500px;
     padding: 40px 0 0 50px;
+    margin-right: 130px;
 }
 
 .order-summary {
@@ -78,7 +79,7 @@
     margin-top: 15px;
     width: 200px;
     color: black;
-    font-family: REX;
+    font-family: global;
     font-weight: 900;
 }
 
@@ -88,7 +89,7 @@
 
     font-size: 24px;
     color: black;
-    font-family: REX;
+    font-family: global;
     font-weight: 900;
 }
 
@@ -120,7 +121,7 @@
     margin-top: 40px;
 
     font-size: 17px;
-    font-family: header_edit;
+    font-family: nav_font;
 
     color: white;
     background-color: black;
@@ -216,7 +217,7 @@
 
 .product-card {
     width: 850px;
-    height: 120px;
+    height: max-content;
     display: flex;
 
     border-bottom: 1px solid rgb(231, 231, 231);
@@ -230,9 +231,9 @@
 
 .card-info {
     width: 330px;
-    height: 120px;
+    height: max-content;
 
-    padding: 25px 0 0 20px;
+    padding: 20px 0 6px 20px;
 
     font-size: 12px;
     font-family: try_cloth;
@@ -240,7 +241,7 @@
 .card-total,
 .card-price {
     width: 100px;
-    height: 120px;
+    height: max-content;
 
     text-align: center;
     margin-top: 45px;
@@ -251,7 +252,7 @@
 
 .card-type {
     width: 70px;
-    height: 120px;
+    height: max-content;
 
     padding-left:32px;
     font-size: 16px;
@@ -262,6 +263,7 @@
 .card-count {
     display: flex;
     margin-top: 30px;
+    height: 80px;
 }
 
 .card-delete {
@@ -274,4 +276,14 @@
 
     margin-top: 53px;
     margin-left: 831px;
+}
+
+.footer-recomended {
+    font-size: 25px;
+    font-weight: 900;
+    font-family: try_cloth;
+
+    text-align: center;
+    padding-top: 20px;
+    padding-right: 1000px;
 }

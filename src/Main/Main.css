@@ -1,5 +1,6 @@
 .video-main {
     width: 100%;
+    height: 450px;
     position: absolute;
     object-fit: cover;
     z-index: -1;
@@ -7,9 +8,29 @@
 
 .video-header {
     width: auto;
-    height: 500px;
+    height: 450px;
 
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.btn-connect {
+    position: absolute;
+    width: 160px;
+    height: 40px;
+    margin-top: 190px;
+    margin-left: -320px;
+    font-size: 15px;
+    font-family: try_cloth;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+    z-index: 1;
+}
+
+.btn-connect:hover {
+    background-color:rgb(83, 83, 83);
 }
 
 .header {
@@ -18,7 +39,7 @@
     width: 100%;
     min-width: 900px;
     height: 500px;
-    margin-top: 180px;
+    margin-top: 80px;
     
     color: white;
     text-align: center;
@@ -33,13 +54,22 @@
     width: 100%;
     min-width: 900px;
     height: 500px;
-    margin-top: 280px;
+    margin-top: 190px;
     
     color: white;
     text-align: center;
     font-family: nav_font2;
     font-weight: 100;
     font-size: 23px;
+}
+
+.header-btn-group {
+    width: auto;
+    height: 30px;
+    font-family: nav_font;
+
+    padding-top: 30px;
+    text-align: center;
 }
 
 .header-part-cursive {
@@ -136,14 +166,14 @@
 
 .help-img {
     position: absolute;
-    top: 50px;
+    top: 70px;
     left: 190px;
 
     width: 160px;
-    height: 160px;
+    height: 130px;
     transition: all 0.3s ease-in-out;
 
-    background: url('http://localhost:5000/static/contactback.png') round;
+    background: url('http://localhost:5000/static/helpconback.png') round;
 }
 
 .btn-group:hover > .help-img {
@@ -175,7 +205,7 @@
     top: 30px;
     left: 20px;
 
-    font-family: nav_font2;
+    font-family: nav_font;
 }
 
 .techno-description {

@@ -1,0 +1,33 @@
+.product-review {
+    display: flex;
+
+    margin-left: 45px;
+}
+
+.product-container {
+    width: 140px;
+    height: 140px;
+
+    padding: 20px;
+}
+
+.product-name {
+    font-family: try_cloth;
+    font-size: 12px;
+
+    text-align: center;
+}
+
+.no-reviews {
+    width: 1000px;
+    height: 200px;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-reviews-header {
+    font-size: 40px;
+    font-family: nav_font;
+}

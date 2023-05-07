@@ -1,4 +1,5 @@
-
+.reviews-header,
+.passwords-header,
 .account-header {
     margin-left: 45px;
     margin-top: 60px;
@@ -8,6 +9,8 @@
 
 }
 
+.reviews-avatar,
+.passwords-avatar,
 .account-avatar {
     font-size: 19px;
     font-family: nav_font2;
@@ -94,7 +97,7 @@
 
 
 .update-btn {
-    margin-top: 110px;
+    margin-top: 70px;
     width: 110px;
     height: 50px;
 
@@ -112,4 +115,3 @@
 .update-btn:hover {
     background-color: rgb(104, 104, 104);
 }
-

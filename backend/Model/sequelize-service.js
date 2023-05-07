@@ -8,6 +8,8 @@ const User = sequelize.define('user',{
     email: {type: DataTypes.STRING,allowNull: false},
     password: {type: DataTypes.STRING,allowNull: false},
     role: {type: DataTypes.STRING,allowNull: false},
+    date_birth: {type: DataTypes.STRING,allowNull: false},
+    sex: {type: DataTypes.STRING,allowNull: false},
     link: {type: DataTypes.STRING,allowNull: false}
 });
 

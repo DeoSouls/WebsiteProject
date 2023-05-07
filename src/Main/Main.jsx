@@ -1,24 +1,29 @@
-import React from 'react';
-import video from '../../videos/video.mp4';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import video from '../../videos/comp.gif';
 import './Main.css';
 
 export const Main = (props) => {
 
-    let scrollpos = document.body.scrollTop;
+    const navigation = useNavigate();
 
-    console.log(scrollpos);
+    function handlerClick() {
+        navigation('/registre');
+    }
 
     return (
         <div>
             <div className='video-header'>
-                <h1 className='header'>
+                <div className='header'>
                 Live life  
                     <span className='header-part-cursive'> to the fullest</span>
-                </h1>
+                    <button className='btn-connect' onClick={e => handlerClick()}>Присоединяйтесь</button>
+                </div>
                 <h1 className='header2'>This is a legacy, and when all is said and done, leave a legacy in any way.</h1>
-                <video className='video-main' height='500' autoPlay loop muted playsInline>
+                {/* <video className='video-main' height='450' autoPlay loop muted playsInline>
                     <source className='video-settings' src={video} type='video/mp4'/>
-                </video>
+                </video> */}
+                <img className='video-main' src={video} alt="" />
             </div>
             <div className='btn-groups'>
                 <div >

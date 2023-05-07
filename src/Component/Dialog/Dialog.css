@@ -1,0 +1,41 @@
+dialog {
+    padding: 0;
+    border: none !important;
+
+    width: 400px;
+    height: 280px;
+
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.dg-image {
+    margin-top: 40px;
+    margin-left: 150px;
+    width: 100px;
+    height: 100px;
+}
+
+.dg-text {
+    height: 60px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-family: try_cloth;
+}
+
+.dg-access {
+    width: 90px;
+    margin-left: 290px;
+    background-color: white;
+
+    transition: all 0.1s ease-in-out;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+
+    font-family: try_cloth;
+}
+
+.dg-access:hover {
+    border: 1px solid rgb(226, 226, 226);
+}

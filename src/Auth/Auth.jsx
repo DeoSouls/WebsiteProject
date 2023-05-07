@@ -1,40 +1,36 @@
-import React,{useEffect, useRef, useState} from 'react';
+import React,{useRef, useState} from 'react';
 import { TempAuth } from '../Component/template/tempAuth';
 import { useNavigate } from 'react-router';
 import { RInput } from '../Component/Input';
-import { $api } from '../axios-service';
-import {TransitionGroup, CSSTransition} from 'react-transition-group';
-import { useSpring, useTransition, animated, useSpringRef } from '@react-spring/web';
+import api from '../axios-service';
+import { Dialog } from '../Component/Dialog/Dialog';
 import './Auth.css';
 
 export const Auth = () => {
 
     const [valueMail, setValueMail] = useState('');
     const [valuePass, setValuePass] = useState('');
-    const [valueMount, setValueMount] = useState(true);
     const navigation = useNavigate();
-    const springRef = useSpringRef();
-
-    useEffect(() => {
-        
-    },[])
+    const dialogRefErr = useRef();
 
     function push_data() {
-        const api = $api();
+
+        const childs = dialogRefErr.current.childNodes;
+        if(childs[1].firstChild !== null) {
+
+            childs[1].removeChild(childs[1].firstChild);
+        }
+
         api.post('http://localhost:5000/api/login', 
         {email: valueMail, password: valuePass})
         .then(res => {console.log(res), navigation('/')})
-        .catch(err => {console.log(err) ,alert(err)});
+        .catch(error => {
+            console.log(error);
+            var text = document.createTextNode(error.response.data.error);
+            childs[1].appendChild(text);
+            dialogRefErr.current.showModal();
+        });
     }
-
-    const springs = useSpring({
-        from: { background: 'linear-gradient(90deg,rgb(218, 218, 218), rgb(248, 248, 248),1%,rgb(248, 248, 248),40%,rgb(238, 238, 238))'},
-        to: { background: 'linear-gradient(90deg,rgb(218, 218, 218),rgb(248, 248, 248),200%,rgb(248, 248, 248), 170%,rgb(238, 238, 238))'},
-        config: {
-            duration: 1000,
-        },
-        loop: true,
-    });
 
     return (
         <TempAuth temp={'2'} header={'Welcome Back'}>
@@ -49,6 +45,7 @@ export const Auth = () => {
             <input id='check_device' className='check_device' type="checkbox" />
             <label className='label_check_device' htmlFor="check_device">Remember this device</label>
             <button className='btn_signin' onClick={push_data}>Sign In</button>
+            <Dialog ref={dialogRefErr} type='error' />
             <p className='navigate_registre'>No Account? <a className='navigate' onClick={e => navigation('/registre')}>Start Here</a></p>
         </TempAuth>
     )

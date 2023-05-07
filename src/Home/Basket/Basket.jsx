@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../axios-service';
 import Counter from '../../Component/Counter/Counter';
+import { ProductFeed } from '../../Component/ProductFeed/ProductFeed';
 import { observer } from 'mobx-react-lite';
 import './Basket.css';
 
@@ -62,50 +63,13 @@ export const Basket = () => {
         setBasketItem({goods: goods, image: img, info: info, basket: basket, discount: discount});
     }
 
-    function deleteItem(event) {
+    function deleteItem(event, goodId, basketId) {
 
-        var goods = basketItem['goods'];
-        var img = basketItem['image'];
-        var info = basketItem['info'];
-        var basket = basketItem['basket'];
-        var discount = basketItem['discount'];
+        api.post('http://localhost:5000/api/delete_basket', {indexProduct: goodId, basketId: basketId})
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error));
 
-        var ind = [];
-        goods.forEach((good,index) => {
-            if(Number(index) !== Number(event.target.id)) {
-                ind.push(good);
-            }
-        })
-
-        var ind1 = [];
-        img.forEach((good,index) => {
-            if(Number(index) !== Number(event.target.id)) {
-                ind1.push(good);
-            }
-        })
-
-        var ind2 = [];
-        info.forEach((good,index) => {
-            if(Number(index) !== Number(event.target.id)) {
-                ind2.push(good);
-            }
-        })
-
-        var ind3 = [];
-        basket.forEach((good,index) => {
-            if(Number(index) !== Number(event.target.id)) {
-                ind3.push(good);
-            }
-        })
-
-        var ind4 = [];
-        discount.forEach((good,index) => {
-            if(Number(index) !== Number(event.target.id)) {
-                ind4.push(good);
-            }
-        })
-
-        setBasketItem({goods: ind, image: ind1, info: ind2, basket: ind3, discount: ind4});
+        getBasketData();
     }
 
     function productCards() {
@@ -143,11 +107,10 @@ export const Basket = () => {
                         </div>
                         <div className='card-type'>{basket[i].color}</div>
                         <div style={{marginLeft: '17px'}} className='card-total'>{Number(goods[i][0].price) * basket[i].count} ₽</div>
-                        <div className='card-delete' id={i} onClick={e => deleteItem(e)}></div>
+                        <div className='card-delete' id={i} onClick={e => deleteItem(e, goods[i][0].id, basket[i].id)}></div>
                     </div>
                 )
             }
-            console.log(basketItem)
             return [...prod_card];
         }
     }
@@ -191,6 +154,7 @@ export const Basket = () => {
                     </div>
                 </div>
             </div>
+            <ProductFeed header={'Рекомендованное'} />
         </div>
     )
 }

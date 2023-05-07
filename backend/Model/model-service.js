@@ -223,6 +223,15 @@ class ModelService {
             throw Error(e.message);
         }
     }
+
+    deleteBasketGood(value) {
+        try {
+            let basketgood = this.BasketGood.destroy({where: value});
+            return basketgood;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
 }
 
 module.exports = ModelService;

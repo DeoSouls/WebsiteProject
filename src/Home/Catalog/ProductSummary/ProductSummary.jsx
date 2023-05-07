@@ -57,18 +57,24 @@ export const ProductSummary = (props) => {
         var undefrate = null;
         var meanrateinter = null;
 
-        if(review[index].length > 0){
-            for (let i = 0; i < review[index].length; i++) {
-                meanrateinter += review[index][i].rate
+        if(review[index] !== undefined ) {
+
+            if(review[index].length > 0) {
+                for (let i = 0; i < review[index].length; i++) {
+                    meanrateinter += review[index][i].rate
+                }
+                meanrate = Math.ceil(meanrateinter / review[index].length);
+                corrate = meanrate % (meanrateinter / review[index].length);
+
+                defrate = 5 - meanrate;
+                undefrate = 5 - defrate;
+            } else {
+                corrate = 0;
+                defrate = 5;
+                undefrate = 0;
             }
-
-            meanrate = Math.ceil(meanrateinter / review[index].length);
-            corrate = meanrate % (meanrateinter / review[index].length);
-
-            defrate = 5 - meanrate;
-            undefrate = 5 - defrate;
-
-        }  else {
+            
+        } else {
             corrate = 0;
             defrate = 5;
             undefrate = 0;
@@ -108,7 +114,7 @@ export const ProductSummary = (props) => {
     
     var totalProd;
     var cardProduct;
-
+    console.log(props.prod);
     if(Object.keys(props.prod).length > 0 && img.length > 0) {
         totalProd = products;
         cardProduct = totalProd.map((good, index) => {

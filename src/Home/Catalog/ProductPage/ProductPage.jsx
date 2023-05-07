@@ -1,9 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import api from '../../../axios-service';
 import Counter from '../../../Component/Counter/Counter';
-import './ProductPage.css'
+import { Dialog } from '../../../Component/Dialog/Dialog';
 import { observer } from 'mobx-react-lite';
+import './ProductPage.css'
 
 export const ProductPage = () => {
 
@@ -11,13 +12,15 @@ export const ProductPage = () => {
     const navigation = useNavigate();
     const counter = new Counter(1);
 
-    const [prodData, setData] = useState({header: '', product: [], rate: 2.6, image: '', prodinfo: [], discount: '', user: [], review: [], usersReview: []});
+    const [prodData, setData] = useState({header: '', product: [], rate: 2.6, image: [], prodinfo: [], discount: '', user: [], review: [], usersReview: []});
     const [borderValue, setBorder] = useState({container: [], color: ''});
     const [isReview, setIsReview] = useState(false);
     const [reviewValues, setReviewValues] = useState([]);
+    const [imageValues, setImageValues] = useState('');
+    const dialogRef = useRef(null);
 
     const MobCounter = observer(({ counter }) => 
-        <input className='counter-input' type="text" onChange={handlerChange}  value={counter.count} />
+        <input className='counter-input' type="text" onChange={handlerChange} value={counter.count} />
     );
 
     useEffect(() => {
@@ -39,7 +42,18 @@ export const ProductPage = () => {
     function submitAddToCart() {
         if(borderValue.color !== '') {
             api.post('http://localhost:5000/api/add_cart', {productId: prodData.product.id, color: borderValue.color, count: counter.count})
-            .then(response => alert(response.data.message))
+            .then(response => {
+                const childs = dialogRef.current.childNodes;
+                var text = document.createTextNode(response.data.message);
+                for (let i = 0; i < childs.length; i++) {
+                    if(i === 1) {
+                        childs[i].appendChild(text);
+                        console.log(childs[i]);
+                    }
+                }
+
+                dialogRef.current.showModal();
+            })
             .catch(err => alert(err.message));
         } else {
             alert('Выберите цвет товара');
@@ -49,7 +63,8 @@ export const ProductPage = () => {
     function settingProdData(data) {
         console.log(data);
         setData({header: data.product.name, product: data.product, rate: prodData.rate, 
-            image: data.image.img, prodinfo: data.data, discount: data.discount.value, user: data.user, review: data.review, usersReview: data.usersreview});
+            image: data.image, prodinfo: data.data, discount: data.discount.value, user: data.user, review: data.review, usersReview: data.usersreview});
+        setImageValues(data.image[0].img);
         interimFunc();
     }
 
@@ -58,9 +73,14 @@ export const ProductPage = () => {
         .then(response => setReviewValues([...response.data.review]))
     }
 
-    function handlerChangeImg() {
-        setData({header: prodData.header, product: prodData.product, rate: prodData.rate, 
-            image: prodData.image, prodinfo: prodData.data, discount: prodData.discount, user: prodData.user, review: prodData.review, usersReview: prodData.usersreview});
+    function handlerChangeImg(event) {
+        var index = event.target.id;
+        for (let i = 0; i < prodData.image.length; i++) {
+            let interimValue = `image${i}`;
+            if(index === interimValue) {
+                setImageValues(prodData.image[i].img);
+            }
+        }
     }
 
     function handlerChange(event) {
@@ -68,17 +88,22 @@ export const ProductPage = () => {
     }
 
     function handlerIsReview() {
-        if(!isReview) {
+        if(prodData.user !== null) {
+            if(!isReview) {
 
-            setIsReview(true);
+                setIsReview(true);
+            } else {
+                setIsReview(false);
+            }
         } else {
-            setIsReview(false);
+            navigation('/authorization');
         }
     }
 
     function enterRate(event) {
         if(state.rate === 0) {
             const img_id = event.currentTarget.id;
+            console.log(img_id);
             for (let i = 0; i < img_id; i++) {
                 let img = document.getElementById(i + 1);
                 img.src = 'http://localhost:5000/static/kindpng.png';
@@ -89,9 +114,6 @@ export const ProductPage = () => {
     function leaveRate(event) {
         if(state.rate === 0) {
             const img_id = event.currentTarget.id;
-
-            console.log(reviewValues);
-
             for (let i = 0; i < img_id; i++) {
                 let img = document.getElementById(i + 1);
                 img.src = 'http://localhost:5000/static/kindpng2.png';
@@ -129,12 +151,10 @@ export const ProductPage = () => {
             api.post('http://localhost:5000/api/add_review', {title: state.title, review: state.review, rate: state.rate, userId: prodData.user.id, goodId: prodData.product.id})
             .then(response => console.log(response.data))
             .catch(error => console.error(error));
-            
         } else {
             navigation('/authorization');
         }
     }
-
 
     function priceTotal() {
 
@@ -167,7 +187,6 @@ export const ProductPage = () => {
     function changeColor(index, colored) {
 
         const container = document.getElementById(`border-coloring${index}`);
-
         setBorder({container: container, color: colored});
         
         if (container.style.borderColor === 'black') {
@@ -183,13 +202,10 @@ export const ProductPage = () => {
 
     function productColor() {
         const color = prodData.prodinfo.color;
-
         var colorContainer = [];
 
         if(color !== undefined) {
-
             const colors = color.split('&');
-
             for (let i = 0; i < colors.length; i++) {
                 if( colors[i] !== '') {
                     colorContainer.push(
@@ -199,17 +215,13 @@ export const ProductPage = () => {
                     </div>)
                 }
             }
-
             return [...colorContainer]
         }
     }
 
     function reviews()  {
-
         var containerReviews = [];
         var containerImages = [];
-
-        console.log(reviewValues);
 
         if(reviewValues.length > 0) {
             reviewValues.forEach((rev, index) => {
@@ -224,9 +236,7 @@ export const ProductPage = () => {
                             <img className='rate-star' src="http://localhost:5000/static/kindpng2.png" alt="" />
                         )
                     }
-                    console.log(defrate)
                 }
-
                 containerReviews.push(
                     <div className='review-container'>
                         <div className='user-review-container'>
@@ -277,6 +287,7 @@ export const ProductPage = () => {
                 <p className='label-header'>Отзыв</p>
                 <textarea className='review-area' onChange={e => dispatch({review: e.target.value})}></textarea>
                 <div className='btn-submit-review-container'>
+                    <p className='btn-submit-desc'><a className='btn-submit-desc' href="">Свяжитесь с нами</a>, если вас не устроил товар или есть предложения по улучшению его качества</p>
                     <button className='btn-submit-review' onClick={handlerAddReview}>Опубликовать</button>
                 </div>
                 
@@ -341,6 +352,26 @@ export const ProductPage = () => {
         }
     };
 
+    function imageBundle() {
+
+        var interimData = [];
+
+        if(prodData.image.length >= 1) {
+            for (let i = 0; i < prodData.image.length; i++) {
+                interimData.push(
+                <button onClick={e => handlerChangeImg(e)} className='btn-look' id={`image${i}`}>
+                    <img className='btn-img-back' src={prodData.image[i].img} alt="" onClick={e => handlerChangeImg(e)} id={`image${i}`}/>
+                </button>)
+            }
+            return [...interimData]
+        }
+    }
+
+    function inReview() {
+        window.scrollTo(0, 500);
+        console.log(reviews());
+    }
+ 
     return (
         <div>
             <div className='clg-prod-container'>
@@ -355,7 +386,7 @@ export const ProductPage = () => {
                     <h1 className='clg-prod-header'>{prodData.header}</h1>
                     <div>
                         <div className='rate-container'>
-                            <a className='ref-review' href=""><p style={{marginRight: '5px'}}>{prodData.review.length}</p> {rating()} <p style={{marginLeft: '7px'}}>Reviews</p></a>
+                            <a className='ref-review' onClick={e => inReview()} ><p style={{marginRight: '5px'}}>{prodData.review.length}</p> {rating()} <p style={{marginLeft: '7px'}}>Reviews</p></a>
                         </div>
                     </div>
                 </div>
@@ -365,12 +396,10 @@ export const ProductPage = () => {
                     <div className='container-product'>
                         <div className='image-container'>
                             <div className='img-bar'>
-                                <button onClick={e => handlerChangeImg} className='btn-look'>
-                                    <img className='btn-img-back' src={prodData.image} alt="" />
-                                </button>
+                                {imageBundle()}
                             </div>
                             <div className='img-content'>
-                                <img className='clg-main-image' src={prodData.image} alt="" />
+                                <img className='clg-main-image' src={imageValues} alt="" />
                             </div>
                         </div>
                         <div className='prod-characteristics'>
@@ -382,7 +411,12 @@ export const ProductPage = () => {
                             <button className='btn-review' onClick={handlerIsReview}>Оставить отзыв</button>
                             {isReview? add_review : null}
                         </div>
-                        {reviews()}
+                        {reviews() === undefined? 
+                        <div className='notreview-container'>
+                            <p className='notreview-header'>К товару пока не было отзывов</p>
+                            <img className='notreview-image' src='http://localhost:5000/static/sadsmile.png' alt="" />
+                        </div> 
+                        : reviews()}
                     </div>
                 </div>
                 <div className='description-card'>
@@ -407,6 +441,7 @@ export const ProductPage = () => {
                             </div>
                             <button onClick={submitAddToCart} className='btn-addbusket'>Add to cart</button>
                         </div>
+                        <Dialog ref={dialogRef} type='confirm' />
                     </div>
                 </div>
             </div>

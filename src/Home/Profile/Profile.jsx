@@ -1,15 +1,14 @@
 import React from 'react';
-import { Catalog } from '../Catalog/Catalog';
-import { Route, Routes, useNavigate} from 'react-router';
+import { Route, Routes} from 'react-router';
 import { Account } from './Account/Account'; 
+import { Passwords } from './Passwords/Passwords';
+import { Reviews } from './Reviews/Reviews';
 import './Profile.css';
-
-
 
 export const Profile = (props) => {
 
-    var firstname = props.first;
-    var lastname = props.last;
+    var firstname = props.first || 'no';
+    var lastname = props.last || 'user';
 
     return (
         <div>
@@ -19,42 +18,34 @@ export const Profile = (props) => {
                 </div>
             </div>
             <div className='profile-nav'>
-                <button className='profile-nav-btn'>
-                    <div className='profile-nav-img'></div>
-                    Profile
-                </button>
+                <div className='profile-nav-container'>
+                    <button className='profile-nav-btn'>
+                        <div className='profile-nav-img'></div>
+                        Profile
+                    </button>
+                </div>
             </div>
             <div className='nav-account'>
-                <div className='navigate-profile'>
-                    <div className='secondary-options'>
-                        <a style={{textDecoration: 'none'}} href="/profile/catalog"><p className='option-account'>Orders</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-account'>Subscriptions</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-account'>Test Results</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-account'>Sessions</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-account'>Recommendations</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-account'>Rewards</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-account'>Reviews</p></a>
+                <div className='between-nav'>
+                    <div className='navigate-profile'>
+                        <div className='secondary-options'>
+                            <a style={{textDecoration: 'none'}} href="/profile/reviews"><p className='option-account'>Reviews</p></a>
+                        </div>
+                        <div className='account-options'>
+                            <a style={{textDecoration: 'none'}} href="/profile/account"><p className='option-main'>Account</p></a>
+                            <a style={{textDecoration: 'none'}} href="/profile/passwords"><p className='option-main'>Passwords</p></a>
+                        </div>
                     </div>
-                    <div className='account-options'>
-                        <a style={{textDecoration: 'none'}} href="/profile/account"><p className='option-main'>Account</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-main'>Health Profile</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-main'>Passwords</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-main'>Shipping Address</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-main'>Payment Method</p></a>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-main'>Communications</p></a>
-                    </div>
-                    <div className='contact-options'>
-                        <a style={{textDecoration: 'none'}} href="/"><p className='option-contact'>Contact Us</p></a>
+                    <div className='profile-content'>
+                        <Routes>
+                            <Route path='account' element={<Account name={props}/>}></Route>
+                            <Route path='passwords' element={<Passwords />}></Route>
+                            <Route path='reviews' element={<Reviews />}></Route>
+                        </Routes>
                     </div>
                 </div>
-                <div className='profile-content'>
-                    <Routes>
-                        <Route path='account' element={<Account name={props}/>}></Route>
-                    </Routes>
-                </div>
+                
             </div>
-
-            
         </div>
     )
 }

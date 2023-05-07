@@ -29,11 +29,11 @@
 }
 
 .nav-bar-btns {
-    width: 1170px;
+    width: 1500px;
     min-width: 600px;
     height: 60px;
     margin-bottom: 1px;
-    margin-left: 60px;
+    margin-left: 185px;
     /* margin: 0 330px; */
 
     display: flex;
@@ -44,9 +44,10 @@
 }
 
 .nav-bar-other {
-    width: 800px;
+    width: 850px;
     min-width: 300px;
     height: 60px;
+    margin-right: 185px;
 
     display: flex;
     align-items: center;
@@ -223,18 +224,32 @@
     position: absolute;
 
     margin-top: 15px;
+    margin-left: 10px;
     font-family: try_cloth;
     font-size: 16px;
     color: black;
 
     transition: all .2s ease-in-out; 
     text-decoration: none;
+}
+
+.menu-option-profile::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute; 
+
+    top: 2px;
+    left: -25px;
+
+    background: url('http://localhost:5000/static/home.png') round;
 }
 
 .menu-option-settings {
     position: absolute;
 
     margin-top: 40px;
+    margin-left: 10px;
     font-family: try_cloth;
     font-size: 16px;
     color: black;
@@ -243,10 +258,23 @@
     text-decoration: none;
 }
 
+.menu-option-settings::before {
+    content: "";
+    width: 17px;
+    height: 17px;
+    position: absolute; 
+
+    top: 3px;
+    left: -23px;
+
+    background: url('http://localhost:5000/static/key.png') round;
+}
+
 .menu-option-sign {
     position: absolute;
 
     margin-top: 65px;
+    margin-left: 10px;
     font-family: try_cloth;
     font-size: 16px;
     color: black;
@@ -254,6 +282,18 @@
 
     transition: all .2s ease-in-out; 
     text-decoration: none;
+}
+
+.menu-option-sign::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute; 
+
+    top: 2px;
+    left: -27px;
+
+    background: url('http://localhost:5000/static/door.png') round;
 }
 
 .menu-option-profile:hover {

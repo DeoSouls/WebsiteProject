@@ -8,6 +8,7 @@ const MailService = require('../mail-service');
 const cookieParser = require('cookie-parser');
 const paginate = require('express-paginate');
 const bcrypt = require('bcrypt');
+const Op = Sequelize.Op;
 const TokenService = require('../token-service');
 const jwt = require('jsonwebtoken');
 const uuid = require('uuid');
@@ -23,7 +24,7 @@ class appMiddleware {
 
             const user = await model.findUser({email: email});
             if(user[0] === undefined) {
-                res.status(400).json({message: `Не существует пользователь с такой почтой ${email}`});
+                throw Error(`Не существует пользователь с такой почтой ${email}`);
             } 
 
             const userid = user[0]['dataValues']['id'];
@@ -33,19 +34,71 @@ class appMiddleware {
 
             const comPass = bcrypt.compareSync(password, hashPass);
             if(!comPass) {
-                res.status(400).json({message: 'Неверный пароль'});
+                throw Error('Неверный пароль');
             }
 
-            // const basket = await model.createBasket({userId: 1});
-            // await model.deleteToken({where: {userId: userid}});
+            await model.deleteToken({where: {userId: userid}});
+            // const group = await model.createGroup({group_name: 'cloth'});
+            // const good = await model.createGood({name: 'Футболка с длинным рукавом', type: 'cloths', price: '5700', brand: 'Malagrida', groupId: group.id});
+            // await model.createGoodInfo({color: 'black&orange', info: 'Футболка Мульти Хлопок - 95%, Эластан - 5% Параметры модели: рост 187 см, грудь 103 см, талия 78 см, бедра 98 см.', goodId: good.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths1.png', goodId: good.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths2.png', goodId: good.id});
+            // await model.createDiscount({value: '0', goodId: good.id});
+            // const good7 = await model.createGood({name: 'Футболки', type: 'cloths', price: '4800', brand: 'Boss', groupId: group.id});
+            // await model.createGoodInfo({color: 'black&white', info: 'Футболка, материал: трикотажное полотно (100% хлопок), плотность 160 г/кв. м. Примерный вес брутто : 0.17 - 0.3 кг. Примерный объем брутто: 0.00096 м3', goodId: good7.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths3.png', goodId: good7.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths4.png', goodId: good7.id});
+            // await model.createDiscount({value: '0', goodId: good7.id});
+            // const good1 = await model.createGood({name: 'Джинсовая куртка', type: 'cloths', price: '13400', brand: 'KLJeans', groupId: group.id});
+            // await model.createGoodInfo({color: 'blue', info: 'Джинсовая куртка выполнена из хлопкового денима. Модель прямого кроя. Особенности: отложной воротник, застежка и манжеты на пуговицах, 2 боковых кармана и 2 кармана на груди, без подкладки.', goodId: good1.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths5.png', goodId: good1.id});
+            // await model.createDiscount({value: '0', goodId: good1.id});
+            // const good8 = await model.createGood({name: 'Джинсы KLJeans', type: 'cloths', price: '11900', brand: 'KLJeans', groupId: group.id});
+            // await model.createGoodInfo({color: 'blue', info: 'Джинсы Хлопок - 95%, Другое волокно - 5% Параметры модели: рост 187 см см, грудь 103 см, талия 75 см, бедра 96 см.', goodId: good8.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths6.png', goodId: good8.id}); //Удалить 8 картинку
+            // await model.createImage({img: 'http://localhost:5000/static/cloths7.png', goodId: good8.id});
+            // await model.createDiscount({value: '0', goodId: good8.id});
+            // const good9 = await model.createGood({name: 'Кеды Reebok', type: 'shoes', price: '2358', brand: 'Reebok', groupId: group.id});
+            // await model.createGoodInfo({color: 'black', info: 'Кеды, натуральная кожа, полимер, текстиль, спорт стиль', goodId: good9.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths9.png', goodId: good9.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths10.png', goodId: good9.id});
+            // await model.createDiscount({value: '0', goodId: good9.id});
+            // const good2 = await model.createGood({name: 'Кроссовки Glide', type: 'shoes', price: '5240', brand: 'Reebok', groupId: group.id});
+            // await model.createGoodInfo({color: 'white', info: 'Кроссовки Glide от Reebok Classics выполнены из натуральной и искусственной кожи, что повышает износостойкость модели. Стелька Ortholite с антибактериальным эффектом обеспечивает амортизацию, фиксирует стопу, адаптируясь под ее особенности.', goodId: good2.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths8.png', goodId: good2.id});
+            // await model.createDiscount({value: '7499', goodId: good2.id});
+            // const good4 = await model.createGood({name: 'Кеды Chuck', type: 'shoes', price: '9340', brand: 'Reebok', groupId: group.id});
+            // await model.createGoodInfo({color: 'blue&pink', info: 'Кеды выполнены из натуральной кожи с перфорацией. Детали: шнуровка, внутренняя отделка и стелька из текстиля, подошва из искусственного материала.', goodId: good4.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths11.png', goodId: good4.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths12.png', goodId: good4.id});
+            // await model.createDiscount({value: '10999', goodId: good4.id});
+            // const good10 = await model.createGood({name: 'Кроссовки Air', type: 'shoes', price: '10999', brand: 'Reebok', groupId: group.id});
+            // await model.createGoodInfo({color: 'black', info: 'Кроссовки выполнены из натуральной кожи и искусственного материала. Мягкая промежуточная подошва из EVA в сочетании с анатомической стелькой амортизирует, делает ходьбу удобнее, а занятия спортом эффективнее.', goodId: good10.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths13.png', goodId: good10.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths14.png', goodId: good10.id});
+            // await model.createDiscount({value: '0', goodId: good10.id});
+            // const good5 = await model.createGood({name: 'Рюкзак Puma', type: 'accessories', price: '2870', brand: 'PUMA', groupId: group.id});
+            // await model.createGoodInfo({color: 'black', info: 'Рюкзак выполнен из непромокаемого полиэстера. Детали: застежка на молнию, внутри 1 карман без застежки, 1 внешний карман на молнии, боковые сетчатые карманы.', goodId: good5.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths15.png', goodId: good5.id});
+            // await model.createDiscount({value: '3190', goodId: good5.id});
+            // const good11 = await model.createGood({name: 'Сумка спортивная Puma', type: 'accessories', price: '2690', brand: 'PUMA', groupId: group.id});
+            // await model.createGoodInfo({color: 'black', info: 'Спортивная сумка выполнена из прочного текстиля. Детали: регулируемый плечевой ремень, один боковой внешний карман без застежки и один внешний карман на молнии, одно отделение с застежкой на молнии, без подкладки.', goodId: good11.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths16.png', goodId: good11.id});
+            // await model.createDiscount({value: '2990', goodId: good11.id});
+            // const good6 = await model.createGood({name: 'Сумка Puma', type: 'accessories', price: '2240', brand: 'PUMA', groupId: group.id});
+            // await model.createGoodInfo({color: 'black&blue', info: 'Сумка выполнена из плотной ткани на основе полиэстера. Детали: одно отделение, внутри один карман без застежки, один внешний карман на молнии, регулируемый плечевой ремень.', goodId: good6.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths17.png', goodId: good6.id});
+            // await model.createDiscount({value: '2490', goodId: good6.id});
+
             // const group = await model.createGroup({group_name: 'techno'});
             // const good = await model.createGood({name: 'Meizu 16s', type: 'phone', price: '26346', brand: 'meizu', groupId: group.id});
             // await model.createGoodInfo({color: 'red&black&white', info: 'Смартфон Meizu 16S глобальной версии, экран 6,2 дюйма, двойная фронтальная камера, 8 ГБ ОЗУ 128 Гб ПЗУ, Восьмиядерный процессор Snapdragon 855, 4G, 3600 мАч', goodId: good.id});
             // await model.createImage({img: 'http://localhost:5000/static/image1.jpg', goodId: good.id});
             // await model.createDiscount({value: '65865', goodId: good.id});
-            // const good7 = await model.createGood({name: 'Xiaomi Redmi Note 7', type: 'phone', price: '14490', brand: 'redmi', groupId: group.id});
-            // await model.createGoodInfo({color: 'red&white', info: 'Смартфон Xiaomi Redmi Note 7, 4 Гб + 64 ГБ, Snapdragon 660AIE, Android мобильный телефон, задняя камера 48 Мп + 5 МП', goodId: good7.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image12.jpg', goodId: good7.id});
+            // const good7 = await model.createGood({name: 'Xiaomi Redmi Note 8', type: 'phone', price: '14490', brand: 'redmi', groupId: group.id});
+            // await model.createGoodInfo({color: 'blue', info: 'Смартфон Xiaomi Redmi Note 8, 4 Гб + 64 ГБ, Snapdragon 660AIE, Android мобильный телефон, задняя камера 48 Мп + 5 МП', goodId: good7.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image12.png', goodId: good7.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image20.png', goodId: good7.id});
             // await model.createDiscount({value: '20000', goodId: good7.id});
             // const good1 = await model.createGood({name: 'Xiaomi Redmi Note 11', type: 'phone', price: '13860', brand: 'apple', groupId: group.id});
             // await model.createGoodInfo({color: 'white', info: 'Глобальная версия смартфона Xiaomi Redmi Note 11, Snapdragon 680 33W Pro, быстрая зарядка, 50 МП, Quad Camera', goodId: good1.id});
@@ -53,7 +106,8 @@ class appMiddleware {
             // await model.createDiscount({value: '17703', goodId: good1.id});
             // const good8 = await model.createGood({name: 'Meizu 16th', type: 'phone', price: '19050', brand: 'meizu', groupId: group.id});
             // await model.createGoodInfo({color: 'black', info: 'Смартфон Meizu 16th с глобальной прошивкой, 6,0 дюйма, двойная фронтальная камера, 8 ГБ ОЗУ, 128 Гб ПЗУ, Восьмиядерный процессор Snapdragon 845, 4G, 3010 мАч', goodId: good8.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image8.jpg', goodId: good8.id}); //Удалить 8 картинку
+            // await model.createImage({img: 'http://localhost:5000/static/image8.png', goodId: good8.id}); 
+            // await model.createImage({img: 'http://localhost:5000/static/image21.png', goodId: good8.id});
             // await model.createDiscount({value: '20383', goodId: good8.id});
             // const good9 = await model.createGood({name: 'Honor Choice Earbuds X3', type: 'headphone', price: '2358', brand: 'honor', groupId: group.id});
             // await model.createGoodInfo({color: 'red&black&white', info: 'Беспроводные наушники Honor Choice Earbuds X3 Lite', goodId: good9.id});
@@ -87,11 +141,11 @@ class appMiddleware {
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPass);
             const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true});
 
-            await res.cookie('accessToken', tokens.accessToken, {maxAge: 1000 * 60 * 15, httpOnly: false});
+            await res.cookie('accessToken', tokens.accessToken, {maxAge: 1000 * 60 * 30, httpOnly: false});
 
             res.json('Авторизация прошла успешно!');
         } catch (e) {
-            res.status(400).json({message: 'Не удалось авторизоваться', error: e});
+            res.status(400).json({message: 'Не удалось авторизоваться', error: e.message});
         }
     }
 
@@ -104,7 +158,7 @@ class appMiddleware {
 
             const mail = new MailService();
             const model = new ModelService();
-            await sequelize.sync({});
+            await sequelize.sync({force: true});
 
             // const checkEmail = await model.User.findAll({where: {email: email}});
             // if(checkEmail[0] !== undefined) {
@@ -119,13 +173,13 @@ class appMiddleware {
             await mail.send(`http://localhost:5000/api/activating/${id}`, email);
 
             const hashPassword = await bcrypt.hashSync(password, 7);
-            const createUser = await model.createUser({firstname: firstname, lastname: lastname, email: email, password: hashPassword, role: 'user', link: id});
+            const createUser = await model.createUser({firstname: firstname, lastname: lastname, email: email, password: hashPassword, role: 'user', link: id, sex: 'notdef', date_birth: 'notdef'});
             
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPassword);
             console.log(tokens.accessToken);
             
             const userToken = model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: createUser.id, isActivate: false});
-            
+            const basket = await model.createBasket({userId: createUser.id});
 
             res.json({message: 'Данные включены в таблицу'});
 
@@ -135,23 +189,76 @@ class appMiddleware {
         }
     }
 
-    async updateUser(req, res) {
+    async search(req, res) {
         try {
-            const {firstname, lastname, email} = req.body;
+            const {searchText} = req.body;
 
             const model = new ModelService();
-            const user =  await model.findUser({email: email});
-            console.log(user[0]);
+
+            const goods = await model.findGood({ name: {[Op.like]: `%${searchText}%`}});
+
+            res.json({products: goods[0]});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось отправить поисковой запрос', error: e.message});
+        }
+    }
+
+    async updateUser(req, res) {
+        try {
+            const { data } = req.body;
+            const model = new ModelService();
+            const user =  await model.findUser({email: data.email});
+            
             if(user[0] === undefined) {
                 throw Error('Пользователь не найден');
             }
 
-            await user[0].update({firstname: firstname, lastname: lastname, email: email});
+            await user[0].update({firstname: data.firstname, lastname: data.lastname, email: data.email, sex: data.gender, date_birth: data.datebirth});
 
             res.json({message: 'Данные сохранены'});
 
         } catch (e) {
             res.status(400).json({message: 'Не удалось обновить данные о пользователе', error: e.message});
+        }
+    }
+
+    async updatePassword(req, res) {
+        try {
+            const { data } = req.body;
+            const { accessToken } = req.cookies;
+
+            const model = new ModelService();
+
+            if(data.newpass !== data.confpass) {
+                throw Error('Пароли должны совпадать');
+            }
+
+            const token = await model.findToken({accessToken: accessToken});
+            if(token[0] === undefined) {
+                throw Error('Токен не найден');
+            }
+
+            const user = await model.findUser({id: token[0]['dataValues']['userId']});
+            if(user[0] === undefined) {
+                throw Error('Пользователь не найден');
+            }
+
+            const hashPass = user[0]['dataValues']['password'];
+
+            const comPass = bcrypt.compareSync(data.curpass, hashPass);
+            if(!comPass) {
+                throw Error('Неверный текущий пароль');
+            }
+
+            const newHashPass = await bcrypt.hashSync(data.confpass, 7);
+
+            await user[0].update({password: newHashPass});
+
+            res.json({message: 'Пароль изменен'});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось обновить пароль', error: e.message});
         }
     }
 
@@ -176,6 +283,57 @@ class appMiddleware {
 
         } catch (e) {
             res.status(400).json({message: 'Не удалось получить пользователя'});
+        }
+    }
+
+    async getReviews(req, res) {
+        try {
+            const { accessToken } = req.cookies;
+            const model = new ModelService();
+
+            const token = await model.findToken({accessToken: accessToken});
+            if(token[0] === undefined) {
+                throw Error('Токен не найден');
+            }
+
+            const user = await model.findUser({id: token[0]['dataValues']['userId']});
+            if(user[0] === undefined) {
+                throw Error('Пользователь не найден');
+            }
+
+            const reviews = await model.findReview({userId: user[0]['dataValues']['id']});
+
+            var products = [];
+            for (let i = 0; i < reviews.length; i++) {
+                products.push(await model.findGood({id: reviews[i]['dataValues']['goodId']}));
+            }
+
+            var images = [];
+            for (let i = 0; i < products.length; i++) {
+                images.push(await model.findImage({goodId: products[i][0]['dataValues']['id']}));
+            }
+
+            res.json({reviews: reviews, products: products, images: images, user: user[0]});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить отзывы'});
+        }
+    } 
+
+    async getGoodImage(req, res) {
+        try {
+            const model = new ModelService();
+            const products = await model.findGood();
+
+            var images = [];
+            for (let i = 0; i < products.length; i++) {
+                images.push(await model.findImage({goodId: products[i]['dataValues']['id']}));
+            }
+
+            res.json({images: images, products: products});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить картинки товара'});
         }
     }
 
@@ -207,7 +365,7 @@ class appMiddleware {
                 user = await model.findUser({id: token[0]['dataValues']['userId']});
             }
 
-            res.json({data: info[0], group: group[0], product: good[0], image: image[0], discount: discount[0], user: user[0], review: review, usersreview: users});
+            res.json({data: info[0], group: group[0], product: good[0], image: image, discount: discount[0], user: user[0], review: review, usersreview: users});
 
         } catch (e) {
             res.status(400).json({message: 'Не удалось получить данные о товарах'});
@@ -300,6 +458,21 @@ class appMiddleware {
         }
     }
 
+    async delete_data_basket(req, res) {
+        try {
+            const {indexProduct, basketId} = req.body;
+            const model = new ModelService();
+
+            await model.deleteBasketGood({goodId: indexProduct});
+            const basket_goods = await model.findBasketGood({basketId: basketId}); 
+
+            res.json({basket: basket_goods});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось удалить товар в корзине', error: e.message});
+        }
+    }
+
     async get_data_busket(req, res) {
         try {
             const model = new ModelService();
@@ -319,21 +492,15 @@ class appMiddleware {
                 goods.push(await model.findGood({id: basket_goods[i]['dataValues']['goodId']}));
             }  
 
-            console.log(goods);
-
             var image = [];
             for (let i = 0; i < basket_goods.length; i++) {
                 image.push(await model.findImage({goodId: basket_goods[i]['dataValues']['goodId']}));
             }  
 
-            console.log(image);
-
             var info = [];
             for (let i = 0; i < basket_goods.length; i++) {
                 info.push(await model.findGoodData({goodId: basket_goods[i]['dataValues']['goodId']}));
             }
-
-            console.log(info);
 
             var discount = [];
             for (let i = 0; i < basket_goods.length; i++) {
@@ -387,9 +554,11 @@ class appMiddleware {
 
                     if(totalFilter.length > 0) {
 
-                        if(group === 'all') {
-                            allprod = await model.findGood();
-
+                        if(group === 'default') {
+                            productGroup = await model.findGroup({group_name: 'techno'});
+                            if(productGroup[0] !== undefined) {
+                                allprod = await model.findGood({groupId: productGroup[0].dataValues.id});
+                            }
                         } else {
                             productGroup = await model.findGroup({group_name: group});
                             if(productGroup[0] !== undefined) {
@@ -404,7 +573,6 @@ class appMiddleware {
                             if(good[0] === undefined) {
                                 good = await model.findGood({brand: totalFilter[i]});
                             }
-
                             prevfilter = totalFilter[i - 1];
 
                             if(good[0] !== undefined) {
@@ -494,23 +662,18 @@ class appMiddleware {
                                                 totalImages.push(imgProd);
                                             }
 
-                                            if(reviews.length > 0) {
-                                                totalReviews.push(reviews);
-                                            }
+                                            totalReviews.push(reviews);
 
                                             if(infos.length > 0) {
                                                 totalInfos.push(infos[0]);
                                             }
                                         }
-
                                         images = [...totalImages];
                                         review = [...totalReviews];
                                         info = [...totalInfos];
-
                                         prod = [];
 
                                     } else if (subArray[skip] === undefined) {
-
                                         prod = [];
                                     }
                                 } else {
@@ -529,19 +692,15 @@ class appMiddleware {
                                                 totalImages.push(imgProd);
                                             }
 
-                                            if(reviews.length > 0) {
-                                                totalReviews.push(reviews);
-                                            }
+                                            totalReviews.push(reviews);
 
                                             if(infos.length > 0) {
                                                 totalInfos.push(infos[0]);
                                             }
                                         }
-
                                         images = [...totalImages];
                                         review = [...totalReviews];
                                         info = [...totalInfos];
-
                                     }
                                 }
                                 
@@ -561,9 +720,7 @@ class appMiddleware {
                                             totalImages.push(imgProd);
                                         }
 
-                                        if(reviews.length > 0) {
-                                            totalReviews.push(reviews);
-                                        }
+                                        totalReviews.push(reviews);
 
                                         if(infos.length > 0) {
                                             totalInfos.push(infos[0]);
@@ -632,15 +789,17 @@ class appMiddleware {
                         
                     } else {
 
-                        if(group === 'all') {
-                            allprod = await model.findGood();
+                        if(group === 'default') {
+                            productGroup = await model.findGroup({group_name: 'techno'});
+                            if(productGroup[0] !== undefined) {
+                                allprod = await model.findGood({groupId: productGroup[0].dataValues.id});
+                            }
 
                         } else {
                             productGroup = await model.findGroup({group_name: group});
                             if(productGroup[0] !== undefined) {
                                 allprod = await model.findGood({groupId: productGroup[0].dataValues.id});
                             }
-                            console.log(allprod);
                         }
 
                         var subAllProd = [];
@@ -688,7 +847,7 @@ class appMiddleware {
                 var reaction = null;
 
                 if(group === '' || group === undefined) {
-                    interim_group = 'all';
+                    interim_group = 'default';
                     reaction = filterWorked(filterObject, interim_group);
                 } else {
                     reaction = filterWorked(filterObject, group);
@@ -712,7 +871,6 @@ class appMiddleware {
 
                 const pgCount = await Math.ceil(counts / req.query.limit);
                 console.log(pgCount);
-                console.log(counts);
 
                 res.json({results, pages: paginate.getArrayPages(req)(3, pgCount, req.query.page), img, products, counts, filter, group, info: info, review: review});
             })

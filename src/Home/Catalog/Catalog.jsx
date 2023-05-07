@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useState } from 'react';
 import { ReactPagination } from '../../Component/ReactPagination/ReactPagination';
 import { ProductSummary } from './ProductSummary/ProductSummary';
 import { LoadingCatalog } from '../../Component/Load/LoadingCatalog';
+import { TechnoType } from '../../Component/FilterTypes/TechnoType';
+import { ClothType } from '../../Component/FilterTypes/ClothType';
 import api from '../../axios-service';
 import './Catalog.css';
 
@@ -14,7 +16,7 @@ export const Catalog = (props) => {
     var productsGroup = props.prodGroup;
 
     if(productsGroup === undefined || productsGroup === '') {
-        productsGroup = 'all';
+        productsGroup = 'default';
     }
 
     useEffect(() => {
@@ -30,42 +32,26 @@ export const Catalog = (props) => {
     });
 
     const [state, dispatch] = useReducer(reducer, {
-        phone: {
-            filterName: '',
-            checked: false
-        },
-        TV: {
-            filterName: '',
-            checked: false
-        },
-        headphone: {
-            filterName: '',
-            checked: false
-        },
-        meizu: {
-            filterName: '',
-            checked: false
-        },
-        samsung: {
-            filterName: '',
-            checked: false
-        },
-        redmi: {
-            filterName: '',
-            checked: false
-        },
-        apple: {
-            filterName: '',
-            checked: false
-        },
-        honor:  {
-            filterName: '',
-            checked: false
-        },
-        Maibenben:  {
-            filterName: '',
-            checked: false
-        },
+        phone: {filterName: '', checked: false},
+        TV: {filterName: '', checked: false},
+        headphone: {filterName: '', checked: false},
+
+        cloths: {filterName: '', checked: false},
+        shoes: {filterName: '', checked: false},
+        accessories: {filterName: '', checked: false},
+        
+        meizu: {filterName: '', checked: false},
+        samsung: {filterName: '', checked: false},
+        redmi: {filterName: '', checked: false},
+        apple: {filterName: '', checked: false},
+        honor:  {filterName: '', checked: false},
+        Maibenben: {filterName: '', checked: false},
+
+        Malagrida: {filterName: '', checked: false},
+        Boss: {filterName: '', checked: false},
+        KLJeans: {filterName: '', checked: false},
+        Reebok: {filterName: '', checked: false},
+        PUMA:  {filterName: '', checked: false},
     });
 
 
@@ -81,7 +67,7 @@ export const Catalog = (props) => {
         console.log(goods);
     }
     
-    const filterObject =  (event) => {
+    const filterObject = (event) => {
         const value = event.target.name;
 
         var action = {[value]: {filterName: event.target.name, checked: event.target.checked}};
@@ -111,8 +97,6 @@ export const Catalog = (props) => {
         endPackage = goods.products.length;
     }
 
-    console.log(state);
-
     return (
         <div>
             <div className='catalog'>
@@ -123,7 +107,7 @@ export const Catalog = (props) => {
                             <p style={{fontFamily: 'try_cloth'}}>/</p>
                             <a className='pseudo-ref' href="/catalog">Catalog</a>
                         </div>
-                        <h1 className='header-name'>{productsGroup} Bundle</h1>
+                        <h1 className='header-name'>{productsGroup.substring(0, 1).toLocaleUpperCase()}{productsGroup.substring(1, productsGroup.length)} Bundle</h1>
                     </div>
                 </div>
             </div>
@@ -131,50 +115,9 @@ export const Catalog = (props) => {
                 <p className='product-results'>{startPackage} - {endPackage} of {countProducts} results</p>
             </div>
             <div className='catalog-content'>
-                <div className='catalog-filter'>
-                    <div className='product-type'>
-                        <p>Product Type</p>
-                    </div>
-                    <div>
-                        <input name='phone' type="checkbox" className='filter-phone' onChange={e => filterObject(e)}/>
-                        <label className='label-check-phone' htmlFor='phone' >Phone</label>
-                    </div>
-                    <div>
-                        <input name='TV' type="checkbox" className='filter-TV' onChange={e => filterObject(e)}/>
-                        <label className='label-check-TV' htmlFor='TV'>TV</label>
-                    </div>
-                    <div>
-                        <input name='headphone' type="checkbox" className='filter-headphone' onChange={e => filterObject(e)}/>
-                        <label className='label-check-headphone' htmlFor='headphone'>Headphone</label>
-                    </div>
-                    <div className='product-type'>
-                        <p>Product Brand</p>
-                    </div>
-                    <div>
-                        <input name='meizu' type="checkbox" className='filter-phone' onChange={e => filterObject(e)}/>
-                        <label className='label-check-phone' htmlFor='meizu' >Meizu</label>
-                    </div>
-                    <div>
-                        <input name='samsung' type="checkbox" className='filter-headphone' onChange={e => filterObject(e)}/>
-                        <label className='label-check-headphone' htmlFor='samsung'>Samsung</label>
-                    </div>
-                    <div>
-                        <input name='redmi' type="checkbox" className='filter-TV' onChange={e => filterObject(e)}/>
-                        <label className='label-check-TV' htmlFor='redmi'>Redmi</label>
-                    </div>
-                    <div>
-                        <input name='apple' type="checkbox" className='filter-headphone' onChange={e => filterObject(e)}/>
-                        <label className='label-check-headphone' htmlFor='apple'>Apple</label>
-                    </div>
-                    <div>
-                        <input name='honor' type="checkbox" className='filter-TV' onChange={e => filterObject(e)}/>
-                        <label className='label-check-TV' htmlFor='honor'>Honor</label>
-                    </div>
-                    <div>
-                        <input name='Maibenben' type="checkbox" className='filter-headphone' onChange={e => filterObject(e)}/>
-                        <label className='label-check-headphone' htmlFor='Maibenben'>Maibenben</label>
-                    </div>
-                </div>
+                {productsGroup === 'techno'? <TechnoType filterObject={filterObject} /> : null}
+                {productsGroup === 'cloth'? <ClothType filterObject={filterObject} /> : null}
+                {productsGroup === 'default'? <TechnoType filterObject={filterObject} /> : null}
                 <div className='catalog-cards'>
                     {isLoading?  <ProductSummary prod={goods} /> : <LoadingCatalog/>}
                     {paginate()}

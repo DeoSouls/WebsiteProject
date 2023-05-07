@@ -4,7 +4,8 @@
 }
 
 .header-catalog {
-    width: 1250px;
+    width: 1740px;
+    padding-left: 157px;
     display: flex;
     justify-content: start;
     margin: 0 auto;
@@ -43,12 +44,13 @@
 .catalog-content {
     display: flex;
     justify-content: center;
-    min-width: 1400px;
+    width: 1400px;
 }
 
 .catalog-filter {
     width: 244px;
     min-width: 244px;
+    margin-left: 210px;
 }
 
 .catalog-cards {
@@ -63,7 +65,6 @@
 
 .under-header {
     width: auto;
-    min-width: 1250px;
     height: 40px;
 
     display: flex;
@@ -74,10 +75,11 @@
 
 .product-results {
     margin-top: 10px;
-    width: 1110px;
+    width: 1520px;
 
     font-size: 15px;
     font-family: simple;
+    margin-left: 237px;
 }
 
 .product-type {
@@ -96,19 +98,19 @@ input[type='checkbox'] {
 .label-check-phone {
     margin-top: 15px;
     font-size: 14px;
-    font-family: simple;
+    font-family: global;
 }
 
 .label-check-TV {
     margin-top: 5px;
     font-size: 14px;
-    font-family: simple;
+    font-family: global;
 }
 
 .label-check-headphone {
     margin-top: 5px;
     font-size: 14px;
-    font-family: simple;
+    font-family: global;
 }
 
 

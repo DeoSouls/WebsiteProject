@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import axios from "axios";
-import { $api } from "../axios-service";
+import api from "../axios-service";
 import './Registre.css';
 import { RInput } from '../Component/Input'
 import { useNavigate } from "react-router";
@@ -14,18 +13,33 @@ export const Registre = () => {
     const [passwordValue, setPasswordValue] = useState('');
     const navigation = useNavigate();
 
+    const dialogRefConf = useRef();
+    const dialogRefErr = useRef();
+
     function push_userdata() {
-        const api = $api();
-        // const response = api.post('http://localhost:5000/api/registration', 
-        // {firstname:'vlad', lastname:'purikov', email: 'maltondeo@gmail.com', password: '1234'});
 
-        const response = api.post('http://localhost:5000/api/registration', 
-        {firstname: firstnameValue, lastname: lastnameValue, email: emailValue, password: passwordValue});
+        const childsErr = dialogRefErr.current.childNodes;
+        const childsConf = dialogRefConf.current.childNodes;
 
-        // axios.post('http://localhost:5000/api/registration', {firstname:'vlad', lastname:'purikov', email: 'maltondeo@gmail.com', password: '1234'},
-        // { headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((data) => console.log(data));
+        if(childsErr[1].firstChild !== null) {
 
-        response.then((data) => {console.log(data), alert('Вам выслано письмо с ссылкой активации аккаунта')});
+            childsErr[1].removeChild(childs[1].firstChild);
+        }
+
+        api.post('http://localhost:5000/api/registration', {firstname: firstnameValue, 
+        lastname: lastnameValue, email: emailValue, password: passwordValue})
+        .then((data) => {
+            console.log(data);
+            var text = document.createTextNode('Вам выслано письмо с ссылкой активации аккаунта');
+            childsConf[1].appendChild(text);
+            childsConf.current.showModal();
+        })
+        .catch(error => {
+            console.log(error);
+            var text = document.createTextNode(error.response.data.error);
+            childsErr[1].appendChild(text);
+            childsErr.current.showModal();
+        })
     }
 
     return (
@@ -48,6 +62,8 @@ export const Registre = () => {
             <div className="other">
                 <p className="other-switch">Already have an account? <a className="other-switch" onClick={e => navigation('/authorization')} >Sign In</a></p>
             </div>
+            <Dialog ref={dialogRefConf} type='confirm' index='1' />
+            <Dialog ref={dialogRefErr} type='error' index='2' />
         </TempAuth>
     )
 }

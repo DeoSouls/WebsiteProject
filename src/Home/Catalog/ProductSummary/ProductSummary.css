@@ -14,9 +14,9 @@
 
 .product-image {
     width: 320px;
-    height: 280px;
+    height: 290px;
 
-    padding: 35px 45px 35px 45px;
+    padding: 35px 60px 35px 60px;
     border-radius: 15px;
     border: 1px solid rgb(241, 241, 241);
     /* box-shadow: 0.03px 0.03px 5px 0.1px rgb(233, 233, 233); */
