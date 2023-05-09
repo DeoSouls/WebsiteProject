@@ -10,10 +10,7 @@ import './Account.css';
 
 export const Account = (props) => {
 
-    var firstname = props.name.first;
-    var lastname = props.name.last;
     var file = localStorage.getItem('file');
-    var email = localStorage.getItem('email');
 
     const dialogRefConf = useRef();
     const dialogRefErr = useRef();
@@ -28,6 +25,11 @@ export const Account = (props) => {
 
         const childs = dialogRefConf.current.childNodes;
         const childsErr = dialogRefErr.current.childNodes;
+
+        if(childs[1].firstChild !== null) 
+            childs[1].removeChild(childs[1].firstChild);
+        if(childsErr[1].firstChild !== null) 
+            childsErr[1].removeChild(childsErr[1].firstChild);
 
         api.post('http://localhost:5000/api/update', { data })
         .then(response => {

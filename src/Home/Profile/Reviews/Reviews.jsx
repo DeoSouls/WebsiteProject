@@ -72,7 +72,7 @@ export const Reviews = (props) => {
             <div className='reviews-header' style={{marginBottom: '50px'}}>
                 <div className='reviews-avatar'>Your reviews</div>
             </div>
-            {reviews() !== undefined? reviews() 
+            {reviewValues?.reviews?.length > 0? reviews() 
             : <div className='no-reviews'>
                 <h1 className='no-reviews-header'>Вы пока не оставляли отзывов</h1>
             </div>}

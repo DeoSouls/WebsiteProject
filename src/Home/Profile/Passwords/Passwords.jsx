@@ -18,9 +18,10 @@ export const Passwords = (props) => {
         const childsConf = dialogRefConf.current.childNodes;
         const childsErr = dialogRefErr.current.childNodes;
 
-        if(childsErr[1].firstChild !== null) {
+        if(childsErr[1].firstChild !== null) 
             childsErr[1].removeChild(childsErr[1].firstChild);
-        }
+        if(childsConf[1].firstChild !== null) 
+            childsConf[1].removeChild(childsConf[1].firstChild);
 
         api.post('http://localhost:5000/api/update_pass', {data})
         .then(response => {

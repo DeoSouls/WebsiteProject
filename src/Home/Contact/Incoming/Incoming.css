@@ -29,3 +29,14 @@
     margin-left: 9px;
     text-decoration: underline;
 }
+
+.message-viewed {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    margin-left: 300px;
+    margin-top: 6px;
+
+    background-color: rgb(58, 255, 239);
+    border-radius: 10px;
+}

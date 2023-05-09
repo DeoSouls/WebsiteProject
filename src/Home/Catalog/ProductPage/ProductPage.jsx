@@ -7,13 +7,13 @@ import { Dialog } from '../../../Component/Dialog/Dialog';
 import { observer } from 'mobx-react-lite';
 import './ProductPage.css'
 
-export const ProductPage = () => {
+export const ProductPage = (props) => {
 
     const { prodId } = useParams();
     const navigation = useNavigate();
     const counter = new Counter(1);
 
-    const [prodData, setData] = useState({header: '', product: [], rate: 2.6, image: [], prodinfo: [], discount: '', user: [], review: [], usersReview: []});
+    const [prodData, setData] = useState({header: '', product: [], rate: 2.6, image: [], prodinfo: [], discount: '', user: [], review: [], usersReview: [], group: []});
     const [isReview, setIsReview] = useState(false);
     const [reviewValues, setReviewValues] = useState([]);
     const [imageValues, setImageValues] = useState('');
@@ -47,6 +47,11 @@ export const ProductPage = () => {
         const childsConf = dialogRef.current.childNodes;
         const childsErr = dialogRefErr.current.childNodes;
 
+        if(childsConf[1].firstChild !== null) 
+            childsConf[1].removeChild(childsConf[1].firstChild);
+        if(childsErr[1].firstChild !== null) 
+            childsErr[1].removeChild(childsErr[1].firstChild);
+
         if(name !== '') {
             api.post('http://localhost:5000/api/add_cart', {productId: prodData.product.id, color: name, count: counter.count})
             .then(response => {
@@ -60,14 +65,16 @@ export const ProductPage = () => {
                 dialogRefErr.current.showModal();
             });
         } else {
-            alert('Выберите цвет товара');
+            var text = document.createTextNode('Выберите цвет товара');
+            childsErr[1].appendChild(text);
+            dialogRefErr.current.showModal();
         }
     }
 
     function settingProdData(data) {
         console.log(data);
         setData({header: data.product.name, product: data.product, rate: prodData.rate, 
-            image: data.image, prodinfo: data.data, discount: data.discount.value, user: data.user, review: data.review, usersReview: data.usersreview});
+            image: data.image, prodinfo: data.data, discount: data.discount.value, user: data.user, review: data.review, usersReview: data.usersreview, group: data.group});
         setImageValues(data.image[0].img);
         interimFunc();
     }
@@ -338,7 +345,6 @@ export const ProductPage = () => {
 
     function inReview() {
         window.scrollTo(0, 500);
-        console.log(reviews());
     }
  
     return (
@@ -348,7 +354,7 @@ export const ProductPage = () => {
                     <div style={{display: 'flex'}}>
                         <a className='clg-prod-ref' href="/">Home </a>  
                         <p className='nav-slash'> /</p> 
-                        <a className='clg-prod-ref' href="/catalog">Catalog</a> 
+                        <a className='clg-prod-ref' id={`${prodData.group.group_name}`} onClick={props.onGroup}>Catalog</a> 
                         <p className='nav-slash'>/</p> 
                         <a className='clg-prod-ref' href={`/catalog/product/${prodData.product.id}`}> Product№{prodData.product.id}</a>
                     </div>

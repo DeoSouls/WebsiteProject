@@ -32,21 +32,19 @@
 
     border-radius: 50%;
 
-    background-color: rgb(112, 214, 112);
+    background: url('http://localhost:5000/static/avatar-user.jpg') round;
 }
 
 .icon-upload {
-    padding-left: 45px;
+    padding-left: 60px;
     padding-top: 34px;
 }
 
 .custom-file-input {
     width: 0.1px;
 	height: 0.1px;
-	/* opacity: 0; */
 	overflow: hidden;
 	position: absolute;
-	/* z-index: -1; */
 }
 
 .label-upload-btn {
@@ -64,8 +62,8 @@
 }
 
 .account-img {
-    width: 148px;
-    height: 114px;
+    width: 160px;
+    height: 128px;
     border: none;
     outline: none;
     position: absolute;

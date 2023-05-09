@@ -36,7 +36,7 @@ export const Incoming = (props) => {
         console.log(messagesRef.current);
         if(messagesRef.current !== null) {
             api.get('http://localhost:5000/api/get_sents_admin')
-            .then(response => {setMessageValue(response.data)})
+            .then(response => {console.log(response.data), setMessageValue(response.data)})
             .catch(error => {
                 var text = document.createTextNode(error.response.data.error);
                 childsErr[1].appendChild(text);
@@ -55,15 +55,14 @@ export const Incoming = (props) => {
 
     const onSubmit = (data) => {
 
-        console.log(data);
-
         const childsConf = dialogRefConf.current.childNodes;
         const childsErr = dialogRefErr.current.childNodes;
         const date = new Date().toISOString().replace('-', '/').split('T')[0].replace('-', '/')
 
-        if(childsErr[1].firstChild !== null) {
+        if(childsConf[1].firstChild !== null) 
+            childsConf[1].removeChild(childsConf[1].firstChild);
+        if(childsErr[1].firstChild !== null) 
             childsErr[1].removeChild(childsErr[1].firstChild);
-        }
 
         api.post('http://localhost:5000/api/incoming_asw', {data, date, userId: messageValue.users[messageId][0].id, sentId: messageValue.message[messageId].id})
         .then(response => {
@@ -83,6 +82,12 @@ export const Incoming = (props) => {
         let id = event.currentTarget.id;
         let array = Array.from(id);
         let msgId = array[array.length -1];
+
+        if(messagesRef.current === null && messageValue.message[msgId].viewed === false){
+            api.post('http://localhost:5000/api/upd_inc', {incomingId: messageValue.message[msgId].id})
+            .then(response => {console.log(response.data), getMessage()})
+            .catch(error => { console.log(error)});
+        }
 
         setMessageId(msgId);
     }
@@ -179,6 +184,7 @@ export const Incoming = (props) => {
                 } else {
                     msgBlock.push(
                         <div className='message-block' id={`message-block${i}`} onClick={e => handlerGetIdMessage(e)}>
+                            {messageValue.message[i].viewed? null : <div className='message-viewed'></div>}
                             <div className='message-date'>
                                 <p className='message-otherdata'>От кого: Техподдержка</p>
                                 <p className='message-otherdata'>Кому: Мне</p>

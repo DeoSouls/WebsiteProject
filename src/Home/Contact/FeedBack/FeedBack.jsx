@@ -18,9 +18,10 @@ export const FeedBack = (props) => {
         const childsErr = dialogRefErr.current.childNodes;
         const date = new Date().toISOString().replace('-', '/').split('T')[0].replace('-', '/')
 
-        if(childsErr[1].firstChild !== null) {
+        if(childsConf[1].firstChild !== null) 
+            childsConf[1].removeChild(childsConf[1].firstChild);
+        if(childsErr[1].firstChild !== null) 
             childsErr[1].removeChild(childsErr[1].firstChild);
-        }
 
         api.post('http://localhost:5000/api/sent_qstn', {data, date})
         .then(response => {

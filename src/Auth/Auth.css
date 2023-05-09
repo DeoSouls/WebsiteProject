@@ -56,6 +56,7 @@
     margin-left: 110px;
     margin-bottom: 100px;
 
+    cursor: pointer;
     font-family: 'REX';
     font-size: 17px;
 }
@@ -79,13 +80,3 @@
     color: rgb(0, 0, 0);
     transition: all 0.5s ease-in-out;
 }
-
-/* .item-exit {
-    opacity: 1;
-}
-
-
-.item-exit-active {
-    opacity: 0.01;
-    transition: opacity 0.5s ease-in;
-} */

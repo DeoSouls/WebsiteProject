@@ -16,14 +16,12 @@ export const Auth = () => {
     function push_data() {
 
         const childs = dialogRefErr.current.childNodes;
-        if(childs[1].firstChild !== null) {
-
+        if(childs[1].firstChild !== null) 
             childs[1].removeChild(childs[1].firstChild);
-        }
 
         api.post('http://localhost:5000/api/login', 
         {email: valueMail, password: valuePass})
-        .then(res => {console.log(res), navigation('/')})
+        .then(res => {navigation('/')})
         .catch(error => {
             console.log(error);
             var text = document.createTextNode(error.response.data.error);

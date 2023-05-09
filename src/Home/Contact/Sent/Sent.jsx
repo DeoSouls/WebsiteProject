@@ -29,6 +29,9 @@ export const Sent = (props) => {
     function getMessage() {
         console.log(messagesRef.current);
         const childsErr = dialogRefErr.current.childNodes;
+        
+        if(childsErr[1].firstChild !== null) 
+            childsErr[1].removeChild(childsErr[1].firstChild);
 
         if(messagesRef.current === null) {
             api.get('http://localhost:5000/api/get_sents')

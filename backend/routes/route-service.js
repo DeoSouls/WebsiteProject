@@ -17,6 +17,7 @@ router.post('/update_pass', appMiddleware.updatePassword)
 router.post('/search', appMiddleware.search);
 router.post('/sent_qstn', appMiddleware.sentMessage);
 router.post('/incoming_asw', appMiddleware.incomingAnswer);
+router.post('/upd_inc', appMiddleware.updIncoming);
 router.get('/get_basket',appMiddleware.get_data_busket);
 router.get('/get_sents', appMiddleware.getSentMessage);
 router.get('/get_sents_admin', appMiddleware.getSentMessageToAdmin);

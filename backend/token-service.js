@@ -18,7 +18,6 @@ class TokenService {
                 password: password,
                 isActivate: false
             }, process.env.SECRET_KEY, {algorithm: 'HS256', expiresIn: 1000 * 60 * 60 * 24 * 14});
-            
             return {accessToken, refreshToken}
         } catch (e) {
             throw Error('Failed to generate');

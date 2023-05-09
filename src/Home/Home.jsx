@@ -88,17 +88,9 @@ export const Home = (props) => {
         var active = localStorage.getItem('isActivate');
         console.log(active);
         if(token.userData.isActivate) {
-            if(!active) {
-                localStorage.setItem('isActivate', token.userData.isActivate);
-                localStorage.setItem('firstname', token.userData.firstname);
-                localStorage.setItem('lastname', token.userData.lastname);
-            }
-            var lastn = localStorage.getItem('lastname');
-            if(token.userData.lastname !== lastn) {
-                localStorage.setItem('isActivate', token.userData.isActivate);
-                localStorage.setItem('firstname', token.userData.firstname);
-                localStorage.setItem('lastname', token.userData.lastname);
-            }
+            localStorage.setItem('isActivate', token.userData.isActivate);
+            localStorage.setItem('firstname', token.userData.firstname);
+            localStorage.setItem('lastname', token.userData.lastname);
         }
     }
 
@@ -148,7 +140,7 @@ export const Home = (props) => {
                 <Route path='/' element={<Main onGroup={e => onGroup(e)} />}></Route>
                 <Route path='profile/*' element={<Profile first={name.firstname} last={name.lastname}/>}></Route>
                 <Route path='catalog' element={<Catalog prodGroup={groupValue}/>}></Route>
-                <Route path='catalog/product/:prodId' element={<ProductPage/>}></Route>
+                <Route path='catalog/product/:prodId' element={<ProductPage onGroup={e => onGroup(e)}/>}></Route>
                 <Route path='basket' element={<Basket/>}></Route>
                 <Route path='contact/*' element={<Contact/>}></Route>
                 <Route path='*' element={<h1>Страница не найдена</h1>}></Route>

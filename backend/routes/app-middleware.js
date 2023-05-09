@@ -202,8 +202,6 @@ class appMiddleware {
 
     async registration(req, res) {
         try {
-
-            //в users поместить параметр isActivate
             
             const {firstname, lastname, email, password} = req.body;
 
@@ -211,13 +209,13 @@ class appMiddleware {
             const model = new ModelService();
             await sequelize.sync({});
 
-            // const checkEmail = await model.User.findAll({where: {email: email}});
-            // if(checkEmail[0] !== undefined) {
-            //     if(checkEmail[0]['dataValues']['email'] === email) {
+            const checkEmail = await model.findUser({email: email});
+            if(checkEmail[0] !== undefined) {
+                if(checkEmail[0]['dataValues']['email'] === email) {
 
-            //         res.status(400).json({message: `User with this email ${email} already exists`});
-            //     }
-            // }
+                    throw Error(`пользователь с такой почтой ${email} уже существует`);
+                }
+            }
             
             const id = uuid.v4();
 
@@ -267,6 +265,15 @@ class appMiddleware {
             }
 
             await user[0].update({firstname: data.firstname, lastname: data.lastname, email: data.email, sex: data.gender, date_birth: data.datebirth});
+
+            await model.deleteToken({where: {userId: user[0]['dataValues']['id']}});
+            
+            const tokens = await TokenService.generateToken(data.firstname, data.lastname, data.email, user[0]['dataValues']['password']);
+            
+            await model.createToken({accessToken: tokens.accessToken, 
+                refreshToken: tokens.refreshToken, userId: user[0]['dataValues']['id'], isActivate: true});
+
+            await res.cookie('accessToken', tokens.accessToken, {maxAge: 1000 * 60 * 30, httpOnly: false});
 
             res.json({message: 'Данные сохранены'});
 
@@ -498,7 +505,7 @@ class appMiddleware {
             const user = await model.findUser({id: token[0]['dataValues']['userId']});
             const basket = await model.findBasket({userId: user[0]['dataValues']['id']});
 
-            const valid = await model.findBasketGood({goodId: productId});
+            const valid = await model.findBasketGood({goodId: productId, basketId: basket[0]['dataValues']['id']});
             if (valid[0] !== undefined) {
                 throw Error('Товар уже есть в корзине!');
             }
@@ -519,7 +526,6 @@ class appMiddleware {
             const model = new ModelService();
 
             const message = await model.createIncoming({message: data.answer, date: date, viewed: false, userId: userId, sentId: sentId});
-            console.log(message);
             res.json({message: 'Сообщение отправлено!'});
 
         } catch (e) {
@@ -560,6 +566,22 @@ class appMiddleware {
             }
 
             res.json({message: message, users: users});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить сообщения', error: e.message});
+        }
+    }
+
+    async updIncoming(req, res) {
+        try {
+            const {incomingId} = req.body;
+            const model = new ModelService();
+
+            const msg = await model.findIncoming({id: incomingId});
+            console.log(msg);
+            await msg[0].update({viewed: true});
+
+            res.json({message: msg[0]});
 
         } catch (e) {
             res.status(400).json({message: 'Не удалось получить сообщения', error: e.message});
@@ -629,10 +651,15 @@ class appMiddleware {
 
     async delete_data_basket(req, res) {
         try {
+            const {accessToken} = req.cookies;
             const {indexProduct, basketId} = req.body;
-            const model = new ModelService();
 
-            await model.deleteBasketGood({goodId: indexProduct});
+            const model = new ModelService();
+            const token = await model.findToken({accessToken: accessToken});
+            const user = await model.findUser({id: token[0]['dataValues']['userId']});
+            const basket = await model.findBasket({userId: user[0]['dataValues']['id']});
+
+            await model.deleteBasketGood({goodId: indexProduct, basketId: basket[0]['dataValues']['id']});
             const basket_goods = await model.findBasketGood({basketId: basketId}); 
 
             res.json({basket: basket_goods});
@@ -683,7 +710,6 @@ class appMiddleware {
         }
     }
     
-    // Прибраться...
     async getGoods(req, res, next) {
         try {
             const model = new ModelService();
