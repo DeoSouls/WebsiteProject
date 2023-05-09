@@ -2,7 +2,7 @@
 /*Шапка профиля*/
 .profile-name {
     width: auto;
-    padding-top: 100px;
+    padding-top: 60px;
     border-bottom: 1px solid rgb(236, 236, 236);
     display: flex;
     justify-content: center;
@@ -121,9 +121,8 @@
 
 .account-options {
     width: 250px;
-    height: 85px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    height: 40px;
+    margin-top: 30px;
 
     border-bottom: 1px solid rgb(228, 228, 228);
     background-color: white;

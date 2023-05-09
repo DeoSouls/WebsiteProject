@@ -1,0 +1,91 @@
+.contact-container {
+    width: auto;
+
+    display:flex;
+}
+
+.contact-navigator {
+    width: 400px;
+    height: 949px;
+
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+
+    transition: all 0.6s ease-in-out;
+    border-right: 1px solid rgb(203, 203, 203);
+    background-color: rgb(252, 252, 252);
+}
+
+.contact-content {
+    width: 100%;
+    height: auto;
+
+    background-color: rgb(255, 255, 255);
+}
+
+.switch-cnt-navigator::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+
+    margin-top: -9px;
+    margin-left: -11px;
+
+    z-index: 1;
+    position: absolute;
+    background: url('http://localhost:5000/static/back.png') round;
+}
+
+.switch-cnt-navigator {
+    width: 40px;
+    height: 40px;
+    margin-top: 25px;
+    transition: all 0.6s ease-in-out;
+    border-radius: 20px;
+    border: none;
+}
+
+.switch-container {
+    margin-right: 15px;
+    position: absolute;
+    right: 0;
+}
+
+.router-container {
+    margin-top: 110px;
+    margin-left: auto;
+}
+
+.btn-route {
+    width: 260px;
+    height: 40px;
+    text-align: start;
+
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 5px;
+
+    transition: all 0.6s ease-in-out;
+    font-size: 14px;
+    font-family: try_cloth;
+    font-weight: 900;
+    border: none;
+    border-bottom: 1px solid rgb(182, 182, 182);
+    background: rgb(252, 252, 252);
+}
+
+.btn-route::before {
+    content: "";
+    width: 0px;
+    height: 1px;
+    margin-left: -6px;
+    margin-top: 29px;
+    transition: all 0.2s;
+    background-color: black;
+    position: absolute;
+}
+
+.btn-route:hover::before {
+    width: 260px;
+}

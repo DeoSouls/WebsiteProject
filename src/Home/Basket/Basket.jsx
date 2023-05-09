@@ -8,7 +8,6 @@ import './Basket.css';
 export const Basket = () => {
     
     const [basketItem, setBasketItem] = useState([]);
-    const [postBasket, setPostBasket] = useState([]);
 
     useEffect(() => {
         getBasketData();
@@ -45,7 +44,11 @@ export const Basket = () => {
 
         if(goods !== undefined) {
             for (let i = 0; i < goods.length; i++) {
-                disc += Number(discount[i][0].value) * basket[i].count;
+                if(Number(discount[i][0].value) === 0) {
+                    disc += Number(goods[i][0].price) * basket[i].count;
+                } else {
+                    disc += Number(discount[i][0].value) * basket[i].count;
+                }
             }
             return disc;
         }
@@ -150,7 +153,7 @@ export const Basket = () => {
                             </div>
                         </div>
                         <button className='btn-payment'>Перейти к оформлению</button>
-                        <p className='contact-description'>Есть вопросы? <a className='contact-description' href="/">Свяжитесь с нами</a> и задайте их</p>
+                        <p className='contact-description'>Есть вопросы? <a className='contact-description' href="/contact/feedback">Свяжитесь с нами</a></p>
                     </div>
                 </div>
             </div>

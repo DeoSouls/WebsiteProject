@@ -33,6 +33,8 @@ export const Profile = (props) => {
                         </div>
                         <div className='account-options'>
                             <a style={{textDecoration: 'none'}} href="/profile/account"><p className='option-main'>Account</p></a>
+                        </div>
+                        <div className='account-options'>
                             <a style={{textDecoration: 'none'}} href="/profile/passwords"><p className='option-main'>Passwords</p></a>
                         </div>
                     </div>

@@ -45,9 +45,9 @@ class appMiddleware {
             // await model.createImage({img: 'http://localhost:5000/static/cloths2.png', goodId: good.id});
             // await model.createDiscount({value: '0', goodId: good.id});
             // const good7 = await model.createGood({name: 'Футболки', type: 'cloths', price: '4800', brand: 'Boss', groupId: group.id});
-            // await model.createGoodInfo({color: 'black&white', info: 'Футболка, материал: трикотажное полотно (100% хлопок), плотность 160 г/кв. м. Примерный вес брутто : 0.17 - 0.3 кг. Примерный объем брутто: 0.00096 м3', goodId: good7.id});
-            // await model.createImage({img: 'http://localhost:5000/static/cloths3.png', goodId: good7.id});
-            // await model.createImage({img: 'http://localhost:5000/static/cloths4.png', goodId: good7.id});
+            // await model.createGoodInfo({color: 'blue&gray', info: 'Футболка, материал: трикотажное полотно (100% хлопок), плотность 160 г/кв. м. Примерный вес брутто : 0.17 - 0.3 кг. Примерный объем брутто: 0.00096 м3', goodId: good7.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths20.png', goodId: good7.id});
+            // await model.createImage({img: 'http://localhost:5000/static/cloths19.png', goodId: good7.id});
             // await model.createDiscount({value: '0', goodId: good7.id});
             // const good1 = await model.createGood({name: 'Джинсовая куртка', type: 'cloths', price: '13400', brand: 'KLJeans', groupId: group.id});
             // await model.createGoodInfo({color: 'blue', info: 'Джинсовая куртка выполнена из хлопкового денима. Модель прямого кроя. Особенности: отложной воротник, застежка и манжеты на пуговицах, 2 боковых кармана и 2 кармана на груди, без подкладки.', goodId: good1.id});
@@ -135,8 +135,59 @@ class appMiddleware {
             // await model.createDiscount({value: '55987', goodId: good11.id});
             // const good6 = await model.createGood({name: 'TV 55" Samsung', type: 'TV', price: '43092', brand: 'samsung', groupId: group.id});
             // await model.createGoodInfo({color: 'black', info: 'Телевизор 55" Samsung UE55TU8000UXRU - 4K | Smart TV | матрица VA 120 Гц | гарантия производителя | быстрая доставка из Москвы', goodId: good6.id});
-            // await model.createImage({img: 'http://localhost:5000/static/image19.jpg', goodId: good6.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image22.png', goodId: good6.id});
+            // await model.createImage({img: 'http://localhost:5000/static/image23.png', goodId: good6.id});
             // await model.createDiscount({value: '49990', goodId: good6.id});
+
+            // const group = await model.createGroup({group_name: 'jewelry'});
+            // const good = await model.createGood({name: 'Кольцо с горным хрусталем', type: 'ring', price: '16990', brand: 'sunlight', groupId: group.id});
+            // await model.createGoodInfo({color: 'pink', info: 'Кольцо с 1 горным хрусталем, 5 карат Розовое золото 565 пробы.', goodId: good.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry1.png', goodId: good.id});
+            // await model.createDiscount({value: '29650', goodId: good.id});
+            // const good7 = await model.createGood({name: 'Кольцо с фианитами и топазами', type: 'ring', price: '5700', brand: 'sunlight', groupId: group.id});
+            // await model.createGoodInfo({color: 'purple&blue', info: 'Кольцо с 1 топаз скай, 1 карат, тип огранки В; фианит Розовое золото 565 пробы.', goodId: good7.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry2.png', goodId: good7.id});
+            // await model.createDiscount({value: '19590', goodId: good7.id});
+            // const good1 = await model.createGood({name: 'Кольца с фианитами', type: 'ring', price: '1000', brand: 'sunlight', groupId: group.id});
+            // await model.createGoodInfo({color: 'silver&white', info: 'Кольцо, вставка:  фианит saroski Серебро 825 пробы.', goodId: good1.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry3.png', goodId: good1.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry4.png', goodId: good1.id});
+            // await model.createDiscount({value: '2790', goodId: good1.id});
+            // const good8 = await model.createGood({name: 'Обручальные кольца', type: 'ring', price: '10000', brand: 'sunlight', groupId: group.id});
+            // await model.createGoodInfo({color: 'pink', info: 'Обручальные кольца, розовое золото 555 пробы', goodId: good8.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry5.png', goodId: good8.id}); 
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry6.png', goodId: good8.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry7.png', goodId: good8.id});
+            // await model.createDiscount({value: '0', goodId: good8.id});
+            // const good9 = await model.createGood({name: 'Серьги с топазами и бриллиантами', type: 'earrings', price: '19590', brand: 'yakutia', groupId: group.id});
+            // await model.createGoodInfo({color: 'purple&blue&red', info: 'Насыщенный и страстный темно-синий топаз, заключенный в роскошную золотую оправу.', goodId: good9.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry8.png', goodId: good9.id});
+            // await model.createDiscount({value: '189990', goodId: good9.id});
+            // const good2 = await model.createGood({name: 'Серьги с фианитами', type: 'earrings', price: '2500', brand: 'efremov', groupId: group.id});
+            // await model.createGoodInfo({color: 'blue&white', info: 'Серьги, вставка:  фианит мистик; фианит бесцветный Серебро 725 пробы', goodId: good2.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry9.png', goodId: good2.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry10.png', goodId: good2.id});
+            // await model.createDiscount({value: '5990', goodId: good2.id});
+            // const good4 = await model.createGood({name: 'Серьги с фианитами', type: 'earrings', price: '19990', brand: 'efremov', groupId: group.id});
+            // await model.createGoodInfo({color: 'pink', info: 'Костромские ювелирные украшения: традиционный русский стиль -  Коллекция украшений с традиционными русскими дизайнами.', goodId: good4.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry11.png', goodId: good4.id});
+            // await model.createDiscount({value: '65000', goodId: good4.id});
+            // const good10 = await model.createGood({name: 'Золотая цепь', type: 'chain', price: '12280', brand: 'krastmet', groupId: group.id});
+            // await model.createGoodInfo({color: 'pink', info: 'За счёт сложной геометрии плетение "Ромб" выглядит объемно и по-настоящему изысканно. Свет необычным образом отражается от звеньев. Цепочки с ромбом в основе плетения очень популярны и пользуются спросом.', goodId: good10.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry12.png', goodId: good10.id});
+            // await model.createDiscount({value: '0', goodId: good10.id});
+            // const good5 = await model.createGood({name: 'Золотая цепь ручной работы', type: 'chain', price: '240790', brand: 'bronickiy', groupId: group.id});
+            // await model.createGoodInfo({color: 'pink', info: 'Цепь ручной работы. Розовое золото 565 пробы.', goodId: good5.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry13.png', goodId: good5.id});
+            // await model.createDiscount({value: '839990', goodId: good5.id});
+            // const good11 = await model.createGood({name: 'Серебрянная подвеска с фианитами', type: 'suspension', price: '1200', brand: 'bronickiy', groupId: group.id});
+            // await model.createGoodInfo({color: 'silver&pink', info: 'Подвеска, вставка:  фианит зеленый; фианит Серебро 925 пробы.', goodId: good11.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry14.png', goodId: good11.id});
+            // await model.createDiscount({value: '3990', goodId: good11.id});
+            // const good6 = await model.createGood({name: 'Золотая подвеска', type: 'suspension', price: '2500', brand: 'bronickiy', groupId: group.id});
+            // await model.createGoodInfo({color: 'silver&pink', info: 'Подвеска с топазом, 1.9 карат, тип огранки В; Белое золото 555 пробы', goodId: good6.id});
+            // await model.createImage({img: 'http://localhost:5000/static/jewelry15.png', goodId: good6.id});
+            // await model.createDiscount({value: '4990', goodId: good6.id});
             
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPass);
             const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true});
@@ -158,7 +209,7 @@ class appMiddleware {
 
             const mail = new MailService();
             const model = new ModelService();
-            await sequelize.sync({force: true});
+            await sequelize.sync({});
 
             // const checkEmail = await model.User.findAll({where: {email: email}});
             // if(checkEmail[0] !== undefined) {
@@ -173,13 +224,14 @@ class appMiddleware {
             await mail.send(`http://localhost:5000/api/activating/${id}`, email);
 
             const hashPassword = await bcrypt.hashSync(password, 7);
-            const createUser = await model.createUser({firstname: firstname, lastname: lastname, email: email, password: hashPassword, role: 'user', link: id, sex: 'notdef', date_birth: 'notdef'});
+            const createUser = await model.createUser({firstname: firstname, lastname: lastname, 
+                email: email, password: hashPassword, role: 'user', link: id, sex: 'notdef', date_birth: 'notdef'});
             
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPassword);
-            console.log(tokens.accessToken);
             
-            const userToken = model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: createUser.id, isActivate: false});
-            const basket = await model.createBasket({userId: createUser.id});
+            await model.createToken({accessToken: tokens.accessToken, 
+                refreshToken: tokens.refreshToken, userId: createUser.id, isActivate: false});
+            await model.createBasket({userId: createUser.id});
 
             res.json({message: 'Данные включены в таблицу'});
 
@@ -378,7 +430,6 @@ class appMiddleware {
             const model = new ModelService();
 
             const reviews = await model.createReview({title: title, rate: rate, review: review, userId: userId, goodId: goodId});
-            console.log(reviews);
 
             res.json({review: reviews});
 
@@ -414,7 +465,6 @@ class appMiddleware {
     async refresh(req, res) {
         try {
             const {accessToken} = req.cookies;
-            console.log(accessToken);
             if(accessToken === undefined) {
                 throw Error('Токен не найден, пожалуйста авторизуйтесь');
             }
@@ -425,7 +475,6 @@ class appMiddleware {
             }
             
             const decode = await jwt.verify(accessToken, process.env.SECRET_KEY);
-            console.log(decode);
 
             res.json({firstname: decode.firstname, lastname: decode.lastname, email: decode.email, password: decode.password, accessToken: accessToken, isActivate: token[0]['dataValues']['isActivate'] })
 
@@ -449,12 +498,132 @@ class appMiddleware {
             const user = await model.findUser({id: token[0]['dataValues']['userId']});
             const basket = await model.findBasket({userId: user[0]['dataValues']['id']});
 
+            const valid = await model.findBasketGood({goodId: productId});
+            if (valid[0] !== undefined) {
+                throw Error('Товар уже есть в корзине!');
+            }
+
             await model.createBasketGood({basketId: basket[0]['dataValues']['id'], goodId: productId, count: count, color: color});
 
             res.json({message: 'Товар добавлен в корзину'});
 
         } catch (e) {
             res.status(400).json({message: 'Не удалось добавить товар в корзину', error: e.message});
+        }
+    }
+
+    async incomingAnswer(req, res) {
+        try {
+            const { data, date, userId, sentId } = req.body;
+
+            const model = new ModelService();
+
+            const message = await model.createIncoming({message: data.answer, date: date, viewed: false, userId: userId, sentId: sentId});
+            console.log(message);
+            res.json({message: 'Сообщение отправлено!'});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось отправить сообщение', error: e.message});
+        }
+    }
+
+    async getIncoming(req, res) {
+        try {
+            const { accessToken } = req.cookies;
+
+            if(accessToken === undefined) {
+                throw new Error('Токен не найден, пожалуйста авторизуйтесь');
+            }
+
+            const model = new ModelService();
+            const token = await model.findToken({accessToken: accessToken});
+            const user = await model.findUser({id: token[0]['dataValues']['userId']});
+
+            const message = await model.findIncoming({userId: user[0]['dataValues']['id']});
+            console.log(message);
+            res.json({message: message});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось отправить сообщение', error: e.message});
+        }
+    }
+
+    async getIncomingToAdmin(req, res) {
+        try {
+            const model = new ModelService();
+
+            const message = await model.findIncoming();
+            
+            var users = [];
+            for (let i = 0; i < message.length; i++) {
+                users.push(await model.findUser({id: message[i]['dataValues']['userId']}));
+            }
+
+            res.json({message: message, users: users});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить сообщения', error: e.message});
+        }
+    }
+
+    async sentMessage(req, res) {
+        try {
+            const { data, date } = req.body;
+
+            const { accessToken } = req.cookies;
+            if (accessToken === undefined) {
+                throw Error('Токен не найден, пожалуйста авторизуйтесь');
+            }
+
+            const model = new ModelService();
+            const token = await model.findToken({accessToken: accessToken});
+            const user = await model.findUser({id: token[0]['dataValues']['userId']});
+
+            await model.createSent({title: data.title, message: data.question, date: date,  userId: user[0]['dataValues']['id']});
+
+            res.json({message: 'Сообщение отправлено, ожидайте ответ в течении нескольких часов'});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось отправить сообщение', error: e.message});
+        }
+    }
+
+    async getSentMessage(req, res) {
+        try {
+            const { accessToken } = req.cookies;
+
+            if(accessToken === undefined) {
+                throw new Error('Токен не найден, пожалуйста авторизуйтесь');
+            }
+
+            const model = new ModelService();
+            const token = await model.findToken({accessToken: accessToken});
+            const user = await model.findUser({id: token[0]['dataValues']['userId']});
+
+            const message = await model.findSent({userId: user[0]['dataValues']['id']});
+
+            res.json({message: message});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить сообщение', error: e.message});
+        }
+    } 
+
+    async getSentMessageToAdmin(req, res) {
+        try {
+            const model = new ModelService();
+
+            const message = await model.findSent();
+            
+            var users = [];
+            for (let i = 0; i < message.length; i++) {
+                users.push(await model.findUser({id: message[i]['dataValues']['userId']}));
+            }
+
+            res.json({message: message, users: users});
+
+        } catch (e) {
+            res.status(400).json({message: 'Не удалось получить сообщения', error: e.message});
         }
     }
 

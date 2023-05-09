@@ -63,6 +63,38 @@
     background: url('../images/4.png') no-repeat;
 }
 
+.nav-start {
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    background: none;
+
+    width: 124px;
+    height: 45px;
+
+    color:rgb(0, 0, 0);
+
+    font-weight: 500;
+    font-family: 'REX';
+    font-size: 16px;
+
+    transition: all .2s;
+}
+
+.nav-start::before {
+    content: "";
+    width: 0px;
+    height: 1px;
+    margin-top: 24px;
+    transition: all 0.2s;
+    background-color: black;
+    position: absolute;
+}
+
+.nav-start:hover::before {
+    width: 51px;
+}
+
 .nav-getstarted {
     text-align: center;
     text-decoration: none;
@@ -75,14 +107,25 @@
     color:rgb(0, 0, 0);
 
     font-weight: 500;
-    font-family: 'try_cloth';
+    font-family: 'REX';
     font-size: 16px;
 
-    transition: all .3s;
+    transition: all .2s;
 }
 
-.nav-getstarted:hover {
-    color:rgb(223, 146, 4);
+.nav-getstarted::before {
+    content: "";
+    width: 0px;
+    height: 1px;
+    margin-left: 1px;
+    margin-top: 24px;
+    transition: all 0.2s;
+    background-color: black;
+    position: absolute;
+}
+
+.nav-getstarted:hover::before {
+    width: 61px;
 }
 
 /*Поиск*/

@@ -125,10 +125,10 @@
 
 .techno-img {
     position: absolute;
-    top: 260px;
-    left: 60px;
+    top: 205px;
+    left: 40px;
 
-    width: 340px;
+    width: 310px;
     transition: all 0.2s ease-in-out;
 }
 

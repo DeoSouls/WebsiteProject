@@ -1,0 +1,110 @@
+.sent-container {
+    display: flex;
+}
+
+.sent-block {
+    width: 600px;
+    height: max-content;
+}
+
+.message-block {
+    width: 500px;
+    height: 60px;
+    cursor: pointer;
+
+    display: flex;
+    margin-left: 50px;
+    margin-top: 3px;
+    border: 1px solid rgb(139, 139, 139);
+}
+
+.message-date {
+    margin-left: 6px;
+    margin-top: 2px;
+}
+
+.message-otherdata {
+    width: 130px;
+    height: 4px;
+    font-size: 11px;
+    font-family: global;
+}
+
+.message-content {
+    width: 370px;
+    height: 60px;
+}
+
+.message-title {
+    width: 300px;
+    height: 20px;
+    padding-top: 2px;
+
+    overflow: hidden;
+    font-family: global;
+    font-size: 15px;
+}
+
+.message-msg {
+    width: 300px;
+    height: 35px;
+    margin-top: -15px;
+    font-size: 12px;
+    font-family: try_cloth;
+    font-weight: 900;
+    overflow: hidden;
+}
+
+.from-content {
+    width: 600px;
+    height: max-content;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid black;
+}
+
+.form-title {
+    width: 500px;
+    height: max-content;
+    min-height: 40px;
+
+    margin-top: 40px;
+    margin: 0 auto;
+    font-size: 20px;
+    font-family: try_cloth;
+    font-weight: 900;
+
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.form-message {
+    width: 500px;
+    font-family: global;
+    font-size: 18px;
+    padding-bottom: 30px;
+    margin: 0 auto;
+}
+
+.dynamic-desc {
+    width: 135px;
+    margin-left: 15px;
+    font-size: 13px;
+    font-weight: 900;
+    font-family: try_cloth;
+}
+
+.no-message {
+    width: 500px;
+    height: 400px;
+    margin-left: 50px;
+}
+
+.no-message-header {
+    margin-top: 100px;
+    text-align: center;
+
+    font-size: 32px;
+    font-family: nav_font;
+}

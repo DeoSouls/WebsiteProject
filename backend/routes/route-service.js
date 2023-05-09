@@ -15,8 +15,14 @@ router.post('/add_cart',appMiddleware.add_to_cart);
 router.post('/delete_basket', appMiddleware.delete_data_basket);
 router.post('/update_pass', appMiddleware.updatePassword)
 router.post('/search', appMiddleware.search);
+router.post('/sent_qstn', appMiddleware.sentMessage);
+router.post('/incoming_asw', appMiddleware.incomingAnswer);
 router.get('/get_basket',appMiddleware.get_data_busket);
-router.get('/get_reviews',appMiddleware.getReviews)
+router.get('/get_sents', appMiddleware.getSentMessage);
+router.get('/get_sents_admin', appMiddleware.getSentMessageToAdmin);
+router.get('/get_incoming', appMiddleware.getIncoming);
+router.get('/get_incoming_admin', appMiddleware.getIncomingToAdmin);
+router.get('/get_reviews',appMiddleware.getReviews);
 router.get('/get_image', appMiddleware.getGoodImage);
 router.get('/activating/:activate', appMiddleware.activate);
 router.get('/refresh', appMiddleware.refresh);

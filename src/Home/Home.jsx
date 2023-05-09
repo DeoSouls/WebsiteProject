@@ -8,6 +8,7 @@ import { observable} from 'mobx';
 import { Main } from '../Main/Main';
 import { useContext } from 'react';
 import { AccountContext } from '../App/Context';
+import { Contact } from './Contact/Contact';
 import api from '../axios-service';
 import { Basket } from './Basket/Basket'; 
 import { ProductPage } from '../Home/Catalog/ProductPage/ProductPage';
@@ -71,6 +72,8 @@ export const Home = (props) => {
         localStorage.removeItem('lastname');
         localStorage.removeItem('firstname');
 
+        document.cookie = 'accessToken=null';
+
         navigation('/authorization');
     }
 
@@ -86,6 +89,12 @@ export const Home = (props) => {
         console.log(active);
         if(token.userData.isActivate) {
             if(!active) {
+                localStorage.setItem('isActivate', token.userData.isActivate);
+                localStorage.setItem('firstname', token.userData.firstname);
+                localStorage.setItem('lastname', token.userData.lastname);
+            }
+            var lastn = localStorage.getItem('lastname');
+            if(token.userData.lastname !== lastn) {
                 localStorage.setItem('isActivate', token.userData.isActivate);
                 localStorage.setItem('firstname', token.userData.firstname);
                 localStorage.setItem('lastname', token.userData.lastname);
@@ -107,16 +116,16 @@ export const Home = (props) => {
         <div>
             <div className='nav-bar'>
                 <div className='nav-bar-btns'>
-                    <a className='website-logo' href='/' > 
+                    <a className='website-logo' > 
                         <p className='website-logo'>WebSite</p>
                     </a>
-                    <a href='/catalog'>
-                        <button className='nav-getstarted'>Начать</button>
+                    <a href='/'>
+                        <button className='nav-start'>Начать</button>
                     </a>
                     <a href='/catalog'>
                         <button className='nav-getstarted'>Магазин</button>
                     </a>
-                    <a href='/catalog'>
+                    <a href='/contact'>
                         <button className='nav-getstarted'>Помощь</button>
                     </a>
                     <div className='nav-bar-other'>
@@ -128,7 +137,7 @@ export const Home = (props) => {
                             <div className='just-figure' >
                                 <a className='menu-option-profile' href="/profile/account" >Profile</a>
                                 <a className='menu-option-settings' href="/">Settings</a>
-                                <a className='menu-option-sign' onClick={signout}>Sign Out</a>
+                                <a className='menu-option-sign' onClick={e => signout()}>Sign Out</a>
                             </div>
                         </div> : null}
                     </div>
@@ -141,6 +150,7 @@ export const Home = (props) => {
                 <Route path='catalog' element={<Catalog prodGroup={groupValue}/>}></Route>
                 <Route path='catalog/product/:prodId' element={<ProductPage/>}></Route>
                 <Route path='basket' element={<Basket/>}></Route>
+                <Route path='contact/*' element={<Contact/>}></Route>
                 <Route path='*' element={<h1>Страница не найдена</h1>}></Route>
             </Routes>
         </div>

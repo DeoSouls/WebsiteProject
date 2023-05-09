@@ -79,7 +79,7 @@
     margin-top: 15px;
     width: 200px;
     color: black;
-    font-family: global;
+    font-family: try_cloth;
     font-weight: 900;
 }
 
@@ -89,7 +89,7 @@
 
     font-size: 24px;
     color: black;
-    font-family: global;
+    font-family: try_cloth;
     font-weight: 900;
 }
 
@@ -131,7 +131,7 @@
 
 .contact-description {
     width: 300px; 
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 15px;
     font-family: try_cloth;
     color: black;

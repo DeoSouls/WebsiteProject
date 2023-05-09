@@ -1,0 +1,31 @@
+.answer-textarea {
+    font-size: 16px;
+    font-family: try_cloth;
+
+    width: 500px;
+    height: 150px;
+    padding-top: 10px;
+    padding-left: 20px;
+    outline: none;
+    border: 1px solid rgb(126, 126, 126);
+}
+
+.incoming-form {
+    width: 600px;
+    min-height: 100px;
+
+    margin-left: 20px;
+    background-color: white;
+}
+
+.switch-answer {
+    background-color: white;
+    border: none;
+
+    font-size: 15px;
+    font-family: try_cloth;
+    font-weight: 900;
+    margin-bottom: 10px;
+    margin-left: 9px;
+    text-decoration: underline;
+}

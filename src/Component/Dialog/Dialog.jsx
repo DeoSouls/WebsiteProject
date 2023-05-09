@@ -9,7 +9,7 @@ export const Dialog = forwardRef((props, ref) => {
     }
 
     return (
-        <div >
+        <div>
             <dialog id={`dg-confirm${props.index}`} className='dialog-item' ref={ref}>
                 {props.type === 'error'? <img className='dg-image' src="http://localhost:5000/static/errorx.png" /> 
                 : <img className='dg-image' src="http://localhost:5000/static/confirm.png" />}

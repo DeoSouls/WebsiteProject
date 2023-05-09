@@ -6,10 +6,12 @@ class ModelService {
     Token;
     User;
     Good;
+    Sent;
     Group;
     Image;
     Basket;
     Review;
+    Incoming;
     GoodInfo;
     Discount;
     BasketGood;
@@ -18,10 +20,12 @@ class ModelService {
         this.User = service.User;
         this.Token = service.Token;
         this.Good = service.Good;
+        this.Sent = service.Sent;
         this.Group = service.Group;
         this.Image = service.Image;
         this.Basket = service.Basket;
         this.Review = service.Review;
+        this.Incoming = service.Incoming;
         this.GoodInfo = service.GoodInfo;
         this.Discount = service.Discount;
         this.BasketGood = service.BasketGood;
@@ -112,6 +116,24 @@ class ModelService {
         try {
             const good_info = this.GoodInfo.create(value);
             return good_info;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
+    createSent(value) {
+        try {
+            const sent = this.Sent.create(value);
+            return sent;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
+    createIncoming(value) {
+        try {
+            const incoming = this.Incoming.create(value);
+            return incoming;
         } catch (e) {
             throw Error(e.message);
         }
@@ -210,6 +232,24 @@ class ModelService {
         try {
             let basket = await this.Basket.findAll({where: value});
             return basket;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
+    async findSent(value) {
+        try {
+            let sent = await this.Sent.findAll({where: value});
+            return sent;
+        } catch (e) {
+            throw Error(e.message);
+        }
+    }
+
+    async findIncoming(value) {
+        try {
+            let incoming = await this.Incoming.findAll({where: value});
+            return incoming;
         } catch (e) {
             throw Error(e.message);
         }

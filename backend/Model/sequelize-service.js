@@ -66,6 +66,20 @@ const GoodInfo = sequelize.define('good_info', {
     info: {type: DataTypes.TEXT,allowNull: false}
 });
 
+const Incoming = sequelize.define('incoming', {
+    id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
+    message: {type: DataTypes.TEXT,allowNull: false},
+    date: {type: DataTypes.STRING,allowNull: false},
+    viewed: {type: DataTypes.BOOLEAN,allowNull: false}
+});
+
+const Sent = sequelize.define('sent', {
+    id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
+    title: {type: DataTypes.STRING, allowNull: false},
+    message: {type: DataTypes.TEXT,allowNull: false},
+    date: {type: DataTypes.STRING,allowNull: false}
+});
+
 User.hasOne(Token, {
     foreignKey: {
         allowNull: false
@@ -136,6 +150,27 @@ Good.hasOne(GoodInfo, {
 });
 GoodInfo.belongsTo(Good);
 
+User.hasMany(Sent, {
+    foreignKey: {
+        allowNull: false
+    }
+});
+Sent.belongsTo(User);
+
+User.hasMany(Incoming, {
+    foreignKey: {
+        allowNull: false
+    }
+});
+Incoming.belongsTo(User);
+
+Sent.hasOne(Incoming, {
+    foreignKey: {
+        allowNull: false
+    }
+});
+Incoming.belongsTo(Sent);
+
 module.exports = {
-    User, Token, Good, Group, Basket, BasketGood, Review, Discount, Image, GoodInfo
+    User, Token, Good, Group, Basket, BasketGood, Review, Discount, Image, GoodInfo, Incoming, Sent
 };

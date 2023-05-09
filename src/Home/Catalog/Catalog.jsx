@@ -4,6 +4,7 @@ import { ProductSummary } from './ProductSummary/ProductSummary';
 import { LoadingCatalog } from '../../Component/Load/LoadingCatalog';
 import { TechnoType } from '../../Component/FilterTypes/TechnoType';
 import { ClothType } from '../../Component/FilterTypes/ClothType';
+import { JewelryType } from '../../Component/FilterTypes/JewelryType';
 import api from '../../axios-service';
 import './Catalog.css';
 
@@ -39,6 +40,11 @@ export const Catalog = (props) => {
         cloths: {filterName: '', checked: false},
         shoes: {filterName: '', checked: false},
         accessories: {filterName: '', checked: false},
+
+        ring: {filterName: '', checked: false},
+        earrings: {filterName: '', checked: false},
+        chain: {filterName: '', checked: false},
+        suspension: {filterName: '', checked: false},
         
         meizu: {filterName: '', checked: false},
         samsung: {filterName: '', checked: false},
@@ -52,6 +58,12 @@ export const Catalog = (props) => {
         KLJeans: {filterName: '', checked: false},
         Reebok: {filterName: '', checked: false},
         PUMA:  {filterName: '', checked: false},
+
+        sunlight: {filterName: '', checked: false},
+        yakutia: {filterName: '', checked: false},
+        efremov: {filterName: '', checked: false},
+        krastmet: {filterName: '', checked: false},
+        bronickiy:  {filterName: '', checked: false},
     });
 
 
@@ -74,7 +86,6 @@ export const Catalog = (props) => {
         dispatch(action);
 
         const nextState = reducer(state, action);
-        
         getGoods(nextState, productsGroup);
     }
 
@@ -117,6 +128,7 @@ export const Catalog = (props) => {
             <div className='catalog-content'>
                 {productsGroup === 'techno'? <TechnoType filterObject={filterObject} /> : null}
                 {productsGroup === 'cloth'? <ClothType filterObject={filterObject} /> : null}
+                {productsGroup === 'jewelry'? <JewelryType filterObject={filterObject} /> : null}
                 {productsGroup === 'default'? <TechnoType filterObject={filterObject} /> : null}
                 <div className='catalog-cards'>
                     {isLoading?  <ProductSummary prod={goods} /> : <LoadingCatalog/>}

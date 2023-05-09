@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import api from '../../../axios-service';
+import { ProductColor } from './ProductColor';
 import Counter from '../../../Component/Counter/Counter';
 import { Dialog } from '../../../Component/Dialog/Dialog';
 import { observer } from 'mobx-react-lite';
@@ -13,11 +14,11 @@ export const ProductPage = () => {
     const counter = new Counter(1);
 
     const [prodData, setData] = useState({header: '', product: [], rate: 2.6, image: [], prodinfo: [], discount: '', user: [], review: [], usersReview: []});
-    const [borderValue, setBorder] = useState({container: [], color: ''});
     const [isReview, setIsReview] = useState(false);
     const [reviewValues, setReviewValues] = useState([]);
     const [imageValues, setImageValues] = useState('');
     const dialogRef = useRef(null);
+    const dialogRefErr = useRef();
 
     const MobCounter = observer(({ counter }) => 
         <input className='counter-input' type="text" onChange={handlerChange} value={counter.count} />
@@ -40,21 +41,24 @@ export const ProductPage = () => {
     });
 
     function submitAddToCart() {
-        if(borderValue.color !== '') {
-            api.post('http://localhost:5000/api/add_cart', {productId: prodData.product.id, color: borderValue.color, count: counter.count})
-            .then(response => {
-                const childs = dialogRef.current.childNodes;
-                var text = document.createTextNode(response.data.message);
-                for (let i = 0; i < childs.length; i++) {
-                    if(i === 1) {
-                        childs[i].appendChild(text);
-                        console.log(childs[i]);
-                    }
-                }
+        let color = document.getElementById('description-content-color');
+        let name = color.getAttribute('name');
 
+        const childsConf = dialogRef.current.childNodes;
+        const childsErr = dialogRefErr.current.childNodes;
+
+        if(name !== '') {
+            api.post('http://localhost:5000/api/add_cart', {productId: prodData.product.id, color: name, count: counter.count})
+            .then(response => {
+                var text = document.createTextNode(response.data.message);
+                childsConf[1].appendChild(text);
                 dialogRef.current.showModal();
             })
-            .catch(err => alert(err.message));
+            .catch(error => {
+                var text = document.createTextNode(error.response.data.error);
+                childsErr[1].appendChild(text);
+                dialogRefErr.current.showModal();
+            });
         } else {
             alert('Выберите цвет товара');
         }
@@ -184,41 +188,6 @@ export const ProductPage = () => {
         }
     }
 
-    function changeColor(index, colored) {
-
-        const container = document.getElementById(`border-coloring${index}`);
-        setBorder({container: container, color: colored});
-        
-        if (container.style.borderColor === 'black') {
-            
-            container.style.borderColor = 'rgb(155, 155, 155)';
-        } else {
-            container.style.borderColor = 'black';
-            if(borderValue.container.length === undefined) {
-                borderValue.container.style.borderColor = 'rgb(155, 155, 155)';
-            }
-        }
-    }
-
-    function productColor() {
-        const color = prodData.prodinfo.color;
-        var colorContainer = [];
-
-        if(color !== undefined) {
-            const colors = color.split('&');
-            for (let i = 0; i < colors.length; i++) {
-                if( colors[i] !== '') {
-                    colorContainer.push(
-                    <div className='border-coloring' id={`border-coloring${i}`}>
-                        <div style={{backgroundColor: colors[i]}} className='color-fill' 
-                        onClick={e => changeColor(i, colors[i])}></div>
-                    </div>)
-                }
-            }
-            return [...colorContainer]
-        }
-    }
-
     function reviews()  {
         var containerReviews = [];
         var containerImages = [];
@@ -287,7 +256,7 @@ export const ProductPage = () => {
                 <p className='label-header'>Отзыв</p>
                 <textarea className='review-area' onChange={e => dispatch({review: e.target.value})}></textarea>
                 <div className='btn-submit-review-container'>
-                    <p className='btn-submit-desc'><a className='btn-submit-desc' href="">Свяжитесь с нами</a>, если вас не устроил товар или есть предложения по улучшению его качества</p>
+                    <p className='btn-submit-desc'><a className='btn-submit-desc' href="/contact/feedback">Свяжитесь с нами</a>, если вас не устроил товар или есть предложения по улучшению его качества</p>
                     <button className='btn-submit-review' onClick={handlerAddReview}>Опубликовать</button>
                 </div>
                 
@@ -423,10 +392,7 @@ export const ProductPage = () => {
                     <div className='description-form'>
                         <p className='description-title'>{prodData.product.name}</p>
                         <p className='description-content'>{prodData.prodinfo.info}</p>
-                        <p className='description-content'>Цвет: {borderValue.color}</p>
-                        <div className='color-choosing'>
-                            {productColor()}
-                        </div>
+                        <ProductColor color={prodData.prodinfo.color} />
                         {priceTotal()}
                         <p className='product-delivery'>Доставка Почтой 17 мая – 160,00 ₽</p>
                         <div className='counter-container'>
@@ -441,7 +407,8 @@ export const ProductPage = () => {
                             </div>
                             <button onClick={submitAddToCart} className='btn-addbusket'>Add to cart</button>
                         </div>
-                        <Dialog ref={dialogRef} type='confirm' />
+                        <Dialog ref={dialogRef} type='confirm' index='1' />
+                        <Dialog ref={dialogRefErr} type='error' index='2' />
                     </div>
                 </div>
             </div>

@@ -10,6 +10,7 @@ const app = express();
 app.use('/static', express.static(path.join(__dirname, 'public'),{ maxAge: '1d'}));
 app.use('/static', express.static(path.join(__dirname, 'public/cloth'),{ maxAge: '1d'}));
 app.use('/static', express.static(path.join(__dirname, 'public/techno'),{ maxAge: '1d'}));
+app.use('/static', express.static(path.join(__dirname, 'public/jewelry'),{ maxAge: '1d'}));
 app.use('/static', express.static(path.join(__dirname, 'public/group'),{ maxAge: '1d'}));
 app.use('/static', express.static(path.join(__dirname, 'public/stars'),{ maxAge: '1d'}));
 app.use('/static', express.static(path.join(__dirname, 'public/dialog'),{ maxAge: '1d'}));

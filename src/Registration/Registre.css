@@ -8,7 +8,7 @@
 
 /*Стили обложки*/
 .reg-cover {
-    min-width: 880px;
+    min-width: 800px;
     height: 100%;
 
     display: flex;
@@ -106,7 +106,7 @@
 
 /*Стили формы анкеты учетной записи*/
 .reg-main {
-    min-width: 1150px;
+    min-width: 920px;
     height: 100%;
 
     display: flex;
@@ -118,6 +118,7 @@
 
 .reg-form {
     padding-top: 200px;
+    padding-left: 100px;
     width: 650px;
 }
 

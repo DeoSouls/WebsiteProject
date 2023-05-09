@@ -5,6 +5,8 @@ dialog {
     width: 400px;
     height: 280px;
 
+    overflow:hidden;
+
     border: 1px solid black;
     border-radius: 15px;
 }
