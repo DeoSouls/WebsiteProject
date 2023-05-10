@@ -66,13 +66,14 @@ export const Home = (props) => {
     }
 
     function signout() {
+        document.cookie;
+        document.cookie = 'accessToken=null';
         localStorage.removeItem('isActivate');
         localStorage.removeItem('file');
         localStorage.removeItem('email');
         localStorage.removeItem('lastname');
         localStorage.removeItem('firstname');
 
-        document.cookie = 'accessToken=null';
 
         navigation('/authorization');
     }

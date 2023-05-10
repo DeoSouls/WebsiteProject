@@ -15,7 +15,7 @@
 .pseudo-navigation {
     display: flex;
 
-    margin-left: 63px;
+    margin-left: 53px;
     margin-top: 30px;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .header-name {
-    margin-left: 67px;
+    margin-left: 60px;
     margin-top: -20px;
 
     font-size: 60px;
@@ -44,7 +44,7 @@
 .catalog-content {
     display: flex;
     justify-content: center;
-    width: 1400px;
+    width: 1460px;
 }
 
 .catalog-filter {

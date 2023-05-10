@@ -153,9 +153,9 @@ export const Sent = (props) => {
                     <div className='form-header' style={{marginBottom: '30px'}}>
                         Отправленные сообщения
                     </div>
-                    {sentMessage() !== undefined? sentMessage() 
+                    {sentMessage()?.length > 0? sentMessage() 
                     : <div className='no-message'>
-                        <p className='no-message-header'>Вы пока не сообщали о проблеме</p>
+                        <p className='no-message-header'>Вы не сообщали о проблеме</p>
                     </div>}
                 </div>
             </div>

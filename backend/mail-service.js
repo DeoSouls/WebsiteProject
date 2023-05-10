@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const MyError = new Error('Could not connect to');
 
 class MailService {
 

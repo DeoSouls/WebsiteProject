@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const { body } = require('express-validator');
 const paginate = require('express-paginate');
 const appMiddleware = require('./app-middleware');
 
 
-router.post('/login', appMiddleware.login);
-router.post('/registration', appMiddleware.registration);
+router.post('/login', body('email').isEmail(), appMiddleware.login);
+router.post('/registration', body('email').isEmail(), appMiddleware.registration);
 router.post('/update', appMiddleware.updateUser);
 router.post('/getuser', appMiddleware.getUser);
 router.post('/add_review', appMiddleware.addReview);

@@ -213,9 +213,9 @@ export const Incoming = (props) => {
                     <div className='form-header' style={{marginBottom: '30px'}}>
                         {messagesRef.current === 'admin'? <>Отправленные сообщения от пользователей</> : <>Полученные сообщения от техподдержки</>}
                     </div>
-                    {sentMessage() !== undefined? sentMessage() 
+                    {sentMessage()?.length > 0? sentMessage() 
                     : <div className='no-message'>
-                        <p className='no-message-header'>Вы пока не сообщали о проблеме</p>
+                        <p className='no-message-header'>Вы еще ничего не получили</p>
                     </div>}
                 </div>
             </div>

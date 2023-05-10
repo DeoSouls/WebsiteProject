@@ -6,6 +6,7 @@ const service = require('../Model/sequelize-service');
 const sequelize  = require('../Model/db');
 const MailService = require('../mail-service');
 const cookieParser = require('cookie-parser');
+const { validationResult } = require('express-validator');
 const paginate = require('express-paginate');
 const bcrypt = require('bcrypt');
 const Op = Sequelize.Op;
@@ -27,6 +28,12 @@ class appMiddleware {
                 throw Error(`Не существует пользователь с такой почтой ${email}`);
             } 
 
+            const result = validationResult(req);
+            console.log(result.isEmpty());
+            if(!result.isEmpty()) {
+                throw Error('Такой почты не существует')
+            }
+
             const userid = user[0]['dataValues']['id'];
             const hashPass = user[0]['dataValues']['password'];
             const firstname = user[0]['dataValues']['firstname'];
@@ -37,7 +44,7 @@ class appMiddleware {
                 throw Error('Неверный пароль');
             }
 
-            await model.deleteToken({where: {userId: userid}});
+            // await model.deleteToken({where: {userId: userid}});
             // const group = await model.createGroup({group_name: 'cloth'});
             // const good = await model.createGood({name: 'Футболка с длинным рукавом', type: 'cloths', price: '5700', brand: 'Malagrida', groupId: group.id});
             // await model.createGoodInfo({color: 'black&orange', info: 'Футболка Мульти Хлопок - 95%, Эластан - 5% Параметры модели: рост 187 см, грудь 103 см, талия 78 см, бедра 98 см.', goodId: good.id});
@@ -190,7 +197,15 @@ class appMiddleware {
             // await model.createDiscount({value: '4990', goodId: good6.id});
             
             const tokens = await TokenService.generateToken(firstname, lastname, email, hashPass);
-            const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true});
+
+            const prevToken = await model.findToken({userId: userid});
+            // if(prevToken[0] !== undefined) {
+
+            // } else {
+            //     const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: true});
+            // }
+            const token = await model.createToken({accessToken: tokens.accessToken, refreshToken: tokens.refreshToken, userId: userid, isActivate: prevToken[0]['dataValues']['isActivate']});
+            // await model.deleteToken({where: {userId: userid, id: prevToken[0]['dataValues']['isActivate']}});
 
             await res.cookie('accessToken', tokens.accessToken, {maxAge: 1000 * 60 * 30, httpOnly: false});
 
@@ -209,12 +224,22 @@ class appMiddleware {
             const model = new ModelService();
             await sequelize.sync({});
 
+            if(firstname === '' || lastname === '' || email === '' || password === '') {
+                throw Error('Заполните форму полностью');
+            }
+
             const checkEmail = await model.findUser({email: email});
             if(checkEmail[0] !== undefined) {
                 if(checkEmail[0]['dataValues']['email'] === email) {
 
                     throw Error(`пользователь с такой почтой ${email} уже существует`);
                 }
+            }
+
+            const result = validationResult(req);
+            console.log(result.isEmpty());
+            if(!result.isEmpty()) {
+                throw Error('Такой почты не существует')
             }
             
             const id = uuid.v4();
